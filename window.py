@@ -253,6 +253,17 @@ class Window:
             if self._ui_elements[element].get_type() == 'text':
                 self.draw_text(self._ui_elements[element])
 
+    def get_ui_element(self, label: str) -> Element:
+        """Given a label, look for a UI element and return it.
+
+        If a UI element with the certain label does not exist, raise NameError
+        """
+
+        if label not in self._ui_elements:
+            raise NameError
+        else:
+            return self._ui_elements[label]
+
 
 if __name__ == '__main__':
     import python_ta

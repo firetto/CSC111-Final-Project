@@ -42,6 +42,10 @@ class Element:
         """Not implemented set_visible method."""
         raise NotImplementedError
 
+    def get_visible(self) -> None:
+        """Not implemented get_visible method."""
+        raise NotImplementedError
+
     def press(self) -> None:
         """Unimplemented press method (used in Button)."""
         raise NotImplementedError
@@ -71,9 +75,9 @@ class UIElement(Element):
         """Change the visibility of the UI element."""
         self._element.visible = visible
 
-    def get_visible(self) -> bool:
-        """Default get_visible method."""
-        raise NotImplementedError
+    def get_visible(self) -> None:
+        """Return the visibility of the UI element."""
+        return self._element.visible
 
 
 class Button(UIElement):
