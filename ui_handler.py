@@ -18,6 +18,18 @@ def toggle_lights(w: window.Window) -> None:
     w.get_ui_element("text-test").set_visible(not w.get_ui_element("text-test").get_visible())
     w.get_ui_element("button-test-hello").set_visible(
         not w.get_ui_element("button-test-hello").get_visible())
+    w.get_ui_element("dropdown-test").set_visible(
+        not w.get_ui_element("dropdown-test").get_visible())
+
+
+def dropdown_test(text: str) -> None:
+    """
+    TEST FUNCTION, TO BE REMOVED!!!!!
+
+    TODO: REMOVE THIS FROM PRODUCTION BUILD
+    """
+
+    print(text)
 
 
 def add_ui(w: window.Window) -> None:
@@ -28,6 +40,12 @@ def add_ui(w: window.Window) -> None:
     w.add_button(rect=pygame.Rect(0, 0, 150, 50),
                  label="button-test-lights", text="Toggle lights",
                  function=lambda: toggle_lights(w))
+
+    w.add_dropdown(options_list=["One", "Two", 'Three'],
+                   starting_option="One",
+                   rect=pygame.Rect(200, 0, 150, 50),
+                   label="dropdown-test",
+                   function=lambda: dropdown_test)
 
     w.add_text(label="text-test", text="BOO!", position=(200, 200))
 

@@ -6,14 +6,14 @@ CSC111 Final Project by Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel
 
 import pygame
 import pygame_gui
-from typing import Tuple
+from typing import Tuple, List
 
 
 class Element:
     """Generic wrapper class for UIElement and Text.
 
     Preconditions:
-     - self._type in {"none", "button", "text"}
+     - self._type in {"none", "button", "text", "dropdown"}
     """
 
     # Private Instance Attributes:
@@ -46,8 +46,8 @@ class Element:
         """Not implemented get_visible method."""
         raise NotImplementedError
 
-    def press(self) -> None:
-        """Unimplemented press method (used in Button)."""
+    def execute(self, text: str = "") -> None:
+        """Unimplemented execute method (used in Dropdown, Button)."""
         raise NotImplementedError
 
 
@@ -103,9 +103,59 @@ class Button(UIElement):
 
         self.set_type("button")
 
-    def press(self) -> None:
+    def execute(self, text: str = "") -> None:
         """Call _function()."""
         self._function()
+
+
+class Dropdown(UIElement):
+    """
+    pygame_gui.elements.UIDropDownMenu wrapper class, containing initialization of Dropdown
+    as well as 'lambda' instances to easily call the corresponding dropdown function when the
+    dropdown setting is changed.
+    """
+
+    # Private Instance Attributes:
+    # - _function: function to call when button is pressed
+    _function: any = lambda: None
+
+    def __init__(self, options_list: List[str], starting_option: str,
+                 rect: pygame.Rect, manager: pygame_gui.UIManager,
+                 function: any) -> None:
+        """Initialize dropdown attributes.
+
+        Preconditions:
+         - function is a lambda function that accepts a single string parameter"""
+
+        super().__init__(pygame_gui.elements.UIDropDownMenu(
+            options_list=options_list,
+            starting_option=starting_option,
+            relative_rect=rect,
+            manager=manager
+        ))
+
+        self.set_type("dropdown")
+
+        self._function = function
+
+    def execute(self, text: str = "") -> None:
+        """
+        Execute the function corresponding to the dropdown based on the option selected.
+
+        Preconditions:
+         - text is an option of the dropdown menu
+        """
+
+        self._function()(text)
+
+    def set_visible(self, visible: bool) -> None:
+        """Change the visibility of the dropdown."""
+        self._element.visible = visible
+
+        if visible:
+            self._element.show()
+        else:
+            self._element.hide()
 
 
 class Text(Element):
@@ -133,7 +183,7 @@ class Text(Element):
 
         super().__init__("text")
 
-    def press(self) -> None:
+    def execute(self, text:str = "") -> None:
         """Nothing is to be done when text is pressed."""
         return
 

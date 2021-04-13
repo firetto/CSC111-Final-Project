@@ -7,7 +7,7 @@ CSC111 Final Project by Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel
 from typing import Dict, List, Tuple, Set, Union
 import pygame
 import pygame_gui
-from ui_elements import Element, Button, Text
+from ui_elements import Element, Button, Text, Dropdown
 
 
 class Window:
@@ -128,16 +128,17 @@ class Window:
             # User event
             elif event.type == pygame.USEREVENT:
 
-                # Check if button was pressed
-                if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
-
-                    # Loop through every button, and check if it is the button that was pressed
-                    # (This is kind of bad and inefficient, look for a better way to do this!)
-                    for element in self._ui_elements:
-                        if event.ui_element == self._ui_elements[element]:
+                # Loop through every UI element, and check if it is the UI element that was
+                # triggered. THIS IS BAD AND INEFFICIENT!
+                for element in self._ui_elements:
+                    if event.ui_element == self._ui_elements[element]:
+                        if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
                             if self._ui_elements[element].get_type() == "button":
-                                self._ui_elements[element].press()
-                            break
+                                self._ui_elements[element].execute()
+                                break
+                        elif event.user_type == pygame_gui.UI_DROP_DOWN_MENU_CHANGED:
+                            if self._ui_elements[element].get_type() == "dropdown":
+                                self._ui_elements[element].execute(event.text)
 
             self._gui_manager.process_events(event)
 
@@ -185,6 +186,22 @@ class Window:
          - label not in self._ui_elements
         """
         self._ui_elements[label] = Text(text, position, large_font)
+
+    def add_dropdown(self, options_list: List[str], starting_option: str,
+                     rect: pygame.Rect, label: str, function: any) -> None:
+        """
+        Add a dropdown to the list of UI elements.
+
+        Preconditions:
+         - len(label) > 0
+         - function is of function type (callable)
+         - label not in self._ui_elements
+        """
+        self._ui_elements[label] = Dropdown(options_list=options_list,
+                                            starting_option=starting_option,
+                                            rect=rect,
+                                            manager=self._gui_manager,
+                                            function=function)
 
     def is_running(self) -> bool:
         """
