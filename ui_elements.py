@@ -71,6 +71,10 @@ class UIElement(Element):
         """Change the visibility of the UI element."""
         self._element.visible = visible
 
+    def get_visible(self) -> bool:
+        """Default get_visible method."""
+        raise NotImplementedError
+
 
 class Button(UIElement):
     """
@@ -130,5 +134,9 @@ class Text(Element):
         return
 
     def set_visible(self, visible: bool) -> None:
-        """Useless. Just access visible directly. But PyCharm REALLY wants it."""
+        """Set visibility of the text."""
         self.visible = visible
+
+    def get_visible(self) -> bool:
+        """Return whether or not the text is visible."""
+        return self.visible

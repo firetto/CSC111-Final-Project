@@ -14,4 +14,6 @@ def add_ui(w: window.Window) -> None:
     :param w: a Window instance
     """
     w.add_button(rect=pygame.Rect(0, 0, 150, 50),
-                 label="button-test", text="Test", function=lambda: print("hello"))
+                label="button-test", text="Test", function=lambda: print("hello"))
+
+    w.add_text(label="text-test", text="Test!!!!", position=(200, 200))

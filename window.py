@@ -114,6 +114,8 @@ class Window:
         # Draw UI
         self._gui_manager.draw_ui(self._screen)
 
+        self._draw_text_elements()
+
     def _handle_events(self) -> None:
         """Handle PyGame window events"""
 
@@ -171,6 +173,19 @@ class Window:
         #                                           value_range=value_range,
         #                                           manager=self._gui_manager)
 
+    def add_text(self, label: str, text: str, position: Tuple[int, int],
+                 large_font: bool = True) -> None:
+        """
+        Add text to UI elements of the window.
+
+        label is the key for self._ui_elements, while text is the text displayed.
+
+        Preconditions:
+         - len(label) > 0
+         - label not in self._ui_elements
+        """
+        self._ui_elements[label] = Text(text, position, large_font)
+
     def is_running(self) -> bool:
         """
         Return whether window is running.
@@ -215,13 +230,28 @@ class Window:
         else:
             return self._small_font.render(text, antialias, color, background)
 
-    def draw_text(self, text: Text):
-        """Draw a Text instance to the Window."""
+    def draw_text(self, text: Union[Text, Element]):
+        """Draw a Text instance to the Window.
 
-        if text.visible:
-            surface = w.render_text(text=text.text, large_font=text.large_font)
+        Preconditions:
+         - text is of type Text
+        """
 
-            w.draw_to_screen(surface, text.position)
+        if text.get_visible():
+            surface = self.render_text(text=text.text, large_font=text.large_font)
+
+            self.draw_to_screen(surface, text.position)
+
+    def _draw_text_elements(self) -> None:
+        """
+        Draw the text elements.
+
+        THIS IS SUPER INEFFICIENT, LOOK FOR A BETTER WAY TO DO THIS!
+        """
+
+        for element in self._ui_elements:
+            if self._ui_elements[element].get_type() == 'text':
+                self.draw_text(self._ui_elements[element])
 
 
 if __name__ == '__main__':
