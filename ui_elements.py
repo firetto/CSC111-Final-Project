@@ -6,7 +6,6 @@ CSC111 Final Project by Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel
 
 import pygame
 import pygame_gui
-import window
 from typing import Tuple
 
 
@@ -26,9 +25,26 @@ class Element:
         """Basic initializer."""
         self._type = type
 
+    def __eq__(self, other: pygame_gui.core.ui_element.UIElement) -> bool:
+        """Return whether Element instance is equal to a UIElement instance.
+        By default, this is FALSE."""
+        return False
+
     def set_type(self, type: str) -> None:
         """Set the type of the element."""
         self._type = type
+
+    def get_type(self) -> str:
+        """Return the type of the element."""
+        return self._type
+
+    def set_visible(self, visible: bool) -> None:
+        """Not implemented set_visible method."""
+        raise NotImplementedError
+
+    def press(self) -> None:
+        """Unimplemented press method (used in Button)."""
+        raise NotImplementedError
 
 
 class UIElement(Element):
@@ -87,36 +103,32 @@ class Button(UIElement):
 class Text(Element):
     """
     Wrapper class for storing text to be drawn, as well as the position the text.
+
+    Instance Attributes:
+     - text: string of text that will be drawn
+     - position: (x, y) position of text to be drawn
+     - visible: whether the text is visible or not
+     - large_font: whether the font is large
     """
 
-    # Private Instance Attributes:
-    # - _text: string of text that will be drawn
-    # - _position: (x, y) position of text to be drawn
-    # - _visible: whether the text is visible or not
-    # - _large_font: whether the font is large
-    _text: str
-    _position: Tuple[int, int]
-    _visible: bool
-    _large_font: bool
+    text: str
+    position: Tuple[int, int]
+    visible: bool
+    large_font: bool
 
     def __init__(self, text: str, position: Tuple[int, int], large_font: bool = True):
         """Initialize the text contents as well as the position of the text."""
-        _text = text
-        _position = position
-        _visible = True
-        self._large_font = large_font
+        self.text = text
+        self.position = position
+        self.visible = True
+        self.large_font = large_font
 
         super().__init__("text")
 
+    def press(self) -> None:
+        """Nothing is to be done when text is pressed."""
+        return
+
     def set_visible(self, visible: bool) -> None:
-        """Change the visibility of the text."""
-        self._visible = visible
-
-    def draw(self, window: window.Window) -> None:
-        """Draw the text to a Window attribute."""
-
-        if self._visible:
-
-            surface = window.render_text(text=self._text, large_font=self._large_font)
-
-            window.draw_to_screen(surface, self._position)
+        """Useless. Just access visible directly. But PyCharm REALLY wants it."""
+        self.visible = visible

@@ -45,7 +45,7 @@ class Window:
     _title: str
     _running: bool
 
-    _ui_elements: Dict[str, Union[Element]]
+    _ui_elements: Dict[str, Element]
 
     _screen: pygame.Surface
     _gui_manager: pygame_gui.UIManager
@@ -131,9 +131,10 @@ class Window:
 
                     # Loop through every button, and check if it is the button that was pressed
                     # (This is kind of bad and inefficient, look for a better way to do this!)
-                    for button in self._buttons:
-                        if event.ui_element == button:
-                            button.press()
+                    for element in self._ui_elements:
+                        if event.ui_element == self._ui_elements[element]:
+                            if self._ui_elements[element].get_type() == "button":
+                                self._ui_elements[element].press()
                             break
 
             self._gui_manager.process_events(event)
@@ -213,6 +214,14 @@ class Window:
             return self._large_font.render(text, antialias, color, background)
         else:
             return self._small_font.render(text, antialias, color, background)
+
+    def draw_text(self, text: Text):
+        """Draw a Text instance to the Window."""
+
+        if text.visible:
+            surface = w.render_text(text=text.text, large_font=text.large_font)
+
+            w.draw_to_screen(surface, text.position)
 
 
 if __name__ == '__main__':

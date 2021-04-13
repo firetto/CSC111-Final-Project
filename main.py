@@ -5,6 +5,7 @@ CSC111 Final Project by Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel
 """
 
 import pygame
+from ui_handler import add_ui
 from window import Window
 
 if __name__ == "__main__":
@@ -14,6 +15,9 @@ if __name__ == "__main__":
 
     # Create a window wrapper class instance
     window = Window()
+
+    # Add UI to the window
+    add_ui(window)
 
     # Window loop
     while window.is_running():
