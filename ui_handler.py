@@ -45,7 +45,7 @@ def add_ui(w: window.Window) -> None:
                    starting_option="One",
                    rect=pygame.Rect(200, 0, 150, 50),
                    label="dropdown-test",
-                   function=lambda: dropdown_test)
+                   function=dropdown_test)
 
     w.add_text(label="text-test", text="BOO!", position=(200, 200))
 

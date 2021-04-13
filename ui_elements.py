@@ -116,8 +116,8 @@ class Dropdown(UIElement):
     """
 
     # Private Instance Attributes:
-    # - _function: function to call when button is pressed
-    _function: any = lambda: None
+    # - _function: function to call when the dropdown option is changed
+    _function: any
 
     def __init__(self, options_list: List[str], starting_option: str,
                  rect: pygame.Rect, manager: pygame_gui.UIManager,
@@ -146,7 +146,7 @@ class Dropdown(UIElement):
          - text is an option of the dropdown menu
         """
 
-        self._function()(text)
+        self._function(text)
 
     def set_visible(self, visible: bool) -> None:
         """Change the visibility of the dropdown."""
