@@ -27,11 +27,13 @@ if __name__ == "__main__":
     # TODO: REMOVE THIS!!!! This is how you access the board.
     for row in range(board.size):
         for column in range(board.size):
-            d = (row + column) % 3
+            d = (row + column) % 4
             if d == 1:
                 board.set_piece(row, column, 1)
             elif d == 2:
                 board.set_piece(row, column, -1)
+            elif d == 3:
+                board.set_next_move(row, column, True)
 
     # Setup the BoardVisualizer instance
     board_visualizer = BoardVisualizer(window)

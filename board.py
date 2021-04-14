@@ -4,7 +4,7 @@ Contains the Board class, which contains information about the board (size, game
 CSC111 Final Project by Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel Kim
 """
 
-from typing import List
+from typing import List, Tuple, Set
 
 
 class Board:
@@ -17,10 +17,13 @@ class Board:
      - pieces: A two-dimensional <size> by <size> array containing the board's pieces represented
                by integers: 0 denotes empty piece, 1 denotes black, and -1 denotes white.
                Accessed by pieces[row][column] (i.e. pieces[y][x])
+     - next_moves: A two-dimensional <size> by <size> array containing the next possible moves
+                   of the next player: 1 denotes possible next move, 0 denotes not possible.
     """
 
     size: int
     pieces: List[List[int]]
+    next_moves: Set[Tuple[int, int]]
 
     # Private Instance Attributes:
     # - _next_size: What size to set the board to next time the board is created. This is
@@ -28,12 +31,13 @@ class Board:
     #               self.set_size is called, and so the board size only changes when
     #               self.create_board is called.
 
-    _next_size = 4
+    _next_size = 8
 
     def __init__(self) -> None:
         """Initialize the board."""
 
         self.pieces = []
+        self.next_moves = set()
 
         self.create_board()
 
@@ -64,6 +68,20 @@ class Board:
         else:
             return self.pieces[row][column]
 
+    def is_next_move(self, row: int, column: int) -> bool:
+        """Return whether or not the square at [row][column] is a possible next move for the
+        next player.
+        """
+        return (row, column) in self.next_moves
+
+    def set_next_move(self, row: int, column: int, allowed: bool) -> None:
+        """Change whether or not the square at [row][column] is an allowed next move."""
+        if not allowed:
+            if (row, column) in self.next_moves:
+                self.next_moves.remove((row, column))
+        else:
+            self.next_moves.add((row, column))
+
     def create_board(self) -> None:
         """Create a new board, update size and clear the board."""
         self.size = self._next_size
@@ -75,6 +93,7 @@ class Board:
         filled with 0s."""
 
         self.pieces.clear()
+        self.next_moves.clear()
 
         for row in range(self.size):
             self.pieces.append([0] * self.size)

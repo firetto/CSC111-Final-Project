@@ -23,6 +23,7 @@ class BoardVisualizer:
     # - _PIECE_COLORS: The colours of the pieces. [0] is black, [1] is white.
     # - _NEXT_MOVE_COLOR: The colour of the possible next move indicator.
     # - _PIECE_RADIUS_RATIO: The ratio of piece radius to square size
+    # - _NEXT_MOVE_RADIUS_RATIO: The ratio of the next move indicator radius to square size
 
     _window: Window
 
@@ -33,6 +34,7 @@ class BoardVisualizer:
     _PIECE_COLORS = (pygame.Color(20, 20, 20), pygame.Color(230, 230, 230))
     _NEXT_MOVE_COLOR = pygame.Color(215, 146, 53)
     _PIECE_RADIUS_RATIO = 0.4
+    _NEXT_MOVE_RADIUS_RATIO = 0.2
 
     def __init__(self, window: Window) -> None:
         """Initialize the BoardVisualizer instance using a window and an existing
@@ -80,5 +82,12 @@ class BoardVisualizer:
                                    (column * square_size + square_size / 2,
                                     row * square_size + square_size / 2),
                                    square_size * self._PIECE_RADIUS_RATIO)
+
+        # Draw next move indicators.
+        for (row, column) in board.next_moves:
+            pygame.draw.circle(surface, self._NEXT_MOVE_COLOR,
+                               (column * square_size + square_size / 2,
+                                row * square_size + square_size / 2),
+                               square_size * self._NEXT_MOVE_RADIUS_RATIO)
 
         self._window.draw_to_screen(surface, self._BOARD_POSITION)
