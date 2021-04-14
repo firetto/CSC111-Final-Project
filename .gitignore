@@ -123,3 +123,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+.idea/
+.idea/CSC111-Final-Project.iml
+.idea/misc.xml
