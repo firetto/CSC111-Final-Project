@@ -83,6 +83,10 @@ class Board:
         else:
             self.next_moves.add((row, column))
 
+    def clear_next_moves(self) -> None:
+        """Clear the set of possible next moves."""
+        self.next_moves.clear()
+
     def create_board(self) -> None:
         """Create a new board, update size and clear the board."""
         self.size = self._next_size
