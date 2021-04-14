@@ -28,6 +28,7 @@ class Window:
     # - _title: The name of the window
     # - _running: Whether the window is running. If not, the window should close.
     # - _screen: PyGame display surface
+    # - _events: Set containing 2-tuples of window event data
     # - _gui_manager: pygame_gui UI Manager instance
     # - _background_surface: a solid color for the surface
     # - _ui_elements: UI elements stored by the window, labelled by strings.
@@ -52,6 +53,8 @@ class Window:
     _clock: pygame.time.Clock
     _time_delta: float
 
+    _events: Set[Tuple[any, any]]
+
     _background_surface: pygame.Surface
 
     _large_font: pygame.font.Font
@@ -69,6 +72,8 @@ class Window:
         self._height = 700
         self._title = "Reversi B)"
         self._ui_elements = {}
+
+        self._events = set()
 
         # Initialize Pygame stuff
         self._screen = pygame.display.set_mode((self._width, self._height))
@@ -104,10 +109,15 @@ class Window:
         pygame.display.flip()
 
         # Handle window events
-        self._handle_events()
+        self._events = self._handle_events()
 
         # Update GUI manager (time takes seconds and not ms, so divide by 1000)
         self._gui_manager.update(self._time_delta / 1000.0)
+
+    def get_events(self) -> Set[Tuple[any, any]]:
+        """Return the important window events (such as mouse clicks)
+        that need to be processed outside of the window."""
+        return self._events
 
     def draw_ui(self) -> None:
         """Draw the buttons and sliders and so on."""
@@ -116,8 +126,18 @@ class Window:
 
         self._draw_text_elements()
 
-    def _handle_events(self) -> None:
-        """Handle PyGame window events"""
+    def _handle_events(self) -> Set[Tuple[any, any]]:
+        """Handle PyGame window events.
+
+        If any events that should be processed outside of Window occur (such as mouse clicks
+        on the board), they are returned in a set, stored as a tuple of (str, any), where
+        the first element of the tuple will be the type of the event, and the
+        second element of the tuple will be another piece of data to go along with the event
+        (could be a position on the screen, etc.).
+        """
+
+        # Events to return
+        events_so_far = set()
 
         for event in pygame.event.get():
 
@@ -140,7 +160,12 @@ class Window:
                             if self._ui_elements[element].get_type() == "dropdown":
                                 self._ui_elements[element].execute(event.text)
 
+            elif event.type == pygame.MOUSEBUTTONUP:
+                events_so_far.add((pygame.MOUSEBUTTONUP, pygame.mouse.get_pos()))
+
             self._gui_manager.process_events(event)
+
+        return events_so_far
 
     def add_button(self, rect: pygame.Rect, label: str, text: str, function: any) -> None:
         """

@@ -1,17 +1,19 @@
 """
-board_visualizer.py:
-Contains the BoardVisualizer class, used for drawing the board.
+board_manager.py:
+Contains the BoardManager class, containing board management methods.
 CSC111 Final Project by Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel Kim
 """
 
 import pygame
 from window import Window
 from board import Board
+from typing import Tuple, Union
 
 
-class BoardVisualizer:
+class BoardManager:
     """
-    BoardVisualizer class, used for drawing a board.
+    BoardManager class, used for drawing a board. Also contains methods for checking whether
+    a square was clicked with mouse, and which one.
     """
 
     # Private Instance Attributes:
@@ -91,3 +93,18 @@ class BoardVisualizer:
                                square_size * self._NEXT_MOVE_RADIUS_RATIO)
 
         self._window.draw_to_screen(surface, self._BOARD_POSITION)
+
+    def check_mouse_press(self, position: Tuple[Union[int, float],
+                                                Union[int, float]],
+                          board: Board) -> Tuple[int, int]:
+        """Check mouse press and return the square in (row, column) format that was pressed.
+        If no square was pressed, return (-1, -1)."""
+
+        if position[0] < self._BOARD_POSITION[0] \
+            or position[0] > self._BOARD_POSITION[0] + self._BOARD_PIXEL_SIZE \
+            or position[1] < self._BOARD_POSITION[1] \
+            or position[1] > self._BOARD_POSITION[1] + self._BOARD_PIXEL_SIZE:
+            return (-1, -1)
+        else:
+            return (int(position[0] // (self._BOARD_PIXEL_SIZE / board.size)),
+                    int(position[1] // (self._BOARD_PIXEL_SIZE / board.size)))

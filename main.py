@@ -8,7 +8,7 @@ import pygame
 from ui_handler import add_ui
 from window import Window
 from board import Board
-from board_visualizer import BoardVisualizer
+from board_manager import BoardManager
 
 if __name__ == "__main__":
 
@@ -35,13 +35,20 @@ if __name__ == "__main__":
             elif d == 3:
                 board.set_next_move(row, column, True)
 
-    # Setup the BoardVisualizer instance
-    board_visualizer = BoardVisualizer(window)
+    # Setup the BoardManager instance
+    board_manager = BoardManager(window)
 
     # Window loop
     while window.is_running():
 
         """ UPDATE STUFF """
+
+        # Look at the mouse clicks and see if they are in the board.
+        for event in window.get_events():
+            if event[0] == pygame.MOUSEBUTTONUP:
+                square = board_manager.check_mouse_press(event[1], board)
+                if square != (-1, -1):
+                    print("Square at ", square, " was pressed!")
 
         # Update the window's clock
         window.update_clock()
@@ -52,7 +59,7 @@ if __name__ == "__main__":
         window.draw_background()
 
         # Draw the board.
-        board_visualizer.draw_board(board)
+        board_manager.draw_board(board)
 
         # Draw the buttons etc.
         window.draw_ui()
