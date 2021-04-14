@@ -17,8 +17,8 @@ class Board:
      - pieces: A two-dimensional <size> by <size> array containing the board's pieces represented
                by integers: 0 denotes empty piece, 1 denotes black, and -1 denotes white.
                Accessed by pieces[row][column] (i.e. pieces[y][x])
-     - next_moves: A two-dimensional <size> by <size> array containing the next possible moves
-                   of the next player: 1 denotes possible next move, 0 denotes not possible.
+     - next_moves: A set containing (int, int) tuples of square positions that are possible
+                   next moves for the player
     """
 
     size: int
