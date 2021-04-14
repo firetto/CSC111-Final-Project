@@ -7,6 +7,8 @@ CSC111 Final Project by Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel
 import pygame
 from ui_handler import add_ui
 from window import Window
+from board import Board
+from board_visualizer import BoardVisualizer
 
 if __name__ == "__main__":
 
@@ -18,6 +20,21 @@ if __name__ == "__main__":
 
     # Add UI to the window
     add_ui(window)
+
+    # Create a board
+    board = Board()
+
+    # TODO: REMOVE THIS!!!! This is how you access the board.
+    for row in range(board.size):
+        for column in range(board.size):
+            d = (row + column) % 3
+            if d == 1:
+                board.set_piece(row, column, 1)
+            elif d == 2:
+                board.set_piece(row, column, -1)
+
+    # Setup the BoardVisualizer instance
+    board_visualizer = BoardVisualizer(window)
 
     # Window loop
     while window.is_running():
@@ -31,6 +48,9 @@ if __name__ == "__main__":
 
         # Draw the background first!!!!
         window.draw_background()
+
+        # Draw the board.
+        board_visualizer.draw_board(board)
 
         # Draw the buttons etc.
         window.draw_ui()

@@ -37,18 +37,18 @@ def add_ui(w: window.Window) -> None:
     Add some UI to the window, such as buttons, and more.
     :param w: a Window instance
     """
-    w.add_button(rect=pygame.Rect(0, 0, 150, 50),
+    w.add_button(rect=pygame.Rect(700, 20, 150, 50),
                  label="button-test-lights", text="Toggle lights",
                  function=lambda: toggle_lights(w))
 
     w.add_dropdown(options_list=["One", "Two", 'Three'],
                    starting_option="One",
-                   rect=pygame.Rect(200, 0, 150, 50),
+                   rect=pygame.Rect(700, 100, 150, 50),
                    label="dropdown-test",
                    function=dropdown_test)
 
-    w.add_text(label="text-test", text="BOO!", position=(200, 200))
+    w.add_text(label="text-test", text="BOO!", position=(700, 500))
 
-    w.add_button(rect=pygame.Rect(200, 300, 150, 50),
+    w.add_button(rect=pygame.Rect(700, 200, 150, 50),
                  label="button-test-hello", text="Say Hello",
                  function=lambda: print("Hello!"))
