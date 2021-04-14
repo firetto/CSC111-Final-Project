@@ -43,6 +43,7 @@ class Board:
 
     def set_size(self, size: int) -> None:
         """Set the size of the board."""
+        self._next_size = size
 
     def set_piece(self, row: int, column: int, type: int) -> None:
         """Set the type of the piece at [row][column] to <type>.
