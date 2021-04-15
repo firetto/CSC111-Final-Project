@@ -102,7 +102,7 @@ class ReversiGame:
     def _calculate_moves_and_paths_for_board(self,
                                              current_player: int) \
             -> Tuple[Set[Tuple[int, int]], Set[Tuple[int, int], Tuple[int, int]]]:
-        """Return all possible moves and pahts on a given board with a given active player.
+        """Return all possible moves and paths on a given board with a given active player.
            A path is a tuple of two integers representing the start square and end square
            of the path of the pieces which will be changed to the current player's colour when
            the move is made.
@@ -116,15 +116,8 @@ class ReversiGame:
 
             current_p = current_player
 
-            self._find_moves_and_paths_in_direction(moves_and_paths, pos, current_p, (0, 1))
-            self._find_moves_and_paths_in_direction(moves_and_paths, pos, current_p, (1, 0))
-            self._find_moves_and_paths_in_direction(moves_and_paths, pos, current_p, (0, -1))
-            self._find_moves_and_paths_in_direction(moves_and_paths, pos, current_p, (-1, 0))
-            self._find_moves_and_paths_in_direction(moves_and_paths, pos, current_p, (1, 1))
-            self._find_moves_and_paths_in_direction(moves_and_paths, pos, current_p, (1, -1))
-            self._find_moves_and_paths_in_direction(moves_and_paths, pos, current_p,
-                                                    (-1, -1))
-            self._find_moves_and_paths_in_direction(moves_and_paths, pos, current_p, (-1, 1))
+            for dir in {(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)}:
+                self._find_moves_and_paths_in_direction(moves_and_paths, pos, current_p, dir)
 
         return moves_and_paths
 
