@@ -111,8 +111,8 @@ class ReversiGame:
         Return None if the game is not over.
         """
         if len(self._board.valid_moves) == 0:
-            num_black = sum([row.count(1) for row in self._board])
-            num_white = sum([row.count(-1) for row in self._board])
+            num_black = sum([row.count(1) for row in self._board.pieces])
+            num_white = sum([row.count(-1) for row in self._board.pieces])
             if num_black > num_white:
                 return 'black'
             elif num_black < num_white:

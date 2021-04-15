@@ -10,6 +10,7 @@ from window import Window
 from reversi import ReversiGame
 from board import Board
 from board_manager import BoardManager
+from ai_players import RandomPlayer, GreedyPlayer
 
 if __name__ == "__main__":
 
@@ -28,6 +29,10 @@ if __name__ == "__main__":
     # Setup the BoardManager instance
     board_manager = BoardManager(window)
 
+    # Random Player
+
+    player = GreedyPlayer(2)
+
     # Window loop
     while window.is_running():
 
@@ -40,6 +45,9 @@ if __name__ == "__main__":
                 if square != (-1, -1):
                     print("CLICK!!! Row: ", square[1], "; Column: ", square[0])
                     game.try_make_move(square)
+                    print(game.get_winner())
+                    if game.get_winner() is None:
+                        game.try_make_move(player.make_move(game, square))
 
         # Update the window's clock
         window.update_clock()
