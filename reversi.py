@@ -7,6 +7,7 @@ CSC111 Final Project by Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel
 from __future__ import annotations
 import copy
 from typing import Optional, Set, Tuple
+from board import Board
 
 
 class ReversiGame:
@@ -27,33 +28,53 @@ class ReversiGame:
     # >>> # This move is okay.
     """
     # Private Instance Attributes:
-    #   - _board: a two-dimensional representation of a Reversi board
-    #   - _valid_moves: a list of the valid moves of the current player
+    #   - _board: a Board instance representing the game board.
     #   - _current_player: an int representing the current player (1 for black, -1 for white)
     #   - _move_count: the number of moves that have been made in the current game
-    _board: list[list[int]]
-    _valid_moves: Set[Tuple[int, int]]
+
+    _board: Board
     _current_player: int
     _move_count: int
 
     def __init__(self, board: list[list[int]] = None,
                  current_player: int = 1, move_count: int = 0) -> None:
+        """Initializer for ReversiGame.
+
+        Preconditions:
+        - board is a square 2-d list
+        """
+
+        self._board = Board()
 
         if board is not None:
-            self._board = board
+            self._board.set_board(board)
         else:
-            self._board = [[0 for _ in range(8)] for _ in range(3)] + [[0, 0, 0, 1, -1, 0, 0, 0]] \
-                          + [[0, 0, 0, -1, 1, 0, 0, 0]] + [[0 for _ in range(8)] for _ in range(3)]
+            self._board.set_piece(row=self._board.size // 2 - 1, column=self._board.size // 2 - 1,
+                                  type=1)
+            self._board.set_piece(row=self._board.size // 2 - 1, column=self._board.size // 2,
+                                  type=-1)
+            self._board.set_piece(row=self._board.size // 2, column=self._board.size // 2 - 1,
+                                  type=-1)
+            self._board.set_piece(row=self._board.size // 2, column=self._board.size // 2,
+                                  type=1)
 
         self._current_player = current_player
         self._move_count = move_count
-        self._valid_moves = set()
 
         self._recalculate_valid_moves()
 
+    def get_board(self) -> Board:
+        """Return the Board instance."""
+        return self._board
+
     def get_valid_moves(self) -> Set[Tuple[int, int]]:
         """Return a list of the valid moves for the active player."""
-        return self._valid_moves
+        return self._board.valid_moves
+
+    def try_make_move(self, move: Tuple[int, int]) -> None:
+        """Try to make a Reversi move by calling make_move if the move is valid."""
+        if self._board.is_valid_move(row=move[0], column=move[1]):
+            self.make_move(move)
 
     def make_move(self, move: Tuple[int, int]) -> None:
         """Make the given Reversi move. This instance of a ReversiGame will be mutated, and will
@@ -61,10 +82,10 @@ class ReversiGame:
 
         If move is not a currently valid move, raise a ValueError.
         """
-        if move not in self._valid_moves:
+        if not self._board.is_valid_move(row=move[0], column=move[1]):
             raise ValueError(f'Move "{move}" is not valid')
 
-        self._board = self._board_after_move(move)
+        self._board.set_board(self._board_after_move(move))
 
         self._current_player = -self._current_player
         self._move_count += 1
@@ -89,7 +110,7 @@ class ReversiGame:
 
         Return None if the game is not over.
         """
-        if len(self._valid_moves) == 0:
+        if len(self._board.valid_moves) == 0:
             num_black = sum([row.count(1) for row in self._board])
             num_white = sum([row.count(-1) for row in self._board])
             if num_black > num_white:
@@ -109,8 +130,9 @@ class ReversiGame:
         """
         moves_and_paths = (set(), set())
 
-        for pos in [(x, y) for x in range(0, 8) for y in range(0, 8)]:
-            piece = self._board[pos[0]][pos[1]]
+        for pos in [(row, col) for row in range(0, self._board.size)
+                    for col in range(0, self._board.size)]:
+            piece = self._board.get_piece(row=pos[0], column=pos[1])
             if piece == -current_player or piece == 0:
                 continue
 
@@ -132,22 +154,22 @@ class ReversiGame:
         other_player = -current_player
 
         while not stop:
-            x, y = pos[0] + direction[0] * i, pos[1] + direction[1] * i
+            row, col = pos[0] + direction[0] * i, pos[1] + direction[1] * i
 
-            if x < 0 or y < 0 or x > 7 or y > 7:
+            if row < 0 or col < 0 or row >= self._board.size or col >= self._board.size:
                 break  # Out of bounds
             # Break if there is another current_player piece in that direction or the first
             # space in that direction is empty
-            if self._board[x][y] == current_player or \
-                    (self._board[x][y] == 0 and (x, y) == (
+            if self._board.get_piece(row=row, column=col) == current_player or \
+                    (self._board.get_piece(row=row, column=col) == 0 and (row, col) == (
                             pos[0] + direction[0], pos[1] + direction[1])):
                 break
-            if self._board[x][y] == other_player:
+            if self._board.get_piece(row=row, column=col) == other_player:
                 pass
             # We have passed at least one of other_player pieces and reached an empty space
             else:
-                moves_and_paths[0].add((x, y))
-                moves_and_paths[1].add(((pos[0], pos[1]), (x, y)))
+                moves_and_paths[0].add((row, col))
+                moves_and_paths[1].add(((pos[0], pos[1]), (row, col)))
                 break
 
             i += 1
@@ -157,7 +179,7 @@ class ReversiGame:
         """
         paths = self._calculate_moves_and_paths_for_board(self.get_current_player())[1]
         filter_paths = {path for path in paths if path[1] == move}
-        board_copy = copy.deepcopy(self._board)
+        board_copy = copy.deepcopy(self._board.pieces)
         board_copy[move[0]][move[1]] = self.get_current_player()
         for path in filter_paths:
             direction = get_direction(path[0], path[1])
@@ -173,7 +195,8 @@ class ReversiGame:
     def _recalculate_valid_moves(self) -> None:
         """Update the valid moves for this game board."""
 
-        self._valid_moves = self._calculate_moves_and_paths_for_board(self.get_current_player())[0]
+        self._board.valid_moves = self._calculate_moves_and_paths_for_board(
+            self.get_current_player())[0]
 
 
 def get_direction(v1: Tuple[int, int], v2: Tuple[int, int]) -> list[int, int]:

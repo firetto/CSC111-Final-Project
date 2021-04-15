@@ -23,9 +23,9 @@ class BoardManager:
     # - _LINE_THICKNESS: How thick the lines separating each square are
     # - _BOARD_POSITION: Position of the board in the window in px, measured from top left
     # - _PIECE_COLORS: The colours of the pieces. [0] is black, [1] is white.
-    # - _NEXT_MOVE_COLOR: The colour of the possible next move indicator.
+    # - _VALID_MOVE_COLOR: The colour of the possible next move indicator.
     # - _PIECE_RADIUS_RATIO: The ratio of piece radius to square size
-    # - _NEXT_MOVE_RADIUS_RATIO: The ratio of the next move indicator radius to square size
+    # - _VALID_MOVE_RADIUS_RATIO: The ratio of the next move indicator radius to square size
 
     _window: Window
 
@@ -34,9 +34,9 @@ class BoardManager:
     _LINE_THICKNESS = 4
     _BOARD_POSITION = (20, 20)
     _PIECE_COLORS = (pygame.Color(20, 20, 20), pygame.Color(230, 230, 230))
-    _NEXT_MOVE_COLOR = pygame.Color(215, 146, 53)
+    _VALID_MOVE_COLOR = pygame.Color(215, 146, 53)
     _PIECE_RADIUS_RATIO = 0.4
-    _NEXT_MOVE_RADIUS_RATIO = 0.2
+    _VALID_MOVE_RADIUS_RATIO = 0.2
 
     def __init__(self, window: Window) -> None:
         """Initialize the BoardVisualizer instance using a window and an existing
@@ -86,11 +86,11 @@ class BoardManager:
                                    square_size * self._PIECE_RADIUS_RATIO)
 
         # Draw next move indicators.
-        for (row, column) in board.next_moves:
-            pygame.draw.circle(surface, self._NEXT_MOVE_COLOR,
+        for (row, column) in board.valid_moves:
+            pygame.draw.circle(surface, self._VALID_MOVE_COLOR,
                                (column * square_size + square_size / 2,
                                 row * square_size + square_size / 2),
-                               square_size * self._NEXT_MOVE_RADIUS_RATIO)
+                               square_size * self._VALID_MOVE_RADIUS_RATIO)
 
         self._window.draw_to_screen(surface, self._BOARD_POSITION)
 
@@ -98,7 +98,9 @@ class BoardManager:
                                                 Union[int, float]],
                           board: Board) -> Tuple[int, int]:
         """Check mouse press and return the square in (row, column) format that was pressed.
-        If no square was pressed, return (-1, -1)."""
+        If no square was pressed, return (-1, -1).
+
+        Position is in (x, y) format."""
 
         if position[0] < self._BOARD_POSITION[0] \
             or position[0] > self._BOARD_POSITION[0] + self._BOARD_PIXEL_SIZE \
@@ -106,5 +108,8 @@ class BoardManager:
             or position[1] > self._BOARD_POSITION[1] + self._BOARD_PIXEL_SIZE:
             return (-1, -1)
         else:
-            return (int(position[0] // (self._BOARD_PIXEL_SIZE / board.size)),
-                    int(position[1] // (self._BOARD_PIXEL_SIZE / board.size)))
+            # Row column format.
+            pos = (position[1] - self._BOARD_POSITION[1], position[0] - self._BOARD_POSITION[0])
+            square_size = (self._BOARD_PIXEL_SIZE / board.size)
+            return (int(pos[0] // square_size),
+                    int(pos[1] // square_size))
