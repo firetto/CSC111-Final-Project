@@ -89,12 +89,9 @@ class ReversiGame:
 
         Return None if the game is not over.
         """
-        current_player_moves = len(self._valid_moves)
-        self._current_player = -self._current_player
-        other_player_moves = len(self._valid_moves)
-        if current_player_moves == 0 and other_player_moves == 0:
+        if len(self._valid_moves) == 0:
             num_black = sum([row.count(1) for row in self._board])
-            num_white = sum([row.count(1) for row in self._board])
+            num_white = sum([row.count(-1) for row in self._board])
             if num_black > num_white:
                 return 'black'
             elif num_black < num_white:
