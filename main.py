@@ -56,6 +56,13 @@ if __name__ == "__main__":
         """ UPDATE STUFF """
 
         # Look at the mouse clicks and see if they are in the board.
+
+        for event in window.get_events():
+            if event[0] == pygame.MOUSEBUTTONUP:
+                square = board_manager.check_mouse_press(event[1], game.get_board())
+                if square != (-1, -1):
+                    print("CLICK!!! Row: ", square[0], "; Column: ", square[1])
+                    game.try_make_move(square)
         winner = game.get_winner()
         if winner is not None and num_games_left > 0:
             results.append(winner)
