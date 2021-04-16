@@ -110,7 +110,6 @@ def test_players(player1: Player, player2: Player, iterations: int) -> None:
             if game.get_winner() is None:
                 prev_move = player2.make_move(game, move)
                 game.try_make_move(prev_move)
-        print(game.get_board().pieces)
         if game.get_winner() == 'white':
             white += 1
         elif game.get_winner() == 'black':
