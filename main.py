@@ -10,7 +10,7 @@ from window import Window
 from reversi import ReversiGame
 from board import Board
 from board_manager import BoardManager
-from ai_players import RandomPlayer, GreedyPlayer
+from ai_players import RandomPlayer, MinimaxPlayer
 
 if __name__ == "__main__":
 
@@ -29,9 +29,9 @@ if __name__ == "__main__":
     # Setup the BoardManager instance
     board_manager = BoardManager(window)
 
-    # Random Player
+    # Minimax Player
 
-    player = GreedyPlayer(2)
+    player = MinimaxPlayer(4)
 
     # Window loop
     while window.is_running():

@@ -10,7 +10,16 @@ from typing import Optional
 
 
 def example_heuristic(game: ReversiGame) -> float:
-    return 0.0
+    pieces = game.get_board().pieces
+    black = 0
+    white = 0
+    for lst in pieces:
+        for i in lst:
+            if i == 1:
+                white += 1
+            elif i == -1:
+                black += 1
+    return white - black
 
 
 class Player:
@@ -23,7 +32,7 @@ class RandomPlayer(Player):
         return random.choice(list(game.get_valid_moves()))
 
 
-class GreedyPlayer(Player):
+class MinimaxPlayer(Player):
     depth: int
     heuristic: callable
 
@@ -33,7 +42,10 @@ class GreedyPlayer(Player):
     def make_move(self, game: ReversiGame, previous_move: tuple[int, int]):
         tree = self._create_tree((-1, -1), game, self.depth)
         subtrees = tree.get_subtrees()
-        best_tree = max(subtrees, key=lambda x: x.evaluation)
+        if tree.is_white_move:
+            best_tree = max(subtrees, key=lambda x: x.evaluation)
+        else:
+            best_tree = min(subtrees, key=lambda x: x.evaluation)
         return best_tree.move
 
     def _create_tree(self, root_move: tuple[int, int], game: ReversiGame, depth: float) -> GameTree:

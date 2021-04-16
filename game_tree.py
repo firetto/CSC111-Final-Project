@@ -33,8 +33,12 @@ class GameTree:
         return None
 
     def update_evaluation(self):
-        for tree in self._subtrees:
-            self.evaluation = min(tree.evaluation, self.evaluation)
+        if self.is_white_move:
+            for tree in self._subtrees:
+                self.evaluation = max(tree.evaluation, self.evaluation)
+        else:
+            for tree in self._subtrees:
+                self.evaluation = min(tree.evaluation, self.evaluation)
 
     def __str__(self) -> str:
         """Return a string representation of this tree.
@@ -50,7 +54,7 @@ class GameTree:
             turn_desc = "White's move"
         else:
             turn_desc = "Black's move"
-        move_desc = f'{self.move} -> {turn_desc}\n'
+        move_desc = f'{self.move} -> {turn_desc}, {self.evaluation}\n'
         s = '  ' * depth + move_desc
         if not self._subtrees:
             return s
