@@ -9,15 +9,21 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 
-def plot_game_statistics(results: list[str], focused_player: str):
+def plot_game_statistics(results: list[str], focused_player: str,
+                         focused_type: str, other_type: str) -> None:
     """ Plots two graphs: the first graph shows the results of the games, with a win by the
     focused_player represented by 1, a win by the other player represented by 0, and a draw
     represented by 0.5. The second graph shows the cumulative win probability of the focused_player
     as well as their win probability for the most recent 50 games.
 
-    Note: fig.show() is commented out, since it doesn't work on my computer
+    focused_type is the type of player used for the focused_player. other_type is the type of player
+    that was used as the opponent of focused_player.
+
+    Draws are counted as 'half-wins' for the player: when calculating the win probability of a
+    certain player, a value of 0.5 is added to total sum of the wins for that player.
 
     Preconditions:
+        - all(result in {'White', 'Black', 'Draw} for result in results)
         - focused_player in {'White', 'Black'}
     """
     outcomes = []
@@ -59,9 +65,16 @@ def plot_game_statistics(results: list[str], focused_player: str):
 
     fig.update_yaxes(range=[0.0, 1.0], row=2, col=1)
 
-    fig.update_layout(title='Reversi Game Results', xaxis_title='Game')
-    # fig.show()
-    fig.write_image('stats.png')
+    if focused_player == 'White':
+        fig.update_layout(
+            title='Reversi Game Results | White: ' + focused_type + ', Black: ' + other_type,
+            xaxis_title='Game')
+    else:
+        fig.update_layout(
+            title='Reversi Game Results | White: ' + other_type + ', Black: ' + focused_type,
+            xaxis_title='Game')
+
+    fig.show()
 
 
 if __name__ == '__main__':
@@ -73,7 +86,8 @@ if __name__ == '__main__':
 
     import python_ta
     python_ta.check_all(config={
-        'extra-imports': [],  # the names (strs) of imported modules
+        'extra-imports': ['plotly.graph_objects',
+                          'plotly.subplots'],  # the names (strs) of imported modules
         'allowed-io': [],  # the names (strs) of functions that call print/open/input
         'max-line-length': 100,
         'disable': ['E1136']
