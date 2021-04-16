@@ -6,6 +6,7 @@ CSC111 Final Project by Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel
 
 from __future__ import annotations
 import copy
+import time
 from typing import Optional, Set, Tuple
 from board import Board
 
@@ -31,13 +32,16 @@ class ReversiGame:
     #   - _board: a Board instance representing the game board.
     #   - _current_player: an int representing the current player (1 for black, -1 for white)
     #   - _move_count: the number of moves that have been made in the current game
+    #   - _human_player: int representing which player the human is (1 for black, -1 for white
+    #                    and 0 if there is no human player in the game)
 
     _board: Board
     _current_player: int
     _move_count: int
+    _human_player: int
 
     def __init__(self, board: list[list[int]] = None,
-                 current_player: int = 1, move_count: int = 0) -> None:
+                 current_player: int = 1, move_count: int = 0, human_player: int = 0) -> None:
         """Initializer for ReversiGame.
 
         Preconditions:
@@ -60,6 +64,7 @@ class ReversiGame:
 
         self._current_player = current_player
         self._move_count = move_count
+        self._human_player = human_player
 
         self._recalculate_valid_moves()
 
@@ -67,14 +72,19 @@ class ReversiGame:
         """Return the Board instance."""
         return self._board
 
+    def get_human_player(self) -> int:
+        """Return the integer representing the human player"""
+        return self._human_player
+
     def get_valid_moves(self) -> Set[Tuple[int, int]]:
         """Return a list of the valid moves for the active player."""
         return self._board.valid_moves
 
-    def try_make_move(self, move: Tuple[int, int]) -> None:
+    def try_make_move(self, move: Tuple[int, int]) -> bool:
         """Try to make a Reversi move by calling make_move if the move is valid."""
         if self._board.is_valid_move(row=move[0], column=move[1]):
             self.make_move(move)
+            return True
 
     def make_move(self, move: Tuple[int, int]) -> None:
         """Make the given Reversi move. This instance of a ReversiGame will be mutated, and will
@@ -111,8 +121,8 @@ class ReversiGame:
         Return None if the game is not over.
         """
         if len(self._board.valid_moves) == 0:
-            num_black = sum([row.count(1) for row in self._board])
-            num_white = sum([row.count(-1) for row in self._board])
+            num_black = sum([row.count(1) for row in self._board.pieces])
+            num_white = sum([row.count(-1) for row in self._board.pieces])
             if num_black > num_white:
                 return 'black'
             elif num_black < num_white:
@@ -208,6 +218,39 @@ def get_direction(v1: Tuple[int, int], v2: Tuple[int, int]) -> list[int, int]:
         else:
             direction[i] = int((v2[i] - v1[i]) / abs(v2[i] - v1[i]))
     return direction
+
+
+def run_game(white: Player, black: Player,
+             visualize: bool = False, fps: int = 6) -> tuple[str, list[str]]:
+    """Run a Minichess game between the two given players.
+
+    Return the winner and list of moves made in the game.
+    """
+    game = ReversiGame()
+
+    move_sequence = []
+    previous_move = None
+    current_player = white
+    while game.get_winner() is None:
+
+        previous_move = current_player.make_move(game, previous_move)
+        game.make_move(previous_move)
+        move_sequence.append(previous_move)
+
+        if visualize:
+            display.update(game.get_fen(), game.get_winner())
+            time.sleep(1 / fps)
+
+        if current_player is white:
+            current_player = black
+        else:
+            current_player = white
+
+    if visualize:
+        # Give slightly more time to the victory visualization
+        time.sleep(4 / fps)
+
+    return game.get_winner(), move_sequence
 
 
 if __name__ == '__main__':
