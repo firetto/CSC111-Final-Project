@@ -29,10 +29,6 @@ if __name__ == "__main__":
     # Setup the BoardManager instance
     board_manager = BoardManager(window)
 
-    # Minimax Player
-
-    player = MinimaxPlayer(4)
-
     # Window loop
     while window.is_running():
 
@@ -43,11 +39,8 @@ if __name__ == "__main__":
             if event[0] == pygame.MOUSEBUTTONUP:
                 square = board_manager.check_mouse_press(event[1], game.get_board())
                 if square != (-1, -1):
-                    print("CLICK!!! Row: ", square[1], "; Column: ", square[0])
+                    print("CLICK!!! Row: ", square[0], "; Column: ", square[1])
                     game.try_make_move(square)
-                    print(game.get_winner())
-                    if game.get_winner() is None:
-                        game.try_make_move(player.make_move(game, square))
 
         # Update the window's clock
         window.update_clock()
