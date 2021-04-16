@@ -50,9 +50,16 @@ class ReversiGame:
 
         self._board = Board()
 
+        self.start_game(board, current_player, move_count, human_player)
+
+    def start_game(self, board: list[list[int]] = None,
+                   current_player: int = 1, move_count: int = 0, human_player: int = 0) -> None:
+        """Reinitialize the board, set attributes."""
+
         if board is not None:
             self._board.set_board(board)
         else:
+            self._board.clear_board()
             self._board.set_piece(row=self._board.size // 2 - 1, column=self._board.size // 2 - 1,
                                   type=1)
             self._board.set_piece(row=self._board.size // 2 - 1, column=self._board.size // 2,
@@ -129,6 +136,8 @@ class ReversiGame:
                 return 'white'
             else:
                 return 'draw'
+
+        return None
 
     def _calculate_moves_and_paths_for_board(self,
                                              current_player: int) \

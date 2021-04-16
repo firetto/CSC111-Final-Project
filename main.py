@@ -5,7 +5,7 @@ CSC111 Final Project by Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel
 """
 
 import pygame
-from ui_handler import add_ui
+from ui_handler import add_ui, update_games_stored_text
 from window import Window
 import reversi
 from reversi import ReversiGame
@@ -22,25 +22,18 @@ if __name__ == "__main__":
     # Create a window wrapper class instance
     window = Window()
 
-    # Add UI to the window
-    add_ui(window)
-
     # Create a ReversiGame instance
-    # Change human_player to 1 or -1 to play against AI
-    human_p = 0
-    game = ReversiGame(human_player=human_p)
+    # Change human_player to 1 or -1 to play against AI, 0 if no human player
+    game = ReversiGame(human_player=1)  # Set to 1 by default.
 
     # Setup the BoardManager instance
     board_manager = BoardManager(window)
 
     # Minimax Player
 
-    player1 = MinimaxPlayer(2)
-    player2 = RandomPlayer()
-    colour_to_player = {1: player1, -1: player2}
-
-    # Set number of games
-    num_games_left = 40
+    # player1 = MinimaxPlayer(2)
+    # player2 = RandomPlayer()
+    colour_to_player = {1: MinimaxPlayer(2), -1: MinimaxPlayer(2)}
 
     # List of moves made
     moves_made = [(-1, -1)]
@@ -48,7 +41,8 @@ if __name__ == "__main__":
     # List of game win results
     results = []
 
-    generated_stats = False
+    # Add UI to the window
+    add_ui(window, game, results, colour_to_player)
 
     # Window loop
     while window.is_running():
@@ -61,25 +55,21 @@ if __name__ == "__main__":
             if event[0] == pygame.MOUSEBUTTONUP:
                 square = board_manager.check_mouse_press(event[1], game.get_board())
                 if square != (-1, -1):
-                    print("CLICK!!! Row: ", square[0], "; Column: ", square[1])
                     game.try_make_move(square)
-        winner = game.get_winner()
-        if winner is not None and num_games_left > 0:
-            results.append(winner)
-            print(winner)
-            num_games_left -= 1
-            game = ReversiGame(human_player=human_p)
 
-        if num_games_left == 0 and generated_stats is False:
-            generated_stats = True
-            plot_game_statistics(results, 'black')
+        # Get game winner
+        winner = game.get_winner()
+        if winner is not None:
+            results.append(winner)
+            update_games_stored_text(len(results), window)
+            print(winner)
+            game.start_game(human_player=game.get_human_player())
 
         if game.get_human_player() == game.get_current_player():
             for event in window.get_events():
                 if event[0] == pygame.MOUSEBUTTONUP:
                     square = board_manager.check_mouse_press(event[1], game.get_board())
                     if square != (-1, -1):
-                        print("CLICK!!! Row: ", square[1], "; Column: ", square[0])
                         if game.try_make_move(square):
                             moves_made.append(square)
         elif game.get_winner() is None:

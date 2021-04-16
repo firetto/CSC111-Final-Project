@@ -20,6 +20,7 @@ def plot_game_statistics(results: list[str], focused_player: str):
     Preconditions:
         - focused_player in {'White', 'Black'}
     """
+
     outcomes = []
     for result in results:
         if result == focused_player:
@@ -60,7 +61,7 @@ def plot_game_statistics(results: list[str], focused_player: str):
     fig.update_yaxes(range=[0.0, 1.0], row=2, col=1)
 
     fig.update_layout(title='Reversi Game Results', xaxis_title='Game')
-    # fig.show()
+    fig.show()
     fig.write_image('stats.png')
 
 
