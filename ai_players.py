@@ -46,6 +46,9 @@ def heuristic(game: ReversiGame, heuristic_array: list[list[int]]) -> float:
                     black += heuristic_array[i][m]
                 elif pieces[i][m] == -1:
                     white += heuristic_array[i][m]
+        if white - black < -400:
+            print(pieces)
+            print(heuristic_array)
         return white - black
     elif game.get_winner() == 'white':
         return 100000
@@ -83,7 +86,7 @@ class MinimaxPlayer(Player):
 
     Instance Attributes:
      - depth: the depth that the player will calculate to when making a decision
-     - heuristic: str that dictates which heuristic to use
+     - heuristic_array: array that dictates how the board is evaluated
     """
     depth: int
     heuristic_array: list[list[int]]
@@ -93,7 +96,8 @@ class MinimaxPlayer(Player):
         self.heuristic_array = heuristic_array
 
     def make_move(self, game: ReversiGame, previous_move: tuple[int, int]):
-        tree = self._create_tree(previous_move, game, self.depth)
+        tree = self._create_tree(previous_move, game, 0)
+        print(tree)
         subtrees = tree.get_subtrees()
         # if the tree is white's move, then it is currently black's turn, as the root holds the previous move
         if not tree.is_white_move:
@@ -102,25 +106,39 @@ class MinimaxPlayer(Player):
             best_tree = min(subtrees, key=lambda x: x.evaluation)
         return best_tree.move
 
-    def _create_tree(self, root_move: tuple[int, int], game: ReversiGame, depth: float) -> GameTree:
+    def _create_tree(self, root_move: tuple[int, int], game: ReversiGame, depth: int) -> GameTree:
         # the root_move is one move behind the game, thus if the game is at white's turn, then the root happened
         # on black's turn. 1 represents black's turn, -1 represents white's turn
         color = (game.get_current_player() == 1)
         ret = GameTree(move=root_move, is_white_move=color)
-        possible_moves = game.get_valid_moves()
+        if depth == self.depth:
+            ret.evaluation = heuristic(game, self.heuristic_array)
+            return ret
+        possible_moves = list(game.get_valid_moves())
+        # shuffle for randomness
+        random.shuffle(possible_moves)
         for move in possible_moves:
             new_game = game.copy_and_make_move(move)
-            evaluation = heuristic(new_game, self.heuristic_array)
-            # if we have reached the final depth, we do not continue to recurse
-            if depth != 0:
-                new_subtree = self._create_tree(move, new_game, depth - 1)
-            else:
-                new_subtree = GameTree(move=move, is_white_move=not color)
-                new_subtree.evaluation = evaluation
+            new_subtree = self._create_tree(move, new_game, depth + 1)
             ret.add_subtree(new_subtree)
         # update the evaluation value of the tree once all subtrees are added
         ret.update_evaluation()
         return ret
+
+
+class MinimaxABPlayer(Player):
+    depth: int
+    heuristic_array: list[list[int]]
+
+    def make_move(self, game: ReversiGame, previous_move: tuple[int, int]):
+        return
+
+    def _minimax(self, root_move: tuple[int, int], depth: int, game: ReversiGame,
+                 alpha: float, beta: float) -> GameTree:
+        color = (game.get_current_player() == 1)
+        ret = GameTree(move=root_move, is_white_move=color)
+        if depth == self.depth:
+            ret.evaluation = 0
 
 
 def test_players(player1: Player, player2: Player, iterations: int) -> None:
