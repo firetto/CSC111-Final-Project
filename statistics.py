@@ -21,24 +21,26 @@ def plot_game_statistics(game: reversi.ReversiGame, results: list[str], focused_
     focused_type is the type of player used for the focused_player. other_type is the type of player
     that was used as the opponent of focused_player.
 
+    game is needed to see whether this was a human vs AI game, and to show this on the graph.
+
     Draws are counted as 'half-wins' for the player: when calculating the win probability of a
     certain player, a value of 0.5 is added to total sum of the wins for that player.
 
     Preconditions:
-        - all(result in {'White', 'Black', 'Draw} for result in results)
-        - focused_player in {'White', 'Black}
+        - all(result in {'white', 'black', 'draw'} for result in results)
+        - focused_player in {'white', 'black'}
         - focused_type in {RandomPlayer(), MinimaxPlayer(2), MinimaxPlayer(3)}
     """
-    if focused_player == 'White':
-        other_player = 'Black'
+    if focused_player == 'white':
+        other_player = 'black'
     else:
-        other_player = 'White'
+        other_player = 'white'
 
     outcomes = []
     for result in results:
         if result == focused_player:
             outcomes.append(1)
-        elif result == 'Draw':
+        elif result == 'draw':
             outcomes.append(0.5)
         else:
             outcomes.append(0)
@@ -49,7 +51,7 @@ def plot_game_statistics(game: reversi.ReversiGame, results: list[str], focused_
 
     fig = make_subplots(rows=2, cols=1)
 
-    if focused_player == 'White':
+    if focused_player == 'white':
         fig.add_trace(go.Scatter(y=outcomes, mode='markers',
                                  name='Outcome (1 = White win, 0.5 = Draw, 0 = Black win)'),
                       row=1, col=1)
@@ -76,7 +78,7 @@ def plot_game_statistics(game: reversi.ReversiGame, results: list[str], focused_
     focused_str = player_to_string(game, focused_player, focused_type)
     other_str = player_to_string(game, other_player, other_type)
 
-    if focused_player == 'White':
+    if focused_player == 'white':
         fig.update_layout(
             title='Reversi Game Results | White: ' + focused_str + ', Black: ' + other_str,
             xaxis_title='Game')
@@ -85,7 +87,8 @@ def plot_game_statistics(game: reversi.ReversiGame, results: list[str], focused_
             title='Reversi Game Results | White: ' + other_str + ', Black: ' + focused_str,
             xaxis_title='Game')
 
-    fig.show()
+    # fig.show()
+    fig.write_image('stats.png')
 
 
 def player_to_string(game: reversi.ReversiGame, player_colour: str, player: ai_players.Player) \
@@ -93,12 +96,12 @@ def player_to_string(game: reversi.ReversiGame, player_colour: str, player: ai_p
     """ Returns the string representation of the type of the player.
 
     Preconditions:
-        - player_colour in {'White', 'Black'}
+        - player_colour in {'white', 'black'}
         - player in {RandomPlayer(), MinimaxPlayer(2), MinimaxPlayer(3)}
     """
-    if game.get_human_player() == 1 and player_colour == 'Black':
+    if game.get_human_player() == 1 and player_colour == 'black':
         return 'Human'
-    elif game.get_human_player() == -1 and player_colour == 'White':
+    elif game.get_human_player() == -1 and player_colour == 'white':
         return 'Human'
     else:
         # the player is one of the AI players
