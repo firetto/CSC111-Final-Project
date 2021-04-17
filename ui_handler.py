@@ -9,7 +9,7 @@ import pygame
 from reversi import ReversiGame
 from typing import List, Dict
 from statistics import plot_game_statistics
-from ai_players import RandomPlayer, MinimaxPlayer
+from ai_players import RandomPlayer, MinimaxPlayer, POSITIONAL_HEURISTIC, basic_heuristic
 
 
 def dropdown_select_player(g: ReversiGame) -> any:
@@ -23,9 +23,9 @@ def dropdown_select_ai(black: int, colour_to_player: Dict) -> any:
 
     if black:
         return lambda text: colour_to_player.update({black:
-                                                     MinimaxPlayer(2) if text == 'Minimax 2'
+                                                     MinimaxPlayer(2, basic_heuristic(8)) if text == 'Minimax 2'
                                                      else (
-                                                           MinimaxPlayer(3) if text == 'Minimax 3'
+                                                           MinimaxPlayer(3, POSITIONAL_HEURISTIC) if text == 'Minimax 3'
                                                            else RandomPlayer())})
 
 

@@ -13,7 +13,7 @@ class GameTree:
     GameTree is a class representing the possible moves in a reversi game
 
     Instance Attributes:
-     - is_white_move: boolean representing if it is white's turn
+     - is_white_move: boolean representing if it is white's turn after the move is played
      - move: a tuple containing the row and column of the current move
      - evaluation: a float representing the evaluation of the tree
 
@@ -49,20 +49,6 @@ class GameTree:
             if subtree.move == move:
                 return subtree
         return None
-
-    def update_evaluation(self):
-        """
-        A function that updates the evaluation of a tree using the minimax algorithm.
-        If there are no subtrees, the current evaluation is kept.
-        """
-        if self._subtrees != []:
-            self.evaluation = self._subtrees[0].evaluation
-            if self.is_white_move:
-                for tree in self._subtrees:
-                    self.evaluation = min(tree.evaluation, self.evaluation)
-            else:
-                for tree in self._subtrees:
-                    self.evaluation = max(tree.evaluation, self.evaluation)
 
     def __str__(self) -> str:
         """Return a string representation of this tree.

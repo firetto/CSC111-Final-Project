@@ -11,7 +11,7 @@ import reversi
 from reversi import ReversiGame
 from board import Board
 from board_manager import BoardManager
-from ai_players import RandomPlayer, MinimaxPlayer
+from ai_players import RandomPlayer, MinimaxPlayer, basic_heuristic, POSITIONAL_HEURISTIC
 from statistics import plot_game_statistics
 
 if __name__ == "__main__":
@@ -31,9 +31,12 @@ if __name__ == "__main__":
 
     # Minimax Player
 
-    # player1 = MinimaxPlayer(2)
-    # player2 = RandomPlayer()
-    colour_to_player = {1: MinimaxPlayer(2), -1: MinimaxPlayer(2)}
+    player1 = MinimaxPlayer(2, basic_heuristic(8))
+    player2 = RandomPlayer()
+    colour_to_player = {1: player1, -1: player2}
+
+    # Set number of games
+    num_games_left = 40
 
     # List of moves made
     moves_made = [(-1, -1)]
