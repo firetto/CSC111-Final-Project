@@ -7,33 +7,59 @@ from reversi import ReversiGame
 import random
 from game_tree import GameTree
 
+ADVANCED_HEURISTIC = [
+    [100, -20, 10, 5, 5, 10, -20, 100],
+    [-20, -50, -2, -2, -2, -2, -50, -20],
+    [10, -2, -1, -1, -1, -1, -2, 10],
+    [5, -2, -1, -1, -1, -1, -2, 5],
+    [5, -2, -1, -1, -1, -1, -2, 5],
+    [10, -2, -1, -1, -1, -1, -2, 10],
+    [-20, -50, -2, -2, -2, -2, -50, -20],
+    [100, -20, 10, 5, 5, 10, -20, 100]
+]
 
-def example_heuristic(game: ReversiGame) -> float:
+
+def basic_heuristic(size: int) -> list[list[int]]:
+    """
+    function that returns a <size> by <size> array of ones
+    """
+    ret = []
+    for _ in range(size):
+        ret.append([1] * size)
+    return ret
+
+
+def heuristic(game: ReversiGame, heuristic_array: list[list[int]]) -> float:
     """
     this is an example of a heuristic function. this function returns the difference between the number of
-    white and black pieces. if one side wins in a position, it gets assigned a value of 1000/-1000
+    white and black pieces. if one side wins in a position, it gets assigned a value of 100000/-100000
     """
+
     if game.get_winner() is None:
         pieces = game.get_board().pieces
         black = 0
         white = 0
-        for lst in pieces:
-            for i in lst:
-                if i == -1:
-                    white += 1
-                elif i == 1:
-                    black += 1
+        length = len(pieces)
+        for i in range(length):
+            for m in range(length):
+                if pieces[i][m] == 1:
+                    black += heuristic_array[i][m]
+                elif pieces[i][m] == -1:
+                    white += heuristic_array[i][m]
         return white - black
     elif game.get_winner() == 'white':
-        return 1000
+        return 100000
+    elif game.get_winner() == 'black':
+        return -100000
     else:
-        return -1000
+        return 0
 
 
 class Player:
     """
     Player is an abstract class that represents a reversi player
     """
+
     def make_move(self, game: ReversiGame, previous_move: tuple[int, int]):
         """
         make_move is a function that takes a game position and the previous move in the game and returns
@@ -46,6 +72,7 @@ class RandomPlayer(Player):
     """
     RandomPlayer is a player that plays random moves
     """
+
     def make_move(self, game: ReversiGame, previous_move: tuple[int, int]):
         return random.choice(list(game.get_valid_moves()))
 
@@ -56,11 +83,14 @@ class MinimaxPlayer(Player):
 
     Instance Attributes:
      - depth: the depth that the player will calculate to when making a decision
+     - heuristic: str that dictates which heuristic to use
     """
     depth: int
+    heuristic_array: list[list[int]]
 
-    def __init__(self, depth: int):
+    def __init__(self, depth: int, heuristic_array: list[list[int]]):
         self.depth = depth
+        self.heuristic_array = heuristic_array
 
     def make_move(self, game: ReversiGame, previous_move: tuple[int, int]):
         tree = self._create_tree(previous_move, game, self.depth)
@@ -80,7 +110,7 @@ class MinimaxPlayer(Player):
         possible_moves = game.get_valid_moves()
         for move in possible_moves:
             new_game = game.copy_and_make_move(move)
-            evaluation = example_heuristic(new_game)
+            evaluation = heuristic(new_game, self.heuristic_array)
             # if we have reached the final depth, we do not continue to recurse
             if depth != 0:
                 new_subtree = self._create_tree(move, new_game, depth - 1)
