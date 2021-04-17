@@ -75,7 +75,7 @@ def add_ui(w: window.Window, g: ReversiGame, results: List, colour_to_player: Di
 
     w.add_button(rect=pygame.Rect(725, 530, 150, 50),
                  label="button-show-stats", text="View Statistics",
-                 function=lambda: plot_game_statistics(g, results, 'Black', colour_to_player[1],
+                 function=lambda: plot_game_statistics(g, results, 'black', colour_to_player[1],
                                                        colour_to_player[-1]))
 
     w.add_button(rect=pygame.Rect(725, 590, 150, 50),
