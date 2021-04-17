@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
     # Minimax Player
 
-    player1 = MinimaxPlayer(2, POSITIONAL_HEURISTIC)
+    player1 = MinimaxPlayer(2, basic_heuristic(8))
     player2 = RandomPlayer()
     colour_to_player = {1: player1, -1: player2}
 
