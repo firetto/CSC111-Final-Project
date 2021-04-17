@@ -7,10 +7,12 @@ from __future__ import annotations
 
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+import ai_players
+import reversi
 
 
-def plot_game_statistics(results: list[str], focused_player: str,
-                         focused_type: str, other_type: str) -> None:
+def plot_game_statistics(game: reversi.ReversiGame, results: list[str], focused_player: str,
+                         focused_type: ai_players.Player, other_type: ai_players.Player) -> None:
     """ Plots two graphs: the first graph shows the results of the games, with a win by the
     focused_player represented by 1, a win by the other player represented by 0, and a draw
     represented by 0.5. The second graph shows the cumulative win probability of the focused_player
@@ -19,19 +21,26 @@ def plot_game_statistics(results: list[str], focused_player: str,
     focused_type is the type of player used for the focused_player. other_type is the type of player
     that was used as the opponent of focused_player.
 
+    game is needed to see whether this was a human vs AI game, and to show this on the graph.
+
     Draws are counted as 'half-wins' for the player: when calculating the win probability of a
     certain player, a value of 0.5 is added to total sum of the wins for that player.
 
     Preconditions:
-        - all(result in {'White', 'Black', 'Draw} for result in results)
-        - focused_player in {'White', 'Black'}
+        - all(result in {'white', 'black', 'draw'} for result in results)
+        - focused_player in {'white', 'black'}
+        - focused_type in {RandomPlayer(), MinimaxPlayer(2), MinimaxPlayer(3)}
     """
+    if focused_player == 'white':
+        other_player = 'black'
+    else:
+        other_player = 'white'
 
     outcomes = []
     for result in results:
         if result == focused_player:
             outcomes.append(1)
-        elif result == 'Draw':
+        elif result == 'draw':
             outcomes.append(0.5)
         else:
             outcomes.append(0)
@@ -42,7 +51,7 @@ def plot_game_statistics(results: list[str], focused_player: str,
 
     fig = make_subplots(rows=2, cols=1)
 
-    if focused_player == 'White':
+    if focused_player == 'white':
         fig.add_trace(go.Scatter(y=outcomes, mode='markers',
                                  name='Outcome (1 = White win, 0.5 = Draw, 0 = Black win)'),
                       row=1, col=1)
@@ -66,16 +75,42 @@ def plot_game_statistics(results: list[str], focused_player: str,
 
     fig.update_yaxes(range=[0.0, 1.0], row=2, col=1)
 
-    if focused_player == 'White':
+    focused_str = player_to_string(game, focused_player, focused_type)
+    other_str = player_to_string(game, other_player, other_type)
+
+    if focused_player == 'white':
         fig.update_layout(
-            title='Reversi Game Results | White: ' + focused_type + ', Black: ' + other_type,
+            title='Reversi Game Results | White: ' + focused_str + ', Black: ' + other_str,
             xaxis_title='Game')
     else:
         fig.update_layout(
-            title='Reversi Game Results | White: ' + other_type + ', Black: ' + focused_type,
+            title='Reversi Game Results | White: ' + other_str + ', Black: ' + focused_str,
             xaxis_title='Game')
 
-    fig.show()
+    # fig.show()
+    fig.write_image('stats.png')
+
+
+def player_to_string(game: reversi.ReversiGame, player_colour: str, player: ai_players.Player) \
+        -> str:
+    """ Returns the string representation of the type of the player.
+
+    Preconditions:
+        - player_colour in {'white', 'black'}
+        - player in {RandomPlayer(), MinimaxPlayer(2), MinimaxPlayer(3)}
+    """
+    if game.get_human_player() == 1 and player_colour == 'black':
+        return 'Human'
+    elif game.get_human_player() == -1 and player_colour == 'white':
+        return 'Human'
+    else:
+        # the player is one of the AI players
+        if isinstance(player, ai_players.RandomPlayer):
+            return 'Random Moves'
+        elif isinstance(player, ai_players.MinimaxPlayer) and player.depth == 2:
+            return 'Minimax 2'
+        elif isinstance(player, ai_players.MinimaxPlayer) and player.depth == 3:
+            return 'Minimax 3'
 
 
 if __name__ == '__main__':
@@ -88,7 +123,9 @@ if __name__ == '__main__':
     import python_ta
     python_ta.check_all(config={
         'extra-imports': ['plotly.graph_objects',
-                          'plotly.subplots'],  # the names (strs) of imported modules
+                          'plotly.subplots',
+                          'ai_players',
+                          'reversi'],  # the names (strs) of imported modules
         'allowed-io': [],  # the names (strs) of functions that call print/open/input
         'max-line-length': 100,
         'disable': ['E1136']

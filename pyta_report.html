@@ -533,13 +533,13 @@ footer {
     <body>
         <header>
             <h1 class="title">PyTA Error Report</h1>
-            <time>Tue. Apr. 06 2021, 09:57:12 PM</time>
+            <time>Fri. Apr. 16 2021, 06:27:30 PM</time>
         </header>
         <main>
             
             <section>
                 <article class="file-name">
-                    <h2> C:/Users/azsza/Documents/GitHub/CSC111-Final-Project/window.py </h2>
+                    <h2> C:/Users/Rachel Kim/Documents/University of Toronto/2020-2021/CSC111/miscellaneous/project/CSC111-Final-Project/statistics.py </h2>
                 </article>
                 <article class="error-output code-errors">
                     <h3 class="category-heading">
@@ -553,7 +553,7 @@ footer {
                         <div class="error-instance">
                             <div class="info">
                                 <span class="error-link code-error-id">
-                                    <a href="http://www.cs.toronto.edu/~david/pyta/&#35;E1101" target="_blank">&#10064; E1101 (no-member)</a>
+                                    <a href="http://www.cs.toronto.edu/~david/pyta/&#35;E9999" target="_blank">&#10064; E9999 (forbidden-import)</a>
                                 </span>
                                 <span class="occurrences">
                                 2
@@ -572,18 +572,18 @@ footer {
                                 
                                 <div class="message">
                                     <h4 class="message-name">
-                                        [Line 125] Module 'pygame' doesn't have the method/attribute 'QUIT'.
+                                        [Line 10] You may not import any modules - you imported ai_players on line 10.
                                         <span class="slider">
                                             <button style="float: right; background: #458B00;"> Expand/Collapse </button>
                                         </span>
                                     </h4>
                                     
                                     <div class="collapsible">
-                                      <code>  <span class="grey line-num">123</span>  <span class="grey"></span>
-  <span class="grey line-num">124</span>              <span class="grey"><span class="pygments-c1"># If window is to be closed</span></span>
-  <span class="gbold line-num">125</span>              <span class="black"><span class="pygments-k">if</span> <span class="pygments-n">event</span><span class="pygments-o">.</span><span class="pygments-n">type</span> <span class="pygments-o">==</span> </span><span class="highlight-pyta"><span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">QUIT</span></span><span class="black"><span class="pygments-p">:</span></span>
-  <span class="grey line-num">126</span>                  <span class="grey"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_running</span> <span class="pygments-o">=</span> <span class="pygments-kc">False</span></span>
-  <span class="grey line-num">127</span>  <span class="grey"></span>
+                                      <code>    <span class="grey line-num">8</span>  <span class="grey"><span class="pygments-kn">import</span> <span class="pygments-nn">plotly.graph_objects</span> <span class="pygments-k">as</span> <span class="pygments-nn">go</span></span>
+    <span class="grey line-num">9</span>  <span class="grey"><span class="pygments-kn">from</span> <span class="pygments-nn">plotly.subplots</span> <span class="pygments-kn">import</span> <span class="pygments-n">make_subplots</span></span>
+   <span class="gbold line-num">10</span>  <span class="highlight-pyta"><span class="pygments-kn">import</span> <span class="pygments-nn">ai_players</span></span>
+   <span class="grey line-num">11</span>  <span class="grey"><span class="pygments-kn">import</span> <span class="pygments-nn">reversi</span></span>
+   <span class="grey line-num">12</span>  <span class="grey"></span>
 </code>
                                     </div>
                                     
@@ -591,18 +591,18 @@ footer {
                                 
                                 <div class="message">
                                     <h4 class="message-name">
-                                        [Line 129] Module 'pygame' doesn't have the method/attribute 'USEREVENT'.
+                                        [Line 11] You may not import any modules - you imported reversi on line 11.
                                         <span class="slider">
                                             <button style="float: right; background: #458B00;"> Expand/Collapse </button>
                                         </span>
                                     </h4>
                                     
                                     <div class="collapsible">
-                                      <code>  <span class="grey line-num">127</span>  <span class="grey"></span>
-  <span class="grey line-num">128</span>              <span class="grey"><span class="pygments-c1"># User event</span></span>
-  <span class="gbold line-num">129</span>              <span class="black"><span class="pygments-k">elif</span> <span class="pygments-n">event</span><span class="pygments-o">.</span><span class="pygments-n">type</span> <span class="pygments-o">==</span> </span><span class="highlight-pyta"><span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">USEREVENT</span></span><span class="black"><span class="pygments-p">:</span></span>
-  <span class="grey line-num">130</span>  <span class="grey"></span>
-  <span class="grey line-num">131</span>                  <span class="grey"><span class="pygments-c1"># Check if button was pressed</span></span>
+                                      <code>    <span class="grey line-num">9</span>  <span class="grey"><span class="pygments-kn">from</span> <span class="pygments-nn">plotly.subplots</span> <span class="pygments-kn">import</span> <span class="pygments-n">make_subplots</span></span>
+   <span class="grey line-num">10</span>  <span class="grey"><span class="pygments-kn">import</span> <span class="pygments-nn">ai_players</span></span>
+   <span class="gbold line-num">11</span>  <span class="highlight-pyta"><span class="pygments-kn">import</span> <span class="pygments-nn">reversi</span></span>
+   <span class="grey line-num">12</span>  <span class="grey"></span>
+   <span class="grey line-num">13</span>  <span class="grey"></span>
 </code>
                                     </div>
                                     
@@ -626,7 +626,7 @@ footer {
 
                             <div class="info">
                                 <span class="error-link style-error-id">
-                                    <a href="http://www.cs.toronto.edu/~david/pyta/&#35;R0902" target="_blank">&#10064; R0902 (too-many-instance-attributes)</a>
+                                    <a href="http://www.cs.toronto.edu/~david/pyta/&#35;R1710" target="_blank">&#10064; R1710 (inconsistent-return-statements)</a>
                                 </span>
                                 <span class="occurrences">
                                 1
@@ -646,287 +646,37 @@ footer {
                                 
                                 <div class="message">
                                     <h4 class="message-name">
-                                        [Line 14] Too many instance attributes (12/7)
+                                        [Line 91] Since this function can return a non-None value, you should explicitly write "return None" whenever None is returned by this function. (Possibly including at the end of the function body.)
                                         <span class="slider">
                                             <button style="float: right; background: #458B00;"> Expand/Collapse </button>
                                         </span>
                                     </h4>
                                     <div class="collapsible">
                                       
-                                      <code>   <span class="grey line-num">12</span>  <span class="grey"></span>
-   <span class="grey line-num">13</span>  <span class="grey"></span>
-   <span class="gbold line-num">14</span>  <span class="highlight-pyta"><span class="pygments-k">class</span> <span class="pygments-nc">Window</span><span class="pygments-p">:</span></span>
-   <span class="gbold line-num">15</span>      <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-   <span class="gbold line-num">16</span>      <span class="highlight-pyta"><span class="pygments-n">Window</span> <span class="pygments-k">class</span> <span class="pygments-nc">containing</span> <span class="pygments-n">window</span> <span class="pygments-n">update</span> <span class="pygments-n">methods</span> <span class="pygments-ow">and</span> <span class="pygments-n">window</span> <span class="pygments-n">attributes</span><span class="pygments-o">.</span></span>
-   <span class="gbold line-num">17</span>      <span class="highlight-pyta"><span class="pygments-n">Instance</span> <span class="pygments-n">Attributes</span><span class="pygments-p">:</span></span>
-   <span class="gbold line-num">18</span>       <span class="highlight-pyta"><span class="pygments-o">-</span> <span class="pygments-n">BACKGROUND_COLOR</span><span class="pygments-p">:</span> <span class="pygments-n">The</span> <span class="pygments-n">background</span> <span class="pygments-n">color</span> <span class="pygments-n">of</span> <span class="pygments-n">the</span> <span class="pygments-n">window</span><span class="pygments-o">.</span></span>
-   <span class="gbold line-num">19</span>      <span class="highlight-pyta"><span class="pygments-n">Sample</span> <span class="pygments-n">Usage</span><span class="pygments-p">:</span></span>
-   <span class="gbold line-num">20</span>      <span class="highlight-pyta"><span class="pygments-o">&gt;&gt;&gt;</span> <span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">init</span><span class="pygments-p">()</span></span>
-   <span class="gbold line-num">21</span>      <span class="highlight-pyta"><span class="pygments-p">(</span><span class="pygments-mi">7</span><span class="pygments-p">,</span> <span class="pygments-mi">0</span><span class="pygments-p">)</span></span>
-   <span class="gbold line-num">22</span>      <span class="highlight-pyta"><span class="pygments-o">&gt;&gt;&gt;</span> <span class="pygments-n">window</span> <span class="pygments-o">=</span> <span class="pygments-n">Window</span><span class="pygments-p">()</span> <span class="pygments-c1"># wow you did it!!!</span></span>
-   <span class="gbold line-num">23</span>      <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-   <span class="gbold line-num">24</span>  <span class="highlight-pyta"></span>
-   <span class="gbold line-num">25</span>      <span class="highlight-pyta"><span class="pygments-c1"># Private Instance Attributes:</span></span>
-   <span class="gbold line-num">26</span>      <span class="highlight-pyta"><span class="pygments-c1"># - _width: The width of the window (in px). Preset to be 800px.</span></span>
-   <span class="gbold line-num">27</span>      <span class="highlight-pyta"><span class="pygments-c1"># - _height: The height of the window (in px). Preset to be 600px.</span></span>
-   <span class="gbold line-num">28</span>      <span class="highlight-pyta"><span class="pygments-c1"># - _title: The name of the window</span></span>
-   <span class="gbold line-num">29</span>      <span class="highlight-pyta"><span class="pygments-c1"># - _running: Whether the window is running. If not, the window should close.</span></span>
-   <span class="gbold line-num">30</span>      <span class="highlight-pyta"><span class="pygments-c1"># - _screen: PyGame display surface</span></span>
-   <span class="gbold line-num">31</span>      <span class="highlight-pyta"><span class="pygments-c1"># - _gui_manager: pygame_gui UI Manager instance</span></span>
-   <span class="gbold line-num">32</span>      <span class="highlight-pyta"><span class="pygments-c1"># - _background_surface: a solid color for the surface</span></span>
-   <span class="gbold line-num">33</span>      <span class="highlight-pyta"><span class="pygments-c1"># - _buttons: List of buttons</span></span>
-   <span class="gbold line-num">34</span>      <span class="highlight-pyta"><span class="pygments-c1"># - _sliders: A dictionary containing strings as keys</span></span>
-   <span class="gbold line-num">35</span>      <span class="highlight-pyta"><span class="pygments-c1">#             and sliders as their corresponding values</span></span>
-   <span class="gbold line-num">36</span>      <span class="highlight-pyta"><span class="pygments-c1"># - _clock: pygame.time.Clock instance, used for updating GUI</span></span>
-   <span class="gbold line-num">37</span>      <span class="highlight-pyta"><span class="pygments-c1"># - _time_delta: the time delta in milliseconds for this update</span></span>
-   <span class="gbold line-num">38</span>      <span class="highlight-pyta"><span class="pygments-c1"># - _font: PyGame font instance, used for rendering text.</span></span>
-   <span class="gbold line-num">39</span>  <span class="highlight-pyta"></span>
-   <span class="gbold line-num">40</span>      <span class="highlight-pyta"><span class="pygments-c1"># Private Representation Invariants:</span></span>
-   <span class="gbold line-num">41</span>      <span class="highlight-pyta"><span class="pygments-c1"># - self._width &gt; 0</span></span>
-   <span class="gbold line-num">42</span>      <span class="highlight-pyta"><span class="pygments-c1"># - self._height &gt; 0</span></span>
-   <span class="gbold line-num">43</span>  <span class="highlight-pyta"></span>
-   <span class="gbold line-num">44</span>      <span class="highlight-pyta"><span class="pygments-n">_width</span><span class="pygments-p">:</span> <span class="pygments-nb">int</span></span>
-   <span class="gbold line-num">45</span>      <span class="highlight-pyta"><span class="pygments-n">_height</span><span class="pygments-p">:</span> <span class="pygments-nb">int</span></span>
-   <span class="gbold line-num">46</span>      <span class="highlight-pyta"><span class="pygments-n">_title</span><span class="pygments-p">:</span> <span class="pygments-nb">str</span></span>
-   <span class="gbold line-num">47</span>      <span class="highlight-pyta"><span class="pygments-n">_running</span><span class="pygments-p">:</span> <span class="pygments-nb">bool</span></span>
-   <span class="gbold line-num">48</span>  <span class="highlight-pyta"></span>
-   <span class="gbold line-num">49</span>      <span class="highlight-pyta"><span class="pygments-n">_buttons</span><span class="pygments-p">:</span> <span class="pygments-n">List</span><span class="pygments-p">[</span><span class="pygments-n">Button</span><span class="pygments-p">]</span></span>
-   <span class="gbold line-num">50</span>      <span class="highlight-pyta"><span class="pygments-n">_sliders</span><span class="pygments-p">:</span> <span class="pygments-n">Dict</span><span class="pygments-p">[</span><span class="pygments-nb">str</span><span class="pygments-p">,</span> <span class="pygments-n">UIHorizontalSlider</span><span class="pygments-p">]</span></span>
-   <span class="gbold line-num">51</span>  <span class="highlight-pyta"></span>
-   <span class="gbold line-num">52</span>      <span class="highlight-pyta"><span class="pygments-n">_screen</span><span class="pygments-p">:</span> <span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">Surface</span></span>
-   <span class="gbold line-num">53</span>      <span class="highlight-pyta"><span class="pygments-n">_gui_manager</span><span class="pygments-p">:</span> <span class="pygments-n">pygame_gui</span><span class="pygments-o">.</span><span class="pygments-n">UIManager</span></span>
-   <span class="gbold line-num">54</span>      <span class="highlight-pyta"><span class="pygments-n">_clock</span><span class="pygments-p">:</span> <span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">time</span><span class="pygments-o">.</span><span class="pygments-n">Clock</span></span>
-   <span class="gbold line-num">55</span>      <span class="highlight-pyta"><span class="pygments-n">_time_delta</span><span class="pygments-p">:</span> <span class="pygments-nb">float</span></span>
-   <span class="gbold line-num">56</span>  <span class="highlight-pyta"></span>
-   <span class="gbold line-num">57</span>      <span class="highlight-pyta"><span class="pygments-n">_background_surface</span><span class="pygments-p">:</span> <span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">Surface</span></span>
-   <span class="gbold line-num">58</span>      <span class="highlight-pyta"><span class="pygments-n">_font</span><span class="pygments-p">:</span> <span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">font</span><span class="pygments-o">.</span><span class="pygments-n">Font</span></span>
-   <span class="gbold line-num">59</span>  <span class="highlight-pyta"></span>
-   <span class="gbold line-num">60</span>      <span class="highlight-pyta"><span class="pygments-n">BACKGROUND_COLOR</span><span class="pygments-p">:</span> <span class="pygments-n">Tuple</span><span class="pygments-p">[</span><span class="pygments-nb">int</span><span class="pygments-p">,</span> <span class="pygments-nb">int</span><span class="pygments-p">,</span> <span class="pygments-nb">int</span><span class="pygments-p">]</span> <span class="pygments-o">=</span> <span class="pygments-p">(</span><span class="pygments-mi">20</span><span class="pygments-p">,</span> <span class="pygments-mi">20</span><span class="pygments-p">,</span> <span class="pygments-mi">30</span><span class="pygments-p">)</span></span>
-   <span class="gbold line-num">61</span>  <span class="highlight-pyta"></span>
-   <span class="gbold line-num">62</span>      <span class="highlight-pyta"><span class="pygments-k">def</span> <span class="pygments-fm">__init__</span><span class="pygments-p">(</span><span class="pygments-bp">self</span><span class="pygments-p">)</span> <span class="pygments-o">-&gt;</span> <span class="pygments-kc">None</span><span class="pygments-p">:</span></span>
-   <span class="gbold line-num">63</span>          <span class="highlight-pyta"><span class="pygments-sd">&quot;&quot;&quot;Initialize window attributes, start window loop.&quot;&quot;&quot;</span></span>
-   <span class="gbold line-num">64</span>  <span class="highlight-pyta"></span>
-   <span class="gbold line-num">65</span>          <span class="highlight-pyta"><span class="pygments-c1"># Initialize basic window attributes</span></span>
-   <span class="gbold line-num">66</span>          <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_running</span> <span class="pygments-o">=</span> <span class="pygments-kc">True</span></span>
-   <span class="gbold line-num">67</span>          <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_width</span> <span class="pygments-o">=</span> <span class="pygments-mi">900</span></span>
-   <span class="gbold line-num">68</span>          <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_height</span> <span class="pygments-o">=</span> <span class="pygments-mi">700</span></span>
-   <span class="gbold line-num">69</span>          <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_title</span> <span class="pygments-o">=</span> <span class="pygments-s2">&quot;Reversi B)&quot;</span></span>
-   <span class="gbold line-num">70</span>          <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_buttons</span> <span class="pygments-o">=</span> <span class="pygments-p">[]</span></span>
-   <span class="gbold line-num">71</span>          <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_sliders</span> <span class="pygments-o">=</span> <span class="pygments-p">{}</span></span>
-   <span class="gbold line-num">72</span>  <span class="highlight-pyta"></span>
-   <span class="gbold line-num">73</span>          <span class="highlight-pyta"><span class="pygments-c1"># Initialize Pygame stuff</span></span>
-   <span class="gbold line-num">74</span>          <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_screen</span> <span class="pygments-o">=</span> <span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">display</span><span class="pygments-o">.</span><span class="pygments-n">set_mode</span><span class="pygments-p">((</span><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_width</span><span class="pygments-p">,</span> <span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_height</span><span class="pygments-p">))</span></span>
-   <span class="gbold line-num">75</span>          <span class="highlight-pyta"><span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">display</span><span class="pygments-o">.</span><span class="pygments-n">set_caption</span><span class="pygments-p">(</span><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_title</span><span class="pygments-p">)</span></span>
-   <span class="gbold line-num">76</span>  <span class="highlight-pyta"></span>
-   <span class="gbold line-num">77</span>          <span class="highlight-pyta"><span class="pygments-c1"># Initialize GUI</span></span>
-   <span class="gbold line-num">78</span>          <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_gui_manager</span> <span class="pygments-o">=</span> <span class="pygments-n">pygame_gui</span><span class="pygments-o">.</span><span class="pygments-n">UIManager</span><span class="pygments-p">((</span><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_width</span><span class="pygments-p">,</span> <span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_height</span><span class="pygments-p">))</span></span>
-   <span class="gbold line-num">79</span>  <span class="highlight-pyta"></span>
-   <span class="gbold line-num">80</span>          <span class="highlight-pyta"><span class="pygments-c1"># Initialize background surface</span></span>
-   <span class="gbold line-num">81</span>          <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_background_surface</span> <span class="pygments-o">=</span> <span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">Surface</span><span class="pygments-p">((</span><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_width</span><span class="pygments-p">,</span> <span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_height</span><span class="pygments-p">))</span></span>
-   <span class="gbold line-num">82</span>          <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_background_surface</span><span class="pygments-o">.</span><span class="pygments-n">fill</span><span class="pygments-p">(</span><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">BACKGROUND_COLOR</span><span class="pygments-p">)</span></span>
-   <span class="gbold line-num">83</span>  <span class="highlight-pyta"></span>
-   <span class="gbold line-num">84</span>          <span class="highlight-pyta"><span class="pygments-c1"># Initialize clock</span></span>
-   <span class="gbold line-num">85</span>          <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_clock</span> <span class="pygments-o">=</span> <span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">time</span><span class="pygments-o">.</span><span class="pygments-n">Clock</span><span class="pygments-p">()</span></span>
-   <span class="gbold line-num">86</span>          <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_time_delta</span> <span class="pygments-o">=</span> <span class="pygments-mi">0</span></span>
-   <span class="gbold line-num">87</span>  <span class="highlight-pyta"></span>
-   <span class="gbold line-num">88</span>          <span class="highlight-pyta"><span class="pygments-c1"># Initialize font</span></span>
-   <span class="gbold line-num">89</span>          <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_font</span> <span class="pygments-o">=</span> <span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">font</span><span class="pygments-o">.</span><span class="pygments-n">Font</span><span class="pygments-p">(</span><span class="pygments-kc">None</span><span class="pygments-p">,</span> <span class="pygments-mi">32</span><span class="pygments-p">)</span></span>
-   <span class="gbold line-num">90</span>  <span class="highlight-pyta"></span>
-   <span class="gbold line-num">91</span>          <span class="highlight-pyta"><span class="pygments-c1"># Initialize buttons</span></span>
-   <span class="gbold line-num">92</span>          <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_init_buttons</span><span class="pygments-p">()</span></span>
-   <span class="gbold line-num">93</span>  <span class="highlight-pyta"></span>
-   <span class="gbold line-num">94</span>      <span class="highlight-pyta"><span class="pygments-k">def</span> <span class="pygments-nf">draw_background</span><span class="pygments-p">(</span><span class="pygments-bp">self</span><span class="pygments-p">)</span> <span class="pygments-o">-&gt;</span> <span class="pygments-kc">None</span><span class="pygments-p">:</span></span>
-   <span class="gbold line-num">95</span>          <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-   <span class="gbold line-num">96</span>          <span class="highlight-pyta"><span class="pygments-n">Draws</span> <span class="pygments-n">the</span> <span class="pygments-n">background</span><span class="pygments-p">,</span> <span class="pygments-n">call</span> <span class="pygments-n">this</span> <span class="pygments-n">BEFORE</span> <span class="pygments-n">drawing</span> <span class="pygments-n">images</span> <span class="pygments-n">onto</span> <span class="pygments-n">the</span> <span class="pygments-n">window</span><span class="pygments-err">!</span></span>
-   <span class="gbold line-num">97</span>          <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-   <span class="gbold line-num">98</span>  <span class="highlight-pyta"></span>
-   <span class="gbold line-num">99</span>          <span class="highlight-pyta"><span class="pygments-c1"># Display background surface</span></span>
-  <span class="gbold line-num">100</span>          <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">draw_to_screen</span><span class="pygments-p">(</span><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_background_surface</span><span class="pygments-p">,</span> <span class="pygments-p">(</span><span class="pygments-mi">0</span><span class="pygments-p">,</span> <span class="pygments-mi">0</span><span class="pygments-p">))</span></span>
-  <span class="gbold line-num">101</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">102</span>      <span class="highlight-pyta"><span class="pygments-k">def</span> <span class="pygments-nf">update</span><span class="pygments-p">(</span><span class="pygments-bp">self</span><span class="pygments-p">)</span> <span class="pygments-o">-&gt;</span> <span class="pygments-kc">None</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">103</span>          <span class="highlight-pyta"><span class="pygments-sd">&quot;&quot;&quot;Window loop body.&quot;&quot;&quot;</span></span>
-  <span class="gbold line-num">104</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">105</span>          <span class="highlight-pyta"><span class="pygments-c1"># Update Pygame Display</span></span>
-  <span class="gbold line-num">106</span>          <span class="highlight-pyta"><span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">display</span><span class="pygments-o">.</span><span class="pygments-n">flip</span><span class="pygments-p">()</span></span>
-  <span class="gbold line-num">107</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">108</span>          <span class="highlight-pyta"><span class="pygments-c1"># Handle window events</span></span>
-  <span class="gbold line-num">109</span>          <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_handle_events</span><span class="pygments-p">()</span></span>
-  <span class="gbold line-num">110</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">111</span>          <span class="highlight-pyta"><span class="pygments-c1"># Update GUI manager (time takes seconds and not ms, so divide by 1000)</span></span>
-  <span class="gbold line-num">112</span>          <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_gui_manager</span><span class="pygments-o">.</span><span class="pygments-n">update</span><span class="pygments-p">(</span><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_time_delta</span> <span class="pygments-o">/</span> <span class="pygments-mf">1000.0</span><span class="pygments-p">)</span></span>
-  <span class="gbold line-num">113</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">114</span>      <span class="highlight-pyta"><span class="pygments-k">def</span> <span class="pygments-nf">draw_ui</span><span class="pygments-p">(</span><span class="pygments-bp">self</span><span class="pygments-p">)</span> <span class="pygments-o">-&gt;</span> <span class="pygments-kc">None</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">115</span>          <span class="highlight-pyta"><span class="pygments-sd">&quot;&quot;&quot;Draw the buttons and sliders and so on.&quot;&quot;&quot;</span></span>
-  <span class="gbold line-num">116</span>          <span class="highlight-pyta"><span class="pygments-c1"># Draw UI</span></span>
-  <span class="gbold line-num">117</span>          <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_gui_manager</span><span class="pygments-o">.</span><span class="pygments-n">draw_ui</span><span class="pygments-p">(</span><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_screen</span><span class="pygments-p">)</span></span>
-  <span class="gbold line-num">118</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">119</span>      <span class="highlight-pyta"><span class="pygments-k">def</span> <span class="pygments-nf">_handle_events</span><span class="pygments-p">(</span><span class="pygments-bp">self</span><span class="pygments-p">)</span> <span class="pygments-o">-&gt;</span> <span class="pygments-kc">None</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">120</span>          <span class="highlight-pyta"><span class="pygments-sd">&quot;&quot;&quot;Handle PyGame window events&quot;&quot;&quot;</span></span>
-  <span class="gbold line-num">121</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">122</span>          <span class="highlight-pyta"><span class="pygments-k">for</span> <span class="pygments-n">event</span> <span class="pygments-ow">in</span> <span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">event</span><span class="pygments-o">.</span><span class="pygments-n">get</span><span class="pygments-p">():</span></span>
-  <span class="gbold line-num">123</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">124</span>              <span class="highlight-pyta"><span class="pygments-c1"># If window is to be closed</span></span>
-  <span class="gbold line-num">125</span>              <span class="highlight-pyta"><span class="pygments-k">if</span> <span class="pygments-n">event</span><span class="pygments-o">.</span><span class="pygments-n">type</span> <span class="pygments-o">==</span> <span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">QUIT</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">126</span>                  <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_running</span> <span class="pygments-o">=</span> <span class="pygments-kc">False</span></span>
-  <span class="gbold line-num">127</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">128</span>              <span class="highlight-pyta"><span class="pygments-c1"># User event</span></span>
-  <span class="gbold line-num">129</span>              <span class="highlight-pyta"><span class="pygments-k">elif</span> <span class="pygments-n">event</span><span class="pygments-o">.</span><span class="pygments-n">type</span> <span class="pygments-o">==</span> <span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">USEREVENT</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">130</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">131</span>                  <span class="highlight-pyta"><span class="pygments-c1"># Check if button was pressed</span></span>
-  <span class="gbold line-num">132</span>                  <span class="highlight-pyta"><span class="pygments-k">if</span> <span class="pygments-n">event</span><span class="pygments-o">.</span><span class="pygments-n">user_type</span> <span class="pygments-o">==</span> <span class="pygments-n">pygame_gui</span><span class="pygments-o">.</span><span class="pygments-n">UI_BUTTON_PRESSED</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">133</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">134</span>                      <span class="highlight-pyta"><span class="pygments-c1"># Loop through every button, and check if it is the button that was pressed</span></span>
-  <span class="gbold line-num">135</span>                      <span class="highlight-pyta"><span class="pygments-c1"># (This is kind of bad and inefficient, look for a better way to do this!)</span></span>
-  <span class="gbold line-num">136</span>                      <span class="highlight-pyta"><span class="pygments-k">for</span> <span class="pygments-n">button</span> <span class="pygments-ow">in</span> <span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_buttons</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">137</span>                          <span class="highlight-pyta"><span class="pygments-k">if</span> <span class="pygments-n">event</span><span class="pygments-o">.</span><span class="pygments-n">ui_element</span> <span class="pygments-o">==</span> <span class="pygments-n">button</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">138</span>                              <span class="highlight-pyta"><span class="pygments-n">button</span><span class="pygments-o">.</span><span class="pygments-n">press</span><span class="pygments-p">()</span></span>
-  <span class="gbold line-num">139</span>                              <span class="highlight-pyta"><span class="pygments-k">break</span></span>
-  <span class="gbold line-num">140</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">141</span>              <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_gui_manager</span><span class="pygments-o">.</span><span class="pygments-n">process_events</span><span class="pygments-p">(</span><span class="pygments-n">event</span><span class="pygments-p">)</span></span>
-  <span class="gbold line-num">142</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">143</span>      <span class="highlight-pyta"><span class="pygments-k">def</span> <span class="pygments-nf">_init_buttons</span><span class="pygments-p">(</span><span class="pygments-bp">self</span><span class="pygments-p">)</span> <span class="pygments-o">-&gt;</span> <span class="pygments-kc">None</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">144</span>          <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-  <span class="gbold line-num">145</span>          <span class="highlight-pyta"><span class="pygments-n">Initialize</span> <span class="pygments-n">window</span> <span class="pygments-n">buttons</span> <span class="pygments-k">with</span> <span class="pygments-n">their</span> <span class="pygments-n">sizes</span><span class="pygments-p">,</span> <span class="pygments-n">pygame_gui</span> <span class="pygments-n">manager</span><span class="pygments-p">,</span></span>
-  <span class="gbold line-num">146</span>          <span class="highlight-pyta"><span class="pygments-ow">and</span> <span class="pygments-n">function</span> <span class="pygments-n">that</span> <span class="pygments-ow">is</span> <span class="pygments-n">to</span> <span class="pygments-n">be</span> <span class="pygments-n">called</span> <span class="pygments-n">when</span> <span class="pygments-n">the</span> <span class="pygments-n">button</span> <span class="pygments-ow">is</span> <span class="pygments-n">pressed</span><span class="pygments-o">.</span></span>
-  <span class="gbold line-num">147</span>          <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-  <span class="gbold line-num">148</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">149</span>      <span class="highlight-pyta"><span class="pygments-k">def</span> <span class="pygments-nf">add_button</span><span class="pygments-p">(</span><span class="pygments-bp">self</span><span class="pygments-p">,</span> <span class="pygments-n">rect</span><span class="pygments-p">:</span> <span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">Rect</span><span class="pygments-p">,</span> <span class="pygments-n">label</span><span class="pygments-p">:</span> <span class="pygments-nb">str</span><span class="pygments-p">,</span> <span class="pygments-n">function</span><span class="pygments-p">:</span> <span class="pygments-nb">any</span><span class="pygments-p">)</span> <span class="pygments-o">-&gt;</span> <span class="pygments-kc">None</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">150</span>          <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-  <span class="gbold line-num">151</span>          <span class="highlight-pyta"><span class="pygments-n">Add</span> <span class="pygments-n">a</span> <span class="pygments-n">button</span> <span class="pygments-n">to</span> <span class="pygments-nb">list</span> <span class="pygments-n">of</span> <span class="pygments-n">buttons</span><span class="pygments-o">.</span></span>
-  <span class="gbold line-num">152</span>          <span class="highlight-pyta"><span class="pygments-n">Preconditions</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">153</span>           <span class="highlight-pyta"><span class="pygments-o">-</span> <span class="pygments-nb">len</span><span class="pygments-p">(</span><span class="pygments-n">label</span><span class="pygments-p">)</span> <span class="pygments-o">&gt;</span> <span class="pygments-mi">0</span></span>
-  <span class="gbold line-num">154</span>           <span class="highlight-pyta"><span class="pygments-o">-</span> <span class="pygments-n">function</span> <span class="pygments-ow">is</span> <span class="pygments-n">of</span> <span class="pygments-n">function</span> <span class="pygments-nb">type</span> <span class="pygments-p">(</span><span class="pygments-n">callable</span><span class="pygments-p">)</span></span>
-  <span class="gbold line-num">155</span>          <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-  <span class="gbold line-num">156</span>          <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_buttons</span><span class="pygments-o">.</span><span class="pygments-n">append</span><span class="pygments-p">(</span><span class="pygments-n">Button</span><span class="pygments-p">(</span><span class="pygments-n">rect</span><span class="pygments-o">=</span><span class="pygments-n">rect</span><span class="pygments-p">,</span> <span class="pygments-n">label</span><span class="pygments-o">=</span><span class="pygments-n">label</span><span class="pygments-p">,</span></span>
-  <span class="gbold line-num">157</span>                                      <span class="highlight-pyta"><span class="pygments-n">manager</span><span class="pygments-o">=</span><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_gui_manager</span><span class="pygments-p">,</span> <span class="pygments-n">function</span><span class="pygments-o">=</span><span class="pygments-n">function</span><span class="pygments-p">))</span></span>
-  <span class="gbold line-num">158</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">159</span>      <span class="highlight-pyta"><span class="pygments-k">def</span> <span class="pygments-nf">add_slider</span><span class="pygments-p">(</span><span class="pygments-bp">self</span><span class="pygments-p">,</span> <span class="pygments-n">rect</span><span class="pygments-p">:</span> <span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">Rect</span><span class="pygments-p">,</span> <span class="pygments-n">label</span><span class="pygments-p">:</span> <span class="pygments-nb">str</span><span class="pygments-p">,</span></span>
-  <span class="gbold line-num">160</span>                     <span class="highlight-pyta"><span class="pygments-n">start_value</span><span class="pygments-p">:</span> <span class="pygments-nb">float</span><span class="pygments-p">,</span> <span class="pygments-n">value_range</span><span class="pygments-p">:</span> <span class="pygments-n">Tuple</span><span class="pygments-p">[</span><span class="pygments-nb">float</span><span class="pygments-p">,</span> <span class="pygments-nb">float</span><span class="pygments-p">])</span> <span class="pygments-o">-&gt;</span> <span class="pygments-kc">None</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">161</span>          <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-  <span class="gbold line-num">162</span>          <span class="highlight-pyta"><span class="pygments-n">Add</span> <span class="pygments-n">a</span> <span class="pygments-n">slider</span> <span class="pygments-n">to</span> <span class="pygments-n">the</span> <span class="pygments-n">dictionary</span> <span class="pygments-n">of</span> <span class="pygments-n">sliders</span><span class="pygments-o">.</span></span>
-  <span class="gbold line-num">163</span>          <span class="highlight-pyta"><span class="pygments-n">Preconditions</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">164</span>           <span class="highlight-pyta"><span class="pygments-o">-</span> <span class="pygments-n">label</span> <span class="pygments-ow">not</span> <span class="pygments-ow">in</span> <span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_sliders</span></span>
-  <span class="gbold line-num">165</span>           <span class="highlight-pyta"><span class="pygments-o">-</span> <span class="pygments-n">value_range</span><span class="pygments-p">[</span><span class="pygments-mi">1</span><span class="pygments-p">]</span> <span class="pygments-o">&gt;</span> <span class="pygments-n">value_range</span><span class="pygments-p">[</span><span class="pygments-mi">0</span><span class="pygments-p">]</span></span>
-  <span class="gbold line-num">166</span>           <span class="highlight-pyta"><span class="pygments-o">-</span> <span class="pygments-n">value_range</span><span class="pygments-p">[</span><span class="pygments-mi">0</span><span class="pygments-p">]</span> <span class="pygments-o">&lt;=</span> <span class="pygments-n">start_value</span> <span class="pygments-o">&lt;=</span> <span class="pygments-n">value_range</span><span class="pygments-p">[</span><span class="pygments-mi">1</span><span class="pygments-p">]</span></span>
-  <span class="gbold line-num">167</span>          <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-  <span class="gbold line-num">168</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">169</span>          <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_sliders</span><span class="pygments-p">[</span><span class="pygments-n">label</span><span class="pygments-p">]</span> <span class="pygments-o">=</span> <span class="pygments-n">UIHorizontalSlider</span><span class="pygments-p">(</span><span class="pygments-n">relative_rect</span><span class="pygments-o">=</span><span class="pygments-n">rect</span><span class="pygments-p">,</span></span>
-  <span class="gbold line-num">170</span>                                                    <span class="highlight-pyta"><span class="pygments-n">start_value</span><span class="pygments-o">=</span><span class="pygments-n">start_value</span><span class="pygments-p">,</span></span>
-  <span class="gbold line-num">171</span>                                                    <span class="highlight-pyta"><span class="pygments-n">value_range</span><span class="pygments-o">=</span><span class="pygments-n">value_range</span><span class="pygments-p">,</span></span>
-  <span class="gbold line-num">172</span>                                                    <span class="highlight-pyta"><span class="pygments-n">manager</span><span class="pygments-o">=</span><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_gui_manager</span><span class="pygments-p">)</span></span>
-  <span class="gbold line-num">173</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">174</span>      <span class="highlight-pyta"><span class="pygments-k">def</span> <span class="pygments-nf">get_slider_value</span><span class="pygments-p">(</span><span class="pygments-bp">self</span><span class="pygments-p">,</span> <span class="pygments-n">label</span><span class="pygments-p">:</span> <span class="pygments-nb">str</span><span class="pygments-p">)</span> <span class="pygments-o">-&gt;</span> <span class="pygments-nb">float</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">175</span>          <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-  <span class="gbold line-num">176</span>          <span class="highlight-pyta"><span class="pygments-n">Return</span> <span class="pygments-n">the</span> <span class="pygments-n">value</span> <span class="pygments-n">of</span> <span class="pygments-n">the</span> <span class="pygments-n">slider</span> <span class="pygments-n">corresponding</span> <span class="pygments-n">to</span> <span class="pygments-n">label</span><span class="pygments-o">.</span></span>
-  <span class="gbold line-num">177</span>          <span class="highlight-pyta"><span class="pygments-n">Preconditions</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">178</span>           <span class="highlight-pyta"><span class="pygments-o">-</span> <span class="pygments-n">label</span> <span class="pygments-ow">in</span> <span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_sliders</span></span>
-  <span class="gbold line-num">179</span>          <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-  <span class="gbold line-num">180</span>          <span class="highlight-pyta"><span class="pygments-k">return</span> <span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_sliders</span><span class="pygments-p">[</span><span class="pygments-n">label</span><span class="pygments-p">]</span><span class="pygments-o">.</span><span class="pygments-n">get_current_value</span><span class="pygments-p">()</span></span>
-  <span class="gbold line-num">181</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">182</span>      <span class="highlight-pyta"><span class="pygments-k">def</span> <span class="pygments-nf">is_running</span><span class="pygments-p">(</span><span class="pygments-bp">self</span><span class="pygments-p">)</span> <span class="pygments-o">-&gt;</span> <span class="pygments-nb">bool</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">183</span>          <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-  <span class="gbold line-num">184</span>          <span class="highlight-pyta"><span class="pygments-n">Return</span> <span class="pygments-n">whether</span> <span class="pygments-n">window</span> <span class="pygments-ow">is</span> <span class="pygments-n">running</span><span class="pygments-o">.</span></span>
-  <span class="gbold line-num">185</span>          <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-  <span class="gbold line-num">186</span>          <span class="highlight-pyta"><span class="pygments-k">return</span> <span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_running</span></span>
-  <span class="gbold line-num">187</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">188</span>      <span class="highlight-pyta"><span class="pygments-k">def</span> <span class="pygments-nf">get_screen</span><span class="pygments-p">(</span><span class="pygments-bp">self</span><span class="pygments-p">)</span> <span class="pygments-o">-&gt;</span> <span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">Surface</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">189</span>          <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-  <span class="gbold line-num">190</span>          <span class="highlight-pyta"><span class="pygments-n">Return</span> <span class="pygments-n">the</span> <span class="pygments-n">background</span> <span class="pygments-n">screen</span> <span class="pygments-n">instance</span><span class="pygments-o">.</span></span>
-  <span class="gbold line-num">191</span>          <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-  <span class="gbold line-num">192</span>          <span class="highlight-pyta"><span class="pygments-k">return</span> <span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_screen</span></span>
-  <span class="gbold line-num">193</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">194</span>      <span class="highlight-pyta"><span class="pygments-k">def</span> <span class="pygments-nf">draw_to_screen</span><span class="pygments-p">(</span><span class="pygments-bp">self</span><span class="pygments-p">,</span> <span class="pygments-n">surface</span><span class="pygments-p">:</span> <span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">Surface</span><span class="pygments-p">,</span> <span class="pygments-n">position</span><span class="pygments-p">:</span> <span class="pygments-n">Tuple</span><span class="pygments-p">[</span><span class="pygments-nb">int</span><span class="pygments-p">,</span> <span class="pygments-nb">int</span><span class="pygments-p">])</span> <span class="pygments-o">-&gt;</span> <span class="pygments-kc">None</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">195</span>          <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-  <span class="gbold line-num">196</span>          <span class="highlight-pyta"><span class="pygments-n">Draw</span> <span class="pygments-n">surface</span> <span class="pygments-n">at</span> <span class="pygments-n">position</span> <span class="pygments-n">onto</span> <span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_screen</span><span class="pygments-o">.</span></span>
-  <span class="gbold line-num">197</span>          <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-  <span class="gbold line-num">198</span>          <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_screen</span><span class="pygments-o">.</span><span class="pygments-n">blit</span><span class="pygments-p">(</span><span class="pygments-n">surface</span><span class="pygments-p">,</span> <span class="pygments-n">position</span><span class="pygments-p">)</span></span>
-  <span class="gbold line-num">199</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">200</span>      <span class="highlight-pyta"><span class="pygments-k">def</span> <span class="pygments-nf">update_clock</span><span class="pygments-p">(</span><span class="pygments-bp">self</span><span class="pygments-p">)</span> <span class="pygments-o">-&gt;</span> <span class="pygments-kc">None</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">201</span>          <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-  <span class="gbold line-num">202</span>          <span class="highlight-pyta"><span class="pygments-n">Update</span> <span class="pygments-n">the</span> <span class="pygments-n">clock</span> <span class="pygments-ow">and</span> <span class="pygments-nb">set</span> <span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_time_delta</span> <span class="pygments-n">to</span> <span class="pygments-n">be</span> <span class="pygments-n">the</span> <span class="pygments-n">time</span> <span class="pygments-n">delta</span> <span class="pygments-ow">in</span> <span class="pygments-n">milliseconds</span><span class="pygments-o">.</span></span>
-  <span class="gbold line-num">203</span>          <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-  <span class="gbold line-num">204</span>          <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_time_delta</span> <span class="pygments-o">=</span> <span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_clock</span><span class="pygments-o">.</span><span class="pygments-n">tick</span><span class="pygments-p">(</span><span class="pygments-mi">60</span><span class="pygments-p">)</span></span>
-  <span class="gbold line-num">205</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">206</span>      <span class="highlight-pyta"><span class="pygments-k">def</span> <span class="pygments-nf">get_delta</span><span class="pygments-p">(</span><span class="pygments-bp">self</span><span class="pygments-p">)</span> <span class="pygments-o">-&gt;</span> <span class="pygments-nb">float</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">207</span>          <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-  <span class="gbold line-num">208</span>          <span class="highlight-pyta"><span class="pygments-n">Return</span> <span class="pygments-n">the</span> <span class="pygments-n">time</span> <span class="pygments-n">delta</span> <span class="pygments-ow">in</span> <span class="pygments-n">milliseconds</span><span class="pygments-o">.</span></span>
-  <span class="gbold line-num">209</span>          <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-  <span class="gbold line-num">210</span>          <span class="highlight-pyta"><span class="pygments-k">return</span> <span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_time_delta</span></span>
-  <span class="gbold line-num">211</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">212</span>      <span class="highlight-pyta"><span class="pygments-k">def</span> <span class="pygments-nf">render_text</span><span class="pygments-p">(</span><span class="pygments-bp">self</span><span class="pygments-p">,</span> <span class="pygments-n">text</span><span class="pygments-p">:</span> <span class="pygments-nb">str</span><span class="pygments-p">,</span> <span class="pygments-n">antialias</span><span class="pygments-p">:</span> <span class="pygments-nb">bool</span><span class="pygments-p">,</span></span>
-  <span class="gbold line-num">213</span>                      <span class="highlight-pyta"><span class="pygments-n">color</span><span class="pygments-p">:</span> <span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">color</span><span class="pygments-o">.</span><span class="pygments-n">Color</span><span class="pygments-p">,</span> <span class="pygments-n">background</span><span class="pygments-p">:</span> <span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">color</span><span class="pygments-o">.</span><span class="pygments-n">Color</span><span class="pygments-p">)</span> <span class="pygments-o">-&gt;</span> <span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">Surface</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">214</span>          <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-  <span class="gbold line-num">215</span>          <span class="highlight-pyta"><span class="pygments-n">Return</span> <span class="pygments-n">the</span> <span class="pygments-n">pygame</span> <span class="pygments-n">Font</span> <span class="pygments-n">render</span> <span class="pygments-n">given</span> <span class="pygments-n">the</span> <span class="pygments-n">parameters</span><span class="pygments-o">.</span></span>
-  <span class="gbold line-num">216</span>          <span class="highlight-pyta"><span class="pygments-n">Preconditions</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">217</span>          <span class="highlight-pyta"><span class="pygments-o">-</span> <span class="pygments-nb">len</span><span class="pygments-p">(</span><span class="pygments-n">text</span><span class="pygments-p">)</span> <span class="pygments-o">&gt;</span> <span class="pygments-mi">0</span></span>
-  <span class="gbold line-num">218</span>          <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-  <span class="gbold line-num">219</span>          <span class="highlight-pyta"><span class="pygments-k">return</span> <span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_font</span><span class="pygments-o">.</span><span class="pygments-n">render</span><span class="pygments-p">(</span><span class="pygments-n">text</span><span class="pygments-p">,</span> <span class="pygments-n">antialias</span><span class="pygments-p">,</span> <span class="pygments-n">color</span><span class="pygments-p">,</span> <span class="pygments-n">background</span><span class="pygments-p">)</span></span>
-  <span class="grey line-num">220</span>  <span class="grey"></span>
-  <span class="grey line-num">221</span>  <span class="grey"></span>
-</code>
-                                      
-                                    </div>
-                                </div>
-                                
-                            </div>
-
-                        </div>
-                        
-                        <div class="error-instance">
-
-                            <div class="info">
-                                <span class="error-link style-error-id">
-                                    <a href="http://www.cs.toronto.edu/~david/pyta/&#35;R1702" target="_blank">&#10064; R1702 (too-many-nested-blocks)</a>
-                                </span>
-                                <span class="occurrences">
-                                1
-                                
-                                 occurrence.
-                                
-                                </span>
-                                <span class="shown">
-                                
-                                </span>
-                                <span class="slider">
-                                   <button> Expand/Collapse </button>
-                                </span>
-                            </div>
-
-                            <div class="message-container collapsible">
-                                
-                                <div class="message">
-                                    <h4 class="message-name">
-                                        [Line 122] Your code has too many nested blocks (5, exceeding limit 3). You should try to break it down into helper functions.
-                                        <span class="slider">
-                                            <button style="float: right; background: #458B00;"> Expand/Collapse </button>
-                                        </span>
-                                    </h4>
-                                    <div class="collapsible">
-                                      
-                                      <code>  <span class="grey line-num">120</span>          <span class="grey"><span class="pygments-sd">&quot;&quot;&quot;Handle PyGame window events&quot;&quot;&quot;</span></span>
-  <span class="grey line-num">121</span>  <span class="grey"></span>
-  <span class="gbold line-num">122</span>          <span class="black"></span><span class="highlight-pyta"><span class="pygments-k">for</span> <span class="pygments-n">event</span> <span class="pygments-ow">in</span> <span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">event</span><span class="pygments-o">.</span><span class="pygments-n">get</span><span class="pygments-p">():</span></span>
-  <span class="gbold line-num">123</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">124</span>              <span class="highlight-pyta"><span class="pygments-c1"># If window is to be closed</span></span>
-  <span class="gbold line-num">125</span>              <span class="highlight-pyta"><span class="pygments-k">if</span> <span class="pygments-n">event</span><span class="pygments-o">.</span><span class="pygments-n">type</span> <span class="pygments-o">==</span> <span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">QUIT</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">126</span>                  <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_running</span> <span class="pygments-o">=</span> <span class="pygments-kc">False</span></span>
-  <span class="gbold line-num">127</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">128</span>              <span class="highlight-pyta"><span class="pygments-c1"># User event</span></span>
-  <span class="gbold line-num">129</span>              <span class="highlight-pyta"><span class="pygments-k">elif</span> <span class="pygments-n">event</span><span class="pygments-o">.</span><span class="pygments-n">type</span> <span class="pygments-o">==</span> <span class="pygments-n">pygame</span><span class="pygments-o">.</span><span class="pygments-n">USEREVENT</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">130</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">131</span>                  <span class="highlight-pyta"><span class="pygments-c1"># Check if button was pressed</span></span>
-  <span class="gbold line-num">132</span>                  <span class="highlight-pyta"><span class="pygments-k">if</span> <span class="pygments-n">event</span><span class="pygments-o">.</span><span class="pygments-n">user_type</span> <span class="pygments-o">==</span> <span class="pygments-n">pygame_gui</span><span class="pygments-o">.</span><span class="pygments-n">UI_BUTTON_PRESSED</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">133</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">134</span>                      <span class="highlight-pyta"><span class="pygments-c1"># Loop through every button, and check if it is the button that was pressed</span></span>
-  <span class="gbold line-num">135</span>                      <span class="highlight-pyta"><span class="pygments-c1"># (This is kind of bad and inefficient, look for a better way to do this!)</span></span>
-  <span class="gbold line-num">136</span>                      <span class="highlight-pyta"><span class="pygments-k">for</span> <span class="pygments-n">button</span> <span class="pygments-ow">in</span> <span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_buttons</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">137</span>                          <span class="highlight-pyta"><span class="pygments-k">if</span> <span class="pygments-n">event</span><span class="pygments-o">.</span><span class="pygments-n">ui_element</span> <span class="pygments-o">==</span> <span class="pygments-n">button</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">138</span>                              <span class="highlight-pyta"><span class="pygments-n">button</span><span class="pygments-o">.</span><span class="pygments-n">press</span><span class="pygments-p">()</span></span>
-  <span class="gbold line-num">139</span>                              <span class="highlight-pyta"><span class="pygments-k">break</span></span>
-  <span class="gbold line-num">140</span>  <span class="highlight-pyta"></span>
-  <span class="gbold line-num">141</span>              <span class="highlight-pyta"><span class="pygments-bp">self</span><span class="pygments-o">.</span><span class="pygments-n">_gui_manager</span><span class="pygments-o">.</span><span class="pygments-n">process_events</span><span class="pygments-p">(</span><span class="pygments-n">event</span><span class="pygments-p">)</span></span>
-  <span class="grey line-num">142</span>  <span class="grey"></span>
-  <span class="grey line-num">143</span>      <span class="grey"><span class="pygments-k">def</span> <span class="pygments-nf">_init_buttons</span><span class="pygments-p">(</span><span class="pygments-bp">self</span><span class="pygments-p">)</span> <span class="pygments-o">-&gt;</span> <span class="pygments-kc">None</span><span class="pygments-p">:</span></span>
+                                      <code>   <span class="grey line-num">89</span>  <span class="grey"></span>
+   <span class="grey line-num">90</span>  <span class="grey"></span>
+   <span class="gbold line-num">91</span>  <span class="highlight-pyta"><span class="pygments-k">def</span> <span class="pygments-nf">player_to_string</span><span class="pygments-p">(</span><span class="pygments-n">game</span><span class="pygments-p">:</span> <span class="pygments-n">reversi</span><span class="pygments-o">.</span><span class="pygments-n">ReversiGame</span><span class="pygments-p">,</span> <span class="pygments-n">player_colour</span><span class="pygments-p">:</span> <span class="pygments-nb">str</span><span class="pygments-p">,</span> <span class="pygments-n">player</span><span class="pygments-p">:</span> <span class="pygments-n">ai_players</span><span class="pygments-o">.</span><span class="pygments-n">Player</span><span class="pygments-p">)</span> \</span>
+   <span class="gbold line-num">92</span>          <span class="highlight-pyta"><span class="pygments-o">-&gt;</span> <span class="pygments-nb">str</span><span class="pygments-p">:</span></span>
+   <span class="gbold line-num">93</span>      <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot; Returns the string representation of the type of the player.</span></span>
+   <span class="gbold line-num">94</span>  <span class="highlight-pyta"></span>
+   <span class="gbold line-num">95</span>      <span class="highlight-pyta"><span class="pygments-n">Preconditions</span><span class="pygments-p">:</span></span>
+   <span class="gbold line-num">96</span>          <span class="highlight-pyta"><span class="pygments-o">-</span> <span class="pygments-n">player_colour</span> <span class="pygments-ow">in</span> <span class="pygments-p">{</span><span class="pygments-s1">&#39;White&#39;</span><span class="pygments-p">,</span> <span class="pygments-s1">&#39;Black&#39;</span><span class="pygments-p">}</span></span>
+   <span class="gbold line-num">97</span>          <span class="highlight-pyta"><span class="pygments-o">-</span> <span class="pygments-n">player</span> <span class="pygments-ow">in</span> <span class="pygments-p">{</span><span class="pygments-n">RandomPlayer</span><span class="pygments-p">(),</span> <span class="pygments-n">MinimaxPlayer</span><span class="pygments-p">(</span><span class="pygments-mi">2</span><span class="pygments-p">),</span> <span class="pygments-n">MinimaxPlayer</span><span class="pygments-p">(</span><span class="pygments-mi">3</span><span class="pygments-p">)}</span></span>
+   <span class="gbold line-num">98</span>      <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
+   <span class="gbold line-num">99</span>      <span class="highlight-pyta"><span class="pygments-k">if</span> <span class="pygments-n">game</span><span class="pygments-o">.</span><span class="pygments-n">get_human_player</span><span class="pygments-p">()</span> <span class="pygments-o">==</span> <span class="pygments-mi">1</span> <span class="pygments-ow">and</span> <span class="pygments-n">player_colour</span> <span class="pygments-o">==</span> <span class="pygments-s1">&#39;Black&#39;</span><span class="pygments-p">:</span></span>
+  <span class="gbold line-num">100</span>          <span class="highlight-pyta"><span class="pygments-k">return</span> <span class="pygments-s1">&#39;Human&#39;</span></span>
+  <span class="gbold line-num">101</span>      <span class="highlight-pyta"><span class="pygments-k">elif</span> <span class="pygments-n">game</span><span class="pygments-o">.</span><span class="pygments-n">get_human_player</span><span class="pygments-p">()</span> <span class="pygments-o">==</span> <span class="pygments-o">-</span><span class="pygments-mi">1</span> <span class="pygments-ow">and</span> <span class="pygments-n">player_colour</span> <span class="pygments-o">==</span> <span class="pygments-s1">&#39;White&#39;</span><span class="pygments-p">:</span></span>
+  <span class="gbold line-num">102</span>          <span class="highlight-pyta"><span class="pygments-k">return</span> <span class="pygments-s1">&#39;Human&#39;</span></span>
+  <span class="gbold line-num">103</span>      <span class="highlight-pyta"><span class="pygments-k">else</span><span class="pygments-p">:</span></span>
+  <span class="gbold line-num">104</span>          <span class="highlight-pyta"><span class="pygments-c1"># the player is one of the AI players</span></span>
+  <span class="gbold line-num">105</span>          <span class="highlight-pyta"><span class="pygments-k">if</span> <span class="pygments-nb">isinstance</span><span class="pygments-p">(</span><span class="pygments-n">player</span><span class="pygments-p">,</span> <span class="pygments-n">ai_players</span><span class="pygments-o">.</span><span class="pygments-n">RandomPlayer</span><span class="pygments-p">):</span></span>
+  <span class="gbold line-num">106</span>              <span class="highlight-pyta"><span class="pygments-k">return</span> <span class="pygments-s1">&#39;Random Moves&#39;</span></span>
+  <span class="gbold line-num">107</span>          <span class="highlight-pyta"><span class="pygments-k">elif</span> <span class="pygments-nb">isinstance</span><span class="pygments-p">(</span><span class="pygments-n">player</span><span class="pygments-p">,</span> <span class="pygments-n">ai_players</span><span class="pygments-o">.</span><span class="pygments-n">MinimaxPlayer</span><span class="pygments-p">)</span> <span class="pygments-ow">and</span> <span class="pygments-n">player</span><span class="pygments-o">.</span><span class="pygments-n">depth</span> <span class="pygments-o">==</span> <span class="pygments-mi">2</span><span class="pygments-p">:</span></span>
+  <span class="gbold line-num">108</span>              <span class="highlight-pyta"><span class="pygments-k">return</span> <span class="pygments-s1">&#39;Minimax 2&#39;</span></span>
+  <span class="gbold line-num">109</span>          <span class="highlight-pyta"><span class="pygments-k">elif</span> <span class="pygments-nb">isinstance</span><span class="pygments-p">(</span><span class="pygments-n">player</span><span class="pygments-p">,</span> <span class="pygments-n">ai_players</span><span class="pygments-o">.</span><span class="pygments-n">MinimaxPlayer</span><span class="pygments-p">)</span> <span class="pygments-ow">and</span> <span class="pygments-n">player</span><span class="pygments-o">.</span><span class="pygments-n">depth</span> <span class="pygments-o">==</span> <span class="pygments-mi">3</span><span class="pygments-p">:</span></span>
+  <span class="gbold line-num">110</span>              <span class="highlight-pyta"><span class="pygments-k">return</span> <span class="pygments-s1">&#39;Minimax 3&#39;</span></span>
+  <span class="grey line-num">111</span>  <span class="grey"></span>
+  <span class="grey line-num">112</span>  <span class="grey"></span>
 </code>
                                       
                                     </div>
