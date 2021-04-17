@@ -68,7 +68,7 @@ class Window:
 
         # Initialize basic window attributes
         self._running = True
-        self._width = 900
+        self._width = 950
         self._height = 700
         self._title = "Reversi B)"
         self._ui_elements = {}

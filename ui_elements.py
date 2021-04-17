@@ -50,6 +50,10 @@ class Element:
         """Unimplemented execute method (used in Dropdown, Button)."""
         raise NotImplementedError
 
+    def set_text(self, text: str):
+        """Unimplemented method to set the text of the Text."""
+        raise NotImplementedError
+
 
 class UIElement(Element):
     """
@@ -176,12 +180,16 @@ class Text(Element):
 
     def __init__(self, text: str, position: Tuple[int, int], large_font: bool = True):
         """Initialize the text contents as well as the position of the text."""
-        self.text = text
+        self.set_text(text)
         self.position = position
         self.visible = True
         self.large_font = large_font
 
         super().__init__("text")
+
+    def set_text(self, text: str):
+        """Set the text of the Text."""
+        self.text = text
 
     def execute(self, text:str = "") -> None:
         """Nothing is to be done when text is pressed."""
