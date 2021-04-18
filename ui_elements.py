@@ -50,8 +50,12 @@ class Element:
         """Unimplemented execute method (used in Dropdown, Button)."""
         raise NotImplementedError
 
-    def set_text(self, text: str):
+    def set_text(self, text: str) -> None:
         """Unimplemented method to set the text of the Text."""
+        raise NotImplementedError
+
+    def get_text(self) -> str:
+        """Not implemented method to get the text of a button."""
         raise NotImplementedError
 
 
@@ -114,7 +118,16 @@ class Button(UIElement):
     def set_text(self, text: str) -> None:
         """Set the text of the button to <text>."""
 
+        # PyCharm doesn't like this, but self._element is, by definition, a
+        # pygame_gui.elements.UIButton instance for the Button class.
         self._element.set_text(text)
+
+    def get_text(self) -> str:
+        """Get the text of the button."""
+
+        # PyCharm doesn't like this, but self._element is, by definition, a
+        # pygame_gui.elements.UIButton instance for the Button class.
+        return self._element.text
 
 
 class Dropdown(UIElement):
@@ -207,3 +220,7 @@ class Text(Element):
     def get_visible(self) -> bool:
         """Return whether or not the text is visible."""
         return self.visible
+
+    def get_text(self) -> str:
+        """Get the text of the Text"""
+        return self.text

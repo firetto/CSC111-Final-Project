@@ -18,6 +18,30 @@ board_size_current = 8
 # Whether or not the game is paused.
 game_paused = False
 
+
+def increment_player_score(player: str, w: window.Window) -> None:
+    """Increments the player score of the corresponding player."""
+
+    if player == "black":
+
+        # text is a member
+        w.get_ui_element('text-score-black-amount').set_text(
+            str(int(w.get_ui_element('text-score-black-amount').get_text()) + 1))
+
+    elif player == "white":
+
+        # text is a member
+        w.get_ui_element('text-score-white-amount').set_text(
+            str(int(w.get_ui_element('text-score-white-amount').get_text()) + 1))
+
+
+def reset_player_scores(w: window.Window) -> None:
+    """Reset the player score of the corresponding player."""
+
+    w.get_ui_element('text-score-black-amount').set_text('0')
+    w.get_ui_element('text-score-white-amount').set_text('0')
+
+
 def helper_dropdown_select_player(g: ReversiGame, text: str) -> None:
     """HELPER FUNCTION: Select the players given the dropdown option selected."""
 
@@ -27,6 +51,7 @@ def helper_dropdown_select_player(g: ReversiGame, text: str) -> None:
         g.start_game(human_player=-1)
     else:
         g.start_game(human_player=0)
+
 
 def dropdown_select_player(g: ReversiGame) -> any:
     """Return a function for setting the players given the selected dropdown option."""
@@ -97,6 +122,8 @@ def clear_results(results: List, w: window.Window) -> None:
 
     update_games_stored_text(0, w)
 
+    reset_player_scores(w)
+
 
 def button_pause_game(w: window.Window) -> None:
     """Function to call when the Pause/Resume game button is pressed.
@@ -124,6 +151,11 @@ def add_ui(w: window.Window, g: ReversiGame, results: List, colour_to_player: Di
     """
     Add some UI to the window, such as buttons, and more.
     """
+
+    w.add_text(label="text-score-black-label", text="BLACK:", position=(20, 675))
+    w.add_text(label="text-score-white-label", text="WHITE:", position=(502, 675))
+    w.add_text(label="text-score-black-amount", text="0", position=(113, 675))
+    w.add_text(label="text-score-white-amount", text="0", position=(593, 675))
 
     w.add_button(rect=pygame.Rect(725, 30, 150, 40),
                  label="button-pause-game", text="Pause Game",
