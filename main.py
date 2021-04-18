@@ -13,7 +13,7 @@ from board import Board
 from board_manager import BoardManager
 from ai_players import RandomPlayer, MinimaxPlayer, MinimaxABPlayer, \
     basic_heuristic, POSITIONAL_HEURISTIC
-from statistics import plot_game_statistics
+from stats import plot_game_statistics
 
 if __name__ == "__main__":
 

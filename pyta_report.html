@@ -533,13 +533,13 @@ footer {
     <body>
         <header>
             <h1 class="title">PyTA Error Report</h1>
-            <time>Fri. Apr. 16 2021, 06:27:30 PM</time>
+            <time>Sun. Apr. 18 2021, 03:35:03 PM</time>
         </header>
         <main>
             
             <section>
                 <article class="file-name">
-                    <h2> C:/Users/Rachel Kim/Documents/University of Toronto/2020-2021/CSC111/miscellaneous/project/CSC111-Final-Project/statistics.py </h2>
+                    <h2> C:/Users/Rachel Kim/Documents/University of Toronto/2020-2021/CSC111/miscellaneous/project/CSC111-Final-Project/generate_stats.py </h2>
                 </article>
                 <article class="error-output code-errors">
                     <h3 class="category-heading">
@@ -550,66 +550,9 @@ footer {
                     </h3>
                     <div class="content collapsible">
                         
-                        <div class="error-instance">
-                            <div class="info">
-                                <span class="error-link code-error-id">
-                                    <a href="http://www.cs.toronto.edu/~david/pyta/&#35;E9999" target="_blank">&#10064; E9999 (forbidden-import)</a>
-                                </span>
-                                <span class="occurrences">
-                                2
-                                
-                                 occurrences.
-                                
-                                </span>
-                                <span class="shown">
-                                
-                                </span>
-                                <span class="slider">
-                                    <button> Expand/Collapse </button>
-                                </span>
-                            </div>
-                            <div class="message-container collapsible">
-                                
-                                <div class="message">
-                                    <h4 class="message-name">
-                                        [Line 10] You may not import any modules - you imported ai_players on line 10.
-                                        <span class="slider">
-                                            <button style="float: right; background: #458B00;"> Expand/Collapse </button>
-                                        </span>
-                                    </h4>
-                                    
-                                    <div class="collapsible">
-                                      <code>    <span class="grey line-num">8</span>  <span class="grey"><span class="pygments-kn">import</span> <span class="pygments-nn">plotly.graph_objects</span> <span class="pygments-k">as</span> <span class="pygments-nn">go</span></span>
-    <span class="grey line-num">9</span>  <span class="grey"><span class="pygments-kn">from</span> <span class="pygments-nn">plotly.subplots</span> <span class="pygments-kn">import</span> <span class="pygments-n">make_subplots</span></span>
-   <span class="gbold line-num">10</span>  <span class="highlight-pyta"><span class="pygments-kn">import</span> <span class="pygments-nn">ai_players</span></span>
-   <span class="grey line-num">11</span>  <span class="grey"><span class="pygments-kn">import</span> <span class="pygments-nn">reversi</span></span>
-   <span class="grey line-num">12</span>  <span class="grey"></span>
-</code>
-                                    </div>
-                                    
-                                </div>
-                                
-                                <div class="message">
-                                    <h4 class="message-name">
-                                        [Line 11] You may not import any modules - you imported reversi on line 11.
-                                        <span class="slider">
-                                            <button style="float: right; background: #458B00;"> Expand/Collapse </button>
-                                        </span>
-                                    </h4>
-                                    
-                                    <div class="collapsible">
-                                      <code>    <span class="grey line-num">9</span>  <span class="grey"><span class="pygments-kn">from</span> <span class="pygments-nn">plotly.subplots</span> <span class="pygments-kn">import</span> <span class="pygments-n">make_subplots</span></span>
-   <span class="grey line-num">10</span>  <span class="grey"><span class="pygments-kn">import</span> <span class="pygments-nn">ai_players</span></span>
-   <span class="gbold line-num">11</span>  <span class="highlight-pyta"><span class="pygments-kn">import</span> <span class="pygments-nn">reversi</span></span>
-   <span class="grey line-num">12</span>  <span class="grey"></span>
-   <span class="grey line-num">13</span>  <span class="grey"></span>
-</code>
-                                    </div>
-                                    
-                                </div>
-                                
-                            </div>
-                        </div>
+                        <span class="empty-placeholder">None!
+
+</span>
                         
                     </div>
                 </article>
@@ -626,7 +569,7 @@ footer {
 
                             <div class="info">
                                 <span class="error-link style-error-id">
-                                    <a href="http://www.cs.toronto.edu/~david/pyta/&#35;R1710" target="_blank">&#10064; R1710 (inconsistent-return-statements)</a>
+                                    <a href="http://www.cs.toronto.edu/~david/pyta/&#35;C0411" target="_blank">&#10064; C0411 (wrong-import-order)</a>
                                 </span>
                                 <span class="occurrences">
                                 1
@@ -646,37 +589,18 @@ footer {
                                 
                                 <div class="message">
                                     <h4 class="message-name">
-                                        [Line 91] Since this function can return a non-None value, you should explicitly write "return None" whenever None is returned by this function. (Possibly including at the end of the function body.)
+                                        [Line 10] standard import "import statistics" should be placed before "import ai_players"
                                         <span class="slider">
                                             <button style="float: right; background: #458B00;"> Expand/Collapse </button>
                                         </span>
                                     </h4>
                                     <div class="collapsible">
                                       
-                                      <code>   <span class="grey line-num">89</span>  <span class="grey"></span>
-   <span class="grey line-num">90</span>  <span class="grey"></span>
-   <span class="gbold line-num">91</span>  <span class="highlight-pyta"><span class="pygments-k">def</span> <span class="pygments-nf">player_to_string</span><span class="pygments-p">(</span><span class="pygments-n">game</span><span class="pygments-p">:</span> <span class="pygments-n">reversi</span><span class="pygments-o">.</span><span class="pygments-n">ReversiGame</span><span class="pygments-p">,</span> <span class="pygments-n">player_colour</span><span class="pygments-p">:</span> <span class="pygments-nb">str</span><span class="pygments-p">,</span> <span class="pygments-n">player</span><span class="pygments-p">:</span> <span class="pygments-n">ai_players</span><span class="pygments-o">.</span><span class="pygments-n">Player</span><span class="pygments-p">)</span> \</span>
-   <span class="gbold line-num">92</span>          <span class="highlight-pyta"><span class="pygments-o">-&gt;</span> <span class="pygments-nb">str</span><span class="pygments-p">:</span></span>
-   <span class="gbold line-num">93</span>      <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot; Returns the string representation of the type of the player.</span></span>
-   <span class="gbold line-num">94</span>  <span class="highlight-pyta"></span>
-   <span class="gbold line-num">95</span>      <span class="highlight-pyta"><span class="pygments-n">Preconditions</span><span class="pygments-p">:</span></span>
-   <span class="gbold line-num">96</span>          <span class="highlight-pyta"><span class="pygments-o">-</span> <span class="pygments-n">player_colour</span> <span class="pygments-ow">in</span> <span class="pygments-p">{</span><span class="pygments-s1">&#39;White&#39;</span><span class="pygments-p">,</span> <span class="pygments-s1">&#39;Black&#39;</span><span class="pygments-p">}</span></span>
-   <span class="gbold line-num">97</span>          <span class="highlight-pyta"><span class="pygments-o">-</span> <span class="pygments-n">player</span> <span class="pygments-ow">in</span> <span class="pygments-p">{</span><span class="pygments-n">RandomPlayer</span><span class="pygments-p">(),</span> <span class="pygments-n">MinimaxPlayer</span><span class="pygments-p">(</span><span class="pygments-mi">2</span><span class="pygments-p">),</span> <span class="pygments-n">MinimaxPlayer</span><span class="pygments-p">(</span><span class="pygments-mi">3</span><span class="pygments-p">)}</span></span>
-   <span class="gbold line-num">98</span>      <span class="highlight-pyta"><span class="pygments-s2">&quot;&quot;&quot;</span></span>
-   <span class="gbold line-num">99</span>      <span class="highlight-pyta"><span class="pygments-k">if</span> <span class="pygments-n">game</span><span class="pygments-o">.</span><span class="pygments-n">get_human_player</span><span class="pygments-p">()</span> <span class="pygments-o">==</span> <span class="pygments-mi">1</span> <span class="pygments-ow">and</span> <span class="pygments-n">player_colour</span> <span class="pygments-o">==</span> <span class="pygments-s1">&#39;Black&#39;</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">100</span>          <span class="highlight-pyta"><span class="pygments-k">return</span> <span class="pygments-s1">&#39;Human&#39;</span></span>
-  <span class="gbold line-num">101</span>      <span class="highlight-pyta"><span class="pygments-k">elif</span> <span class="pygments-n">game</span><span class="pygments-o">.</span><span class="pygments-n">get_human_player</span><span class="pygments-p">()</span> <span class="pygments-o">==</span> <span class="pygments-o">-</span><span class="pygments-mi">1</span> <span class="pygments-ow">and</span> <span class="pygments-n">player_colour</span> <span class="pygments-o">==</span> <span class="pygments-s1">&#39;White&#39;</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">102</span>          <span class="highlight-pyta"><span class="pygments-k">return</span> <span class="pygments-s1">&#39;Human&#39;</span></span>
-  <span class="gbold line-num">103</span>      <span class="highlight-pyta"><span class="pygments-k">else</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">104</span>          <span class="highlight-pyta"><span class="pygments-c1"># the player is one of the AI players</span></span>
-  <span class="gbold line-num">105</span>          <span class="highlight-pyta"><span class="pygments-k">if</span> <span class="pygments-nb">isinstance</span><span class="pygments-p">(</span><span class="pygments-n">player</span><span class="pygments-p">,</span> <span class="pygments-n">ai_players</span><span class="pygments-o">.</span><span class="pygments-n">RandomPlayer</span><span class="pygments-p">):</span></span>
-  <span class="gbold line-num">106</span>              <span class="highlight-pyta"><span class="pygments-k">return</span> <span class="pygments-s1">&#39;Random Moves&#39;</span></span>
-  <span class="gbold line-num">107</span>          <span class="highlight-pyta"><span class="pygments-k">elif</span> <span class="pygments-nb">isinstance</span><span class="pygments-p">(</span><span class="pygments-n">player</span><span class="pygments-p">,</span> <span class="pygments-n">ai_players</span><span class="pygments-o">.</span><span class="pygments-n">MinimaxPlayer</span><span class="pygments-p">)</span> <span class="pygments-ow">and</span> <span class="pygments-n">player</span><span class="pygments-o">.</span><span class="pygments-n">depth</span> <span class="pygments-o">==</span> <span class="pygments-mi">2</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">108</span>              <span class="highlight-pyta"><span class="pygments-k">return</span> <span class="pygments-s1">&#39;Minimax 2&#39;</span></span>
-  <span class="gbold line-num">109</span>          <span class="highlight-pyta"><span class="pygments-k">elif</span> <span class="pygments-nb">isinstance</span><span class="pygments-p">(</span><span class="pygments-n">player</span><span class="pygments-p">,</span> <span class="pygments-n">ai_players</span><span class="pygments-o">.</span><span class="pygments-n">MinimaxPlayer</span><span class="pygments-p">)</span> <span class="pygments-ow">and</span> <span class="pygments-n">player</span><span class="pygments-o">.</span><span class="pygments-n">depth</span> <span class="pygments-o">==</span> <span class="pygments-mi">3</span><span class="pygments-p">:</span></span>
-  <span class="gbold line-num">110</span>              <span class="highlight-pyta"><span class="pygments-k">return</span> <span class="pygments-s1">&#39;Minimax 3&#39;</span></span>
-  <span class="grey line-num">111</span>  <span class="grey"></span>
-  <span class="grey line-num">112</span>  <span class="grey"></span>
+                                      <code>    <span class="grey line-num">8</span>  <span class="grey"><span class="pygments-kn">import</span> <span class="pygments-nn">ai_players</span></span>
+    <span class="grey line-num">9</span>  <span class="grey"><span class="pygments-kn">import</span> <span class="pygments-nn">reversi</span></span>
+   <span class="gbold line-num">10</span>  <span class="highlight-pyta"><span class="pygments-kn">import</span> <span class="pygments-nn">statistics</span></span>
+   <span class="grey line-num">11</span>  <span class="grey"></span>
+   <span class="grey line-num">12</span>  <span class="grey"></span>
 </code>
                                       
                                     </div>

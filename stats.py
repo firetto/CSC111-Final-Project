@@ -1,5 +1,5 @@
 """
-statistics.py:
+stats.py:
 Plots the relevant statistics graphs for the players.
 CSC111 Final Project by Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel Kim
 """
@@ -88,7 +88,7 @@ def plot_game_statistics(game: reversi.ReversiGame, results: list[str], focused_
             title='Reversi Game Results | White: ' + other_str + ', Black: ' + focused_str,
             xaxis_title='Game')
 
-    fig.show()
+    # fig.show()
     fig.write_image('stats.png')
 
 
