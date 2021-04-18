@@ -29,7 +29,6 @@ def plot_game_statistics(game: reversi.ReversiGame, results: list[str], focused_
     Preconditions:
         - all(result in {'white', 'black', 'draw'} for result in results)
         - focused_player in {'white', 'black'}
-        - focused_type in {RandomPlayer(), MinimaxPlayer(2), MinimaxPlayer(3)}
     """
     if focused_player == 'white':
         other_player = 'black'
@@ -97,7 +96,6 @@ def player_to_string(game: reversi.ReversiGame, player_colour: str, player: ai_p
 
     Preconditions:
         - player_colour in {'white', 'black'}
-        - player in {RandomPlayer(), MinimaxPlayer(2), MinimaxPlayer(3)}
     """
     if game.get_human_player() == 1 and player_colour == 'black':
         return 'Human'
