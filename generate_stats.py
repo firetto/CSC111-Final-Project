@@ -36,20 +36,20 @@ def generate_stats(player1: ai_players.Player, player2: ai_players.Player, board
 
 
 if __name__ == '__main__':
-    import python_ta.contracts
-    python_ta.contracts.check_all_contracts()
+    # import python_ta.contracts
+    # python_ta.contracts.check_all_contracts()
+    #
+    # import doctest
+    # doctest.testmod()
+    #
+    # import python_ta
+    # python_ta.check_all(config={
+    #     'extra-imports': ['ai_players',
+    #                       'reversi',
+    #                       'stats'],  # the names (strs) of imported modules
+    #     'allowed-io': [],  # the names (strs) of functions that call print/open/input
+    #     'max-line-length': 100,
+    #     'disable': ['E1136']
+    # })
 
-    import doctest
-    doctest.testmod()
-
-    import python_ta
-    python_ta.check_all(config={
-        'extra-imports': ['ai_players',
-                          'reversi',
-                          'statistics'],  # the names (strs) of imported modules
-        'allowed-io': [],  # the names (strs) of functions that call print/open/input
-        'max-line-length': 100,
-        'disable': ['E1136']
-    })
-
-    generate_stats(ai_players.RandomPlayer(), ai_players.RandomPlayer(), 8, 200)
+    generate_stats(ai_players.MinimaxABPlayer(2, 16), ai_players.RandomPlayer(), 16, 200)
