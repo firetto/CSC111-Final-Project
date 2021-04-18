@@ -26,6 +26,7 @@ class BoardManager:
     # - _VALID_MOVE_COLOR: The colour of the possible next move indicator.
     # - _PIECE_RADIUS_RATIO: The ratio of piece radius to square size
     # - _VALID_MOVE_RADIUS_RATIO: The ratio of the next move indicator radius to square size
+    # - _PAUSED_OVERLAY_ALPHA: The transparency of the overlay rectangle when paused (max 255)
 
     _window: Window
 
@@ -37,6 +38,7 @@ class BoardManager:
     _VALID_MOVE_COLOR = pygame.Color(215, 146, 53)
     _PIECE_RADIUS_RATIO = 0.4
     _VALID_MOVE_RADIUS_RATIO = 0.2
+    _PAUSED_OVERLAY_ALPHA = 100
 
     def __init__(self, window: Window) -> None:
         """Initialize the BoardVisualizer instance using a window and an existing
@@ -44,8 +46,10 @@ class BoardManager:
 
         self._window = window
 
-    def draw_board(self, board: Board) -> None:
-        """Create a pygame.Surface of the board, then draw it to self._window"""
+    def draw_board(self, board: Board, game_paused: bool) -> None:
+        """Create a pygame.Surface of the board, then draw it to self._window.
+
+        If game_paused is true, draw an overlay with text saying 'GAME PAUSED'"""
 
         # Size of each square in pixels.
         square_size = self._BOARD_PIXEL_SIZE / board.size
@@ -91,6 +95,14 @@ class BoardManager:
                                (column * square_size + square_size / 2,
                                 row * square_size + square_size / 2),
                                square_size * self._VALID_MOVE_RADIUS_RATIO)
+
+        if game_paused:
+            overlay = pygame.Surface((self._BOARD_PIXEL_SIZE, self._BOARD_PIXEL_SIZE))
+            overlay.set_alpha(self._PAUSED_OVERLAY_ALPHA)
+            overlay.fill((0, 0, 0))
+            surface.blit(overlay, (0, 0))
+            surface.blit(self._window.render_text(text="GAME PAUSED"),
+                         (self._BOARD_PIXEL_SIZE // 2 - 82, self._BOARD_PIXEL_SIZE // 2 - 12))
 
         self._window.draw_to_screen(surface, self._BOARD_POSITION)
 

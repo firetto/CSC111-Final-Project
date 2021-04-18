@@ -5,7 +5,7 @@ CSC111 Final Project by Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel
 """
 
 import pygame
-from ui_handler import add_ui, update_games_stored_text
+from ui_handler import add_ui, update_games_stored_text, get_game_paused
 from window import Window
 import reversi
 from reversi import ReversiGame
@@ -61,18 +61,19 @@ if __name__ == "__main__":
             print(winner)
             game.start_game(human_player=game.get_human_player())
 
-        if game.get_human_player() == game.get_current_player():
-            # Look at the mouse clicks and see if they are in the board.
+        if not get_game_paused():
+            if game.get_human_player() == game.get_current_player():
+                # Look at the mouse clicks and see if they are in the board.
 
-            for event in window.get_events():
-                if event[0] == pygame.MOUSEBUTTONUP:
-                    square = board_manager.check_mouse_press(event[1], game.get_board())
-                    if square != (-1, -1):
-                        if game.try_make_move(square):
-                            moves_made.append(square)
-        elif game.get_winner() is None:
-            moves_made.append(game.try_make_move(colour_to_player[game.get_current_player()]
-                                                 .make_move(game, moves_made[-1])))
+                for event in window.get_events():
+                    if event[0] == pygame.MOUSEBUTTONUP:
+                        square = board_manager.check_mouse_press(event[1], game.get_board())
+                        if square != (-1, -1):
+                            if game.try_make_move(square):
+                                moves_made.append(square)
+            elif game.get_winner() is None:
+                moves_made.append(game.try_make_move(colour_to_player[game.get_current_player()]
+                                                     .make_move(game, moves_made[-1])))
 
         # Update the window's clock
         window.update_clock()
@@ -83,7 +84,7 @@ if __name__ == "__main__":
         window.draw_background()
 
         # Draw the board.
-        board_manager.draw_board(game.get_board())
+        board_manager.draw_board(game.get_board(), get_game_paused())
 
         # Draw the buttons etc.
         window.draw_ui()

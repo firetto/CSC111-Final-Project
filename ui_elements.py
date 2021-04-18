@@ -111,6 +111,11 @@ class Button(UIElement):
         """Call _function()."""
         self._function()
 
+    def set_text(self, text: str) -> None:
+        """Set the text of the button to <text>."""
+
+        self._element.set_text(text)
+
 
 class Dropdown(UIElement):
     """
