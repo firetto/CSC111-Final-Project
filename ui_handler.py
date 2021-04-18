@@ -8,7 +8,7 @@ import window
 import pygame
 from reversi import ReversiGame
 from typing import List, Dict
-from statistics import plot_game_statistics
+from stats import plot_game_statistics
 from ai_players import RandomPlayer, MinimaxPlayer, MinimaxABPlayer, \
     POSITIONAL_HEURISTIC, basic_heuristic
 
