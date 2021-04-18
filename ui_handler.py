@@ -37,10 +37,11 @@ def helper_dropdown_select_ai(black: int, colour_to_player: Dict, text: str) -> 
         colour_to_player.update({black: MinimaxABPlayer(3, board_size_current)})
     elif text == 'Minimax 4':
         colour_to_player.update({black: MinimaxABPlayer(4, board_size_current)})
-    elif text == 'Minimax 8':
-        colour_to_player.update({black: MinimaxABPlayer(8, board_size_current)})
+    elif text == 'Minimax 6':
+        colour_to_player.update({black: MinimaxABPlayer(6, board_size_current)})
     else:
         colour_to_player.update({black: RandomPlayer()})
+
 
 def dropdown_select_ai(black: int, colour_to_player: Dict) -> any:
     """Return a function for setting the AI given the text."""
@@ -113,14 +114,14 @@ def add_ui(w: window.Window, g: ReversiGame, results: List, colour_to_player: Di
                large_font=False)
 
     w.add_dropdown(options_list=["Random Moves", "Minimax 2", 'Minimax 3',
-                                 'Minimax 4'],
+                                 'Minimax 4', 'Minimax 6'],
                    starting_option="Minimax 2",
                    rect=pygame.Rect(675, 230, 125, 50),
                    label="dropdown-ai-black",
                    function=dropdown_select_ai(1, colour_to_player))
 
     w.add_dropdown(options_list=["Random Moves", "Minimax 2", 'Minimax 3',
-                                 'Minimax 4'],
+                                 'Minimax 4', 'Minimax 6'],
                    starting_option="Minimax 2",
                    rect=pygame.Rect(810, 230, 125, 50),
                    label="dropdown-ai-white",
