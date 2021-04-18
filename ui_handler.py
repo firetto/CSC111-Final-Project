@@ -9,7 +9,14 @@ import pygame
 from reversi import ReversiGame
 from typing import List, Dict
 from statistics import plot_game_statistics
-from ai_players import RandomPlayer, MinimaxPlayer, POSITIONAL_HEURISTIC, basic_heuristic
+from ai_players import RandomPlayer, MinimaxPlayer, MinimaxABPlayer, \
+    POSITIONAL_HEURISTIC, basic_heuristic
+
+# Parameter for the board size stored by the selection
+board_size_current = 8
+
+
+
 
 
 def dropdown_select_player(g: ReversiGame) -> any:
@@ -17,16 +24,60 @@ def dropdown_select_player(g: ReversiGame) -> any:
     return lambda text: g.start_game(human_player=1) if text == 'Human vs. AI' else (
         g.start_game(human_player=-1) if text == 'AI vs. Human' else g.start_game(human_player=0))
 
+def helper_dropdown_select_ai(black: int, colour_to_player: Dict, text: str) -> None:
+    """Set the AI given the text.
+
+    Preconditions:
+        - text in {'Minimax 2', 'Minimax 3', 'Minimax 4', 'Minimax 8', 'Random Moves'}
+    """
+
+    if text == 'Minimax 2':
+        colour_to_player.update({black: MinimaxABPlayer(2, board_size_current)})
+    elif text == 'Minimax 3':
+        colour_to_player.update({black: MinimaxABPlayer(3, board_size_current)})
+    elif text == 'Minimax 4':
+        colour_to_player.update({black: MinimaxABPlayer(4, board_size_current)})
+    elif text == 'Minimax 8':
+        colour_to_player.update({black: MinimaxABPlayer(8, board_size_current)})
+    else:
+        colour_to_player.update({black: RandomPlayer()})
 
 def dropdown_select_ai(black: int, colour_to_player: Dict) -> any:
     """Return a function for setting the AI given the text."""
 
-    if black:
-        return lambda text: colour_to_player.update({black:
-                                                     MinimaxPlayer(2, basic_heuristic(8)) if text == 'Minimax 2'
-                                                     else (
-                                                           MinimaxPlayer(3, POSITIONAL_HEURISTIC) if text == 'Minimax 3'
-                                                           else RandomPlayer())})
+    return lambda text: helper_dropdown_select_ai(black, colour_to_player, text)
+
+
+def helper_dropdown_select_board_size(g: ReversiGame, colour_to_player: Dict, text: str) -> None:
+    """
+    Set the board size given the text.
+    Preconditions:
+        - text is of the form '<int>x<int>' where the two integers are the same and greater than 0.
+    """
+    global board_size_current
+
+    # Update the current board size (why?)
+    board_size_current = int(text.split('x')[0])
+
+    # Set new heuristics for players
+    colour_to_player[1].set_heuristic(board_size_current)
+
+    colour_to_player[-1].set_heuristic(board_size_current)
+
+    # Update game board size
+    g.set_board_size(board_size_current)
+
+    # Start new game.
+    g.start_game(human_player=g.get_human_player())
+
+
+def dropdown_select_board_size(g: ReversiGame, colour_to_player: Dict) -> any:
+    """Return a function for setting the board size given the text.
+    Preconditions:
+     - text is of the form '<int>x<int>' where the two integers are the same.
+    """
+
+    return lambda text: helper_dropdown_select_board_size(g, colour_to_player, text)
 
 
 def update_games_stored_text(games: int, w: window.Window) -> None:
@@ -61,24 +112,33 @@ def add_ui(w: window.Window, g: ReversiGame, results: List, colour_to_player: Di
     w.add_text(label="text-choose-ai-white", text="White AI", position=(840, 210),
                large_font=False)
 
-    w.add_dropdown(options_list=["Random Moves", "Minimax 2", 'Minimax 3'],
+    w.add_dropdown(options_list=["Random Moves", "Minimax 2", 'Minimax 3',
+                                 'Minimax 4'],
                    starting_option="Minimax 2",
                    rect=pygame.Rect(675, 230, 125, 50),
                    label="dropdown-ai-black",
                    function=dropdown_select_ai(1, colour_to_player))
 
-    w.add_dropdown(options_list=["Random Moves", "Minimax 2", 'Minimax 3'],
+    w.add_dropdown(options_list=["Random Moves", "Minimax 2", 'Minimax 3',
+                                 'Minimax 4'],
                    starting_option="Minimax 2",
                    rect=pygame.Rect(810, 230, 125, 50),
                    label="dropdown-ai-white",
                    function=dropdown_select_ai(-1, colour_to_player))
 
-    w.add_button(rect=pygame.Rect(725, 530, 150, 50),
+    w.add_text(label="text-choose-board-size", text="Choose Board Size", position=(700, 390))
+    w.add_dropdown(options_list=["8x8", '12x12', '16x16', '24x24'],
+                   starting_option="8x8",
+                   rect=pygame.Rect(725, 420, 150, 50),
+                   label="dropdown-board-size",
+                   function=dropdown_select_board_size(g, colour_to_player))
+
+    w.add_button(rect=pygame.Rect(725, 560, 150, 40),
                  label="button-show-stats", text="View Statistics",
                  function=lambda: plot_game_statistics(g, results, 'black', colour_to_player[1],
                                                        colour_to_player[-1]))
 
-    w.add_button(rect=pygame.Rect(725, 590, 150, 50),
+    w.add_button(rect=pygame.Rect(725, 610, 150, 40),
                  label="button-clear-stats", text="Clear Statistics",
                  function=lambda: clear_results(results, w))
 

@@ -59,7 +59,7 @@ class ReversiGame:
         if board is not None:
             self._board.set_board(board)
         else:
-            self._board.clear_board()
+            self._board.create_board()
             self._board.set_piece(row=self._board.size // 2 - 1, column=self._board.size // 2 - 1,
                                   type=1)
             self._board.set_piece(row=self._board.size // 2 - 1, column=self._board.size // 2,
@@ -79,6 +79,14 @@ class ReversiGame:
         """Return the Board instance."""
         return self._board
 
+    def set_board_size(self, size: int) -> None:
+        """Set the board size to <size>.
+
+        Preconditions:
+         - size >= 2
+         """
+        self._board.set_size(size)
+
     def get_human_player(self) -> int:
         """Return the integer representing the human player"""
         return self._human_player
@@ -92,6 +100,7 @@ class ReversiGame:
         if self._board.is_valid_move(row=move[0], column=move[1]):
             self.make_move(move)
             return True
+        return False
 
     def make_move(self, move: Tuple[int, int]) -> None:
         """Make the given Reversi move. This instance of a ReversiGame will be mutated, and will
@@ -194,8 +203,10 @@ class ReversiGame:
             i += 1
 
     def _board_after_move(self, move: Tuple[int, int]) -> list[list[int]]:
-        """Return a copy of self._board representing the state of the board after making move.
+        """Return a copy of self._board.pieces representing the state of
+        the board after making move.
         """
+
         paths = self._calculate_moves_and_paths_for_board(self.get_current_player())[1]
         filter_paths = {path for path in paths if path[1] == move}
         board_copy = copy.deepcopy(self._board.pieces)

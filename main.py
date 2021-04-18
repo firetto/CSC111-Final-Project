@@ -11,7 +11,8 @@ import reversi
 from reversi import ReversiGame
 from board import Board
 from board_manager import BoardManager
-from ai_players import RandomPlayer, MinimaxPlayer, basic_heuristic, POSITIONAL_HEURISTIC
+from ai_players import RandomPlayer, MinimaxPlayer, MinimaxABPlayer, \
+    basic_heuristic, POSITIONAL_HEURISTIC
 from statistics import plot_game_statistics
 
 if __name__ == "__main__":
@@ -31,8 +32,8 @@ if __name__ == "__main__":
 
     # Minimax Player
 
-    player1 = MinimaxPlayer(2, basic_heuristic(8))
-    player2 = RandomPlayer()
+    player1 = MinimaxABPlayer(2, 8)
+    player2 = MinimaxABPlayer(2, 8)
     colour_to_player = {1: player1, -1: player2}
 
     # Set number of games
@@ -60,9 +61,9 @@ if __name__ == "__main__":
             print(winner)
             game.start_game(human_player=game.get_human_player())
 
-        if game.get_human_player() == game.get_current_player():          
+        if game.get_human_player() == game.get_current_player():
             # Look at the mouse clicks and see if they are in the board.
-            
+
             for event in window.get_events():
                 if event[0] == pygame.MOUSEBUTTONUP:
                     square = board_manager.check_mouse_press(event[1], game.get_board())

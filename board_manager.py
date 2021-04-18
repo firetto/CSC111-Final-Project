@@ -31,7 +31,7 @@ class BoardManager:
 
     _BG_COLORS = (pygame.Color(225, 174, 104), pygame.Color(181, 136, 103))
     _BOARD_PIXEL_SIZE = 640
-    _LINE_THICKNESS = 4
+    _LINE_THICKNESS = 2
     _BOARD_POSITION = (20, 20)
     _PIECE_COLORS = (pygame.Color(20, 20, 20), pygame.Color(230, 230, 230))
     _VALID_MOVE_COLOR = pygame.Color(215, 146, 53)

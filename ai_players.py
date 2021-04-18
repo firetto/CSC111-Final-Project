@@ -59,7 +59,13 @@ def heuristic(game: ReversiGame, heuristic_array: list[list[int]]) -> float:
 class Player:
     """
     Player is an abstract class that represents a reversi player
+
+    Instance Attributes:
+        - heuristic_array: array that dictates how the board is evaluated, used in
+                           MinimaxPlayer and MinimaxABPlayer
     """
+
+    heuristic_array: list[list[int]]
 
     def make_move(self, game: ReversiGame, previous_move: tuple[int, int]):
         """
@@ -68,13 +74,22 @@ class Player:
         """
         raise NotImplementedError
 
+    def set_heuristic(self, size: int):
+        """Set the heuristic array BASED on board size. 8x8 will choose the POSITIONAL_HEURISTIC,
+        while any other size will choose the basic_heuristic. (get it? I said based)"""
+
+        if size == 8:
+            self.heuristic_array = POSITIONAL_HEURISTIC
+        else:
+            self.heuristic_array = basic_heuristic(size)
+
 
 class RandomPlayer(Player):
     """
-    RandomPlayer is a player that plays random moves
+    RandomPlayer is a player that plays random moves.
     """
-
     def make_move(self, game: ReversiGame, previous_move: tuple[int, int]):
+        """Make a random move."""
         return random.choice(list(game.get_valid_moves()))
 
 
@@ -84,14 +99,12 @@ class MinimaxPlayer(Player):
 
     Instance Attributes:
      - depth: the depth that the player will calculate to when making a decision
-     - heuristic_array: array that dictates how the board is evaluated
     """
     depth: int
-    heuristic_array: list[list[int]]
 
-    def __init__(self, depth: int, heuristic_array: list[list[int]]):
+    def __init__(self, depth: int, board_size: int):
         self.depth = depth
-        self.heuristic_array = heuristic_array
+        self.set_heuristic(board_size)
 
     def make_move(self, game: ReversiGame, previous_move: tuple[int, int]):
         tree = self._minimax(previous_move, game, 0)
@@ -106,7 +119,7 @@ class MinimaxPlayer(Player):
     def _minimax(self, root_move: tuple[int, int], game: ReversiGame, depth: int) -> GameTree:
         """
         _minimax is a function that returns a tree where each node has a value determined by
-        minimax seach
+        minimax search
         """
         white_move = (game.get_current_player() == -1)
         ret = GameTree(move=root_move, is_white_move=white_move)
@@ -143,11 +156,10 @@ class MinimaxPlayer(Player):
 
 class MinimaxABPlayer(Player):
     depth: int
-    heuristic_array: list[list[int]]
 
-    def __init__(self, depth: int, heuristic_array: list[list[int]]):
+    def __init__(self, depth: int, board_size: int):
         self.depth = depth
-        self.heuristic_array = heuristic_array
+        self.set_heuristic(board_size)
 
     def make_move(self, game: ReversiGame, previous_move: tuple[int, int]):
         tree = self._minimax(previous_move, 0, game, float('-inf'), float('inf'))

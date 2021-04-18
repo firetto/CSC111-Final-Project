@@ -87,7 +87,7 @@ def plot_game_statistics(game: reversi.ReversiGame, results: list[str], focused_
             title='Reversi Game Results | White: ' + other_str + ', Black: ' + focused_str,
             xaxis_title='Game')
 
-    # fig.show()
+    fig.show()
     fig.write_image('stats.png')
 
 
@@ -107,10 +107,9 @@ def player_to_string(game: reversi.ReversiGame, player_colour: str, player: ai_p
         # the player is one of the AI players
         if isinstance(player, ai_players.RandomPlayer):
             return 'Random Moves'
-        elif isinstance(player, ai_players.MinimaxPlayer) and player.depth == 2:
-            return 'Minimax 2'
-        elif isinstance(player, ai_players.MinimaxPlayer) and player.depth == 3:
-            return 'Minimax 3'
+        elif (isinstance(player, ai_players.MinimaxPlayer)
+              or isinstance(player, ai_players.MinimaxABPlayer)):
+            return 'Minimax ' + str(player.depth)
 
 
 if __name__ == '__main__':
