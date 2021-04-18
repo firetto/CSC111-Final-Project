@@ -61,6 +61,7 @@ if __name__ == "__main__":
             print(winner)
             game.start_game(human_player=game.get_human_player())
 
+        # If the game is not paused, look for mouse clicks and process moves.
         if not get_game_paused():
             if game.get_human_player() == game.get_current_player():
                 # Look at the mouse clicks and see if they are in the board.

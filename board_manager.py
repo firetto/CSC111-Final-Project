@@ -96,6 +96,7 @@ class BoardManager:
                                 row * square_size + square_size / 2),
                                square_size * self._VALID_MOVE_RADIUS_RATIO)
 
+        # If the game is paused, draw the overlay along with text.
         if game_paused:
             overlay = pygame.Surface((self._BOARD_PIXEL_SIZE, self._BOARD_PIXEL_SIZE))
             overlay.set_alpha(self._PAUSED_OVERLAY_ALPHA)

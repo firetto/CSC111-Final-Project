@@ -18,11 +18,19 @@ board_size_current = 8
 # Whether or not the game is paused.
 game_paused = False
 
+def helper_dropdown_select_player(g: ReversiGame, text: str) -> None:
+    """HELPER FUNCTION: Select the players given the dropdown option selected."""
+
+    if text == "Human vs. AI":
+        g.start_game(human_player=1)
+    elif text == "AI vs. Human":
+        g.start_game(human_player=-1)
+    else:
+        g.start_game(human_player=0)
 
 def dropdown_select_player(g: ReversiGame) -> any:
-    """Holy crap."""
-    return lambda text: g.start_game(human_player=1) if text == 'Human vs. AI' else (
-        g.start_game(human_player=-1) if text == 'AI vs. Human' else g.start_game(human_player=0))
+    """Return a function for setting the players given the selected dropdown option."""
+    return lambda text: helper_dropdown_select_player(g, text)
 
 
 def helper_dropdown_select_ai(black: int, colour_to_player: Dict, text: str) -> None:
@@ -32,14 +40,9 @@ def helper_dropdown_select_ai(black: int, colour_to_player: Dict, text: str) -> 
         - text in {'Minimax 2', 'Minimax 3', 'Minimax 4', 'Minimax 8', 'Random Moves'}
     """
 
-    if text == 'Minimax 2':
-        colour_to_player.update({black: MinimaxABPlayer(2, board_size_current)})
-    elif text == 'Minimax 3':
-        colour_to_player.update({black: MinimaxABPlayer(3, board_size_current)})
-    elif text == 'Minimax 4':
-        colour_to_player.update({black: MinimaxABPlayer(4, board_size_current)})
-    elif text == 'Minimax 6':
-        colour_to_player.update({black: MinimaxABPlayer(6, board_size_current)})
+    if text.startswith('Minimax '):
+        colour_to_player.update({black: MinimaxABPlayer(int(text.split("Minimax ")[-1]),
+                                                        board_size_current)})
     else:
         colour_to_player.update({black: RandomPlayer()})
 
@@ -93,6 +96,7 @@ def clear_results(results: List, w: window.Window) -> None:
     results.clear()
 
     update_games_stored_text(0, w)
+
 
 def button_pause_game(w: window.Window) -> None:
     """Function to call when the Pause/Resume game button is pressed.
