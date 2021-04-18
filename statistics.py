@@ -26,6 +26,8 @@ def plot_game_statistics(game: reversi.ReversiGame, results: list[str], focused_
     Draws are counted as 'half-wins' for the player: when calculating the win probability of a
     certain player, a value of 0.5 is added to total sum of the wins for that player.
 
+    Note: a lot of this code draws from Assignment 2.
+
     Preconditions:
         - all(result in {'white', 'black', 'draw'} for result in results)
         - focused_player in {'white', 'black'}
