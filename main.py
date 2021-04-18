@@ -7,9 +7,7 @@ CSC111 Final Project by Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel
 import pygame
 from ui_handler import add_ui, update_games_stored_text, get_game_paused, increment_player_score
 from window import Window
-import reversi
 from reversi import ReversiGame
-from board import Board
 from board_manager import BoardManager
 from ai_players import RandomPlayer, MinimaxPlayer, MinimaxABPlayer, \
     basic_heuristic, POSITIONAL_HEURISTIC
