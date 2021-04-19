@@ -94,6 +94,9 @@ class Player:
         """
         make_move is a function that takes a game position and the previous
         move in the game and returns a valid move
+
+        Preconditions:
+            - game.get_winner() is None
         """
         raise NotImplementedError
 
@@ -123,6 +126,9 @@ class MinimaxPlayer(Player):
 
     Instance Attributes:
      - depth: the depth that the player will calculate to when making a decision
+
+     Representation Invariant:
+      - self.depth > 0
     """
     depth: int
 
@@ -189,6 +195,9 @@ class MinimaxABPlayer(Player):
 
     Instance Attributes:
      - depth: the depth that the player will calculate to when making a decision
+
+     Representation Invariant:
+      - self.depth > 0
     """
     depth: int
 
@@ -211,6 +220,9 @@ class MinimaxABPlayer(Player):
         """
         _minimax is a minimax function with alpha-beta pruning implemented that returns
         a full GameTree where each node stores the given evaluation
+
+        Preconditions
+            - depth >= 0
         """
         white_move = (game.get_current_player() == -1)
         ret = GameTree(move=root_move, is_white_move=white_move)

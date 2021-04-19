@@ -62,7 +62,7 @@ class ReversiGame:
         Preconditions:
         - board is a square 2-d list
         - current_player in [_BLACK, _WHITE]
-        - move_count > 0
+        - move_count >= 0
         - human_player in [_BLACK, _WHITE, 0]
         """
 
@@ -77,7 +77,7 @@ class ReversiGame:
         Preconditions:
         - board is a square 2-d list
         - current_player in [_BLACK, _WHITE]
-        - move_count > 0
+        - move_count >= 0
         - human_player in [_BLACK, _WHITE, 0]
         """
 
