@@ -23,7 +23,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 """
 
 import pygame
-from ui_handler import UIHandler
+from ui_handler import UIHandler, increment_player_score
 from window import Window
 from reversi import ReversiGame
 from board_manager import BoardManager
@@ -74,7 +74,7 @@ if __name__ == "__main__":
         if winner is not None:
             results.append(winner)
             ui_handler.update_games_stored_text(len(results), window)
-            ui_handler.increment_player_score(winner, window)
+            increment_player_score(winner, window)
             game.start_game(human_player=game.get_human_player())
 
         # If the game is not paused, look for mouse clicks and process moves.

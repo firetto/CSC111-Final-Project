@@ -64,20 +64,6 @@ def helper_dropdown_select_player(g: ReversiGame, text: str) -> None:
         g.start_game(human_player=0)
 
 
-def helper_dropdown_select_ai(black: int, colour_to_player: Dict, text: str) -> None:
-    """Set the AI given the text.
-
-    Preconditions:
-        - text in {'Minimax 2', 'Minimax 3', 'Minimax 4', 'Minimax 8', 'Random Moves'}
-    """
-
-    if text.startswith('Minimax '):
-        colour_to_player.update({black: MinimaxABPlayer(int(text.split("Minimax ")[-1]),
-                                                        board_size_current)})
-    else:
-        colour_to_player.update({black: RandomPlayer()})
-
-
 def helper_dropdown_select_board_size(g: ReversiGame,
                                       colour_to_player: Dict, text: str) -> None:
     """
@@ -119,10 +105,23 @@ class UIHandler:
         """Return a function for setting the players given the selected dropdown option."""
         return lambda text: helper_dropdown_select_player(g, text)
 
+    def helper_dropdown_select_ai(self, black: int, colour_to_player: Dict, text: str) -> None:
+        """Set the AI given the text.
+
+        Preconditions:
+            - text in {'Minimax 2', 'Minimax 3', 'Minimax 4', 'Minimax 8', 'Random Moves'}
+        """
+
+        if text.startswith('Minimax '):
+            colour_to_player.update({black: MinimaxABPlayer(int(text.split("Minimax ")[-1]),
+                                                            self.board_size_current)})
+        else:
+            colour_to_player.update({black: RandomPlayer()})
+
     def dropdown_select_ai(self, black: int, colour_to_player: Dict) -> any:
         """Return a function for setting the AI given the text."""
 
-        return lambda text: helper_dropdown_select_ai(black, colour_to_player, text)
+        return lambda text: self.helper_dropdown_select_ai(black, colour_to_player, text)
 
     def dropdown_select_board_size(self, g: ReversiGame, colour_to_player: Dict) -> any:
         """Return a function for setting the board size given the text.
