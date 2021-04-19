@@ -86,13 +86,13 @@ class ReversiGame:
         else:
             self._board.create_board()
             self._board.set_piece(row=self._board.size // 2 - 1, column=self._board.size // 2 - 1,
-                                  piece_type=1)
+                                  piece_type=_BLACK)
             self._board.set_piece(row=self._board.size // 2 - 1, column=self._board.size // 2,
-                                  piece_type=-1)
+                                  piece_type=_WHITE)
             self._board.set_piece(row=self._board.size // 2, column=self._board.size // 2 - 1,
-                                  piece_type=-1)
+                                  piece_type=_WHITE)
             self._board.set_piece(row=self._board.size // 2, column=self._board.size // 2,
-                                  piece_type=1)
+                                  piece_type=_BLACK)
 
         self._current_player = current_player
         self._move_count = move_count
@@ -160,8 +160,8 @@ class ReversiGame:
         Return None if the game is not over.
         """
         if len(self._board.valid_moves) == 0:
-            num_black = sum([row.count(1) for row in self._board.pieces])
-            num_white = sum([row.count(-1) for row in self._board.pieces])
+            num_black = sum([row.count(_BLACK) for row in self._board.pieces])
+            num_white = sum([row.count(_WHITE) for row in self._board.pieces])
             if num_black > num_white:
                 return 'black'
             elif num_black < num_white:
