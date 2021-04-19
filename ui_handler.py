@@ -218,7 +218,11 @@ class UIHandler:
                      label="button-clear-stats", text="Clear Stats",
                      function=lambda: self.clear_results(results, w))
 
-        w.add_text(label="text-games-stored", text="Games Stored: 0", position=(720, 665))
+        w.add_text(label="text-games-stored", text="Games Stored: 0", position=(715, 665))
+
+        w.add_text(label="text-credits",
+                   text="Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel Kim",
+                   position=(20, 2), large_font=False)
 
 
 if __name__ == "__main__":
