@@ -274,3 +274,6 @@ if __name__ == "__main__":
         # Disable too-many-nested-blocks, too-many-arguments
         'disable': ['E1136', 'R1702', 'R0913']
     })
+
+    import python_ta.contracts
+    python_ta.contracts.check_all_contracts()
