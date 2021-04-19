@@ -2,11 +2,28 @@
 ui_elements.py:
 Contains PyGame GUI UI element wrapper classes, for buttons, text, and more.
 CSC111 Final Project by Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel Kim
+
+Copyright 2021 Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel Kim
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+associated documentation files (the "Software"), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge, publish, distribute,
+sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
+from typing import Tuple, List
 import pygame
 import pygame_gui
-from typing import Tuple, List
 
 
 class Element:
@@ -21,18 +38,18 @@ class Element:
 
     _type: str
 
-    def __init__(self, type: str = "none") -> None:
+    def __init__(self, element_type: str = "none") -> None:
         """Basic initializer."""
-        self._type = type
+        self._type = element_type
 
     def __eq__(self, other: pygame_gui.core.ui_element.UIElement) -> bool:
         """Return whether Element instance is equal to a UIElement instance.
         By default, this is FALSE."""
         return False
 
-    def set_type(self, type: str) -> None:
+    def set_type(self, element_type: str) -> None:
         """Set the type of the element."""
-        self._type = type
+        self._type = element_type
 
     def get_type(self) -> str:
         """Return the type of the element."""
@@ -86,6 +103,18 @@ class UIElement(Element):
     def get_visible(self) -> None:
         """Return the visibility of the UI element."""
         return self._element.visible
+
+    def execute(self, text: str = "") -> None:
+        """Unimplemented execute method (used in Dropdown, Button)."""
+        raise NotImplementedError
+
+    def get_text(self) -> str:
+        """Not implemented method to get the text of a button."""
+        raise NotImplementedError
+
+    def set_text(self, text: str) -> None:
+        """Unimplemented method to set the text of the Text."""
+        raise NotImplementedError
 
 
 class Button(UIElement):
@@ -179,6 +208,12 @@ class Dropdown(UIElement):
         else:
             self._element.hide()
 
+    def get_text(self) -> str:
+        """Do nothing."""
+
+    def set_text(self, text: str) -> None:
+        """Do nothing."""
+
 
 class Text(Element):
     """
@@ -196,7 +231,7 @@ class Text(Element):
     visible: bool
     large_font: bool
 
-    def __init__(self, text: str, position: Tuple[int, int], large_font: bool = True):
+    def __init__(self, text: str, position: Tuple[int, int], large_font: bool = True) -> None:
         """Initialize the text contents as well as the position of the text."""
         self.set_text(text)
         self.position = position
@@ -205,11 +240,11 @@ class Text(Element):
 
         super().__init__("text")
 
-    def set_text(self, text: str):
+    def set_text(self, text: str) -> None:
         """Set the text of the Text."""
         self.text = text
 
-    def execute(self, text:str = "") -> None:
+    def execute(self, text: str = "") -> None:
         """Nothing is to be done when text is pressed."""
         return
 
@@ -224,3 +259,20 @@ class Text(Element):
     def get_text(self) -> str:
         """Get the text of the Text"""
         return self.text
+
+
+if __name__ == "__main__":
+    # Test doctests
+    import doctest
+    doctest.testmod(verbose=True)
+
+    import python_ta
+    python_ta.check_all(config={
+        # the names (strs) of imported modules
+        'extra-imports': ['pygame', 'pygame_gui'],
+        'allowed-io': [],  # the names (strs) of functions that call print/open/input
+        'max-line-length': 100,
+
+        # Disable too-many-nested-blocks, too-many-arguments
+        'disable': ['E1136', 'R1702', 'R0913']
+    })

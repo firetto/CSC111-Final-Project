@@ -2,12 +2,29 @@
 board_manager.py:
 Contains the BoardManager class, containing board management methods.
 CSC111 Final Project by Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel Kim
+
+Copyright 2021 Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel Kim
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+associated documentation files (the "Software"), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge, publish, distribute,
+sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
+from typing import Tuple, Union
 import pygame
 from window import Window
 from board import Board
-from typing import Tuple, Union
 
 
 class BoardManager:
@@ -30,15 +47,17 @@ class BoardManager:
 
     _window: Window
 
-    _BG_COLORS = (pygame.Color(225, 174, 104), pygame.Color(181, 136, 103))
-    _BOARD_PIXEL_SIZE = 640
-    _LINE_THICKNESS = 2
-    _BOARD_POSITION = (20, 20)
-    _PIECE_COLORS = (pygame.Color(20, 20, 20), pygame.Color(230, 230, 230))
-    _VALID_MOVE_COLOR = pygame.Color(215, 146, 53)
-    _PIECE_RADIUS_RATIO = 0.4
-    _VALID_MOVE_RADIUS_RATIO = 0.2
-    _PAUSED_OVERLAY_ALPHA = 100
+    _BG_COLORS: Tuple[pygame.Color, pygame.Color] = (pygame.Color(225, 174, 104),
+                                                     pygame.Color(181, 136, 103))
+    _BOARD_PIXEL_SIZE: int = 640
+    _LINE_THICKNESS: int = 2
+    _BOARD_POSITION: int = (20, 20)
+    _PIECE_COLORS: Tuple[pygame.Color, pygame.Color] = (pygame.Color(20, 20, 20),
+                                                        pygame.Color(230, 230, 230))
+    _VALID_MOVE_COLOR: pygame.Color = pygame.Color(215, 146, 53)
+    _PIECE_RADIUS_RATIO: int = 0.4
+    _VALID_MOVE_RADIUS_RATIO: int = 0.2
+    _PAUSED_OVERLAY_ALPHA: int = 100
 
     def __init__(self, window: Window) -> None:
         """Initialize the BoardVisualizer instance using a window and an existing
@@ -116,9 +135,9 @@ class BoardManager:
         Position is in (x, y) format."""
 
         if position[0] < self._BOARD_POSITION[0] \
-            or position[0] > self._BOARD_POSITION[0] + self._BOARD_PIXEL_SIZE \
-            or position[1] < self._BOARD_POSITION[1] \
-            or position[1] > self._BOARD_POSITION[1] + self._BOARD_PIXEL_SIZE:
+                or position[0] > self._BOARD_POSITION[0] + self._BOARD_PIXEL_SIZE \
+                or position[1] < self._BOARD_POSITION[1] \
+                or position[1] > self._BOARD_POSITION[1] + self._BOARD_PIXEL_SIZE:
             return (-1, -1)
         else:
             # Row column format.
@@ -126,3 +145,20 @@ class BoardManager:
             square_size = (self._BOARD_PIXEL_SIZE / board.size)
             return (int(pos[0] // square_size),
                     int(pos[1] // square_size))
+
+
+if __name__ == "__main__":
+    # Test doctests
+    import doctest
+    doctest.testmod()
+
+    import python_ta
+    python_ta.check_all(config={
+        # the names (strs) of imported modules
+        'extra-imports': ['pygame', 'window', 'board'],
+        'allowed-io': [],  # the names (strs) of functions that call print/open/input
+        'max-line-length': 100,
+
+        # Disable too-many-nested-blocks, too-many-arguments
+        'disable': ['E1136', 'R1702', 'R0913']
+    })

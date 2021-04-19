@@ -2,6 +2,23 @@
 window.py:
 Contains PyGame window wrapper class.
 CSC111 Final Project by Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel Kim
+
+Copyright 2021 Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel Kim
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+associated documentation files (the "Software"), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge, publish, distribute,
+sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
 from typing import Dict, List, Tuple, Set, Union
@@ -272,7 +289,7 @@ class Window:
         else:
             return self._small_font.render(text, antialias, color, background)
 
-    def draw_text(self, text: Union[Text, Element]):
+    def draw_text(self, text: Union[Text, Element]) -> None:
         """Draw a Text instance to the Window.
 
         Preconditions:
@@ -327,3 +344,19 @@ if __name__ == '__main__':
     import doctest
 
     doctest.testmod()
+
+if __name__ == "__main__":
+    # Test doctests
+    import doctest
+    doctest.testmod(verbose=True)
+
+    import python_ta
+    python_ta.check_all(config={
+        # the names (strs) of imported modules
+        'extra-imports': ['ui_elements', 'pygame', 'pygame_gui'],
+        'allowed-io': [],  # the names (strs) of functions that call print/open/input
+        'max-line-length': 100,
+
+        # Disable too-many-nested-blocks, too-many-arguments
+        'disable': ['E1136', 'R1702', 'R0913', 'R0902', 'E1101']
+    })

@@ -2,6 +2,23 @@
 board.py:
 Contains the Board class, which contains information about the board (size, game pieces).
 CSC111 Final Project by Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel Kim
+
+Copyright 2021 Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel Kim
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+associated documentation files (the "Software"), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge, publish, distribute,
+sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
 from typing import List, Tuple, Set
@@ -31,7 +48,7 @@ class Board:
     #               self.set_size is called, and so the board size only changes when
     #               self.create_board is called.
 
-    _next_size = 8
+    _next_size: int = 8
 
     def __init__(self) -> None:
         """Initialize the board."""
@@ -45,7 +62,7 @@ class Board:
         """Set the size of the board."""
         self._next_size = size
 
-    def set_piece(self, row: int, column: int, type: int) -> None:
+    def set_piece(self, row: int, column: int, piece_type: int) -> None:
         """Set the type of the piece at [row][column] to <type>.
         type is 0 if empty, 1 if black, -1 if white.
 
@@ -54,10 +71,10 @@ class Board:
         """
         if row >= self.size or column >= self.size:
             raise IndexError
-        elif type not in {-1, 0, 1}:
+        elif piece_type not in {-1, 0, 1}:
             raise ValueError
         else:
-            self.pieces[row][column] = type
+            self.pieces[row][column] = piece_type
 
     def get_piece(self, row: int, column: int) -> int:
         """Retrieve a piece at a row and column. Note that this indexes from 0.
@@ -100,7 +117,7 @@ class Board:
         self.pieces.clear()
         self.valid_moves.clear()
 
-        for row in range(self.size):
+        for _ in range(self.size):
             self.pieces.append([0] * self.size)
 
     def set_board(self, board: List[List[int]]) -> None:
@@ -111,3 +128,20 @@ class Board:
         """
 
         self.pieces = board
+
+
+if __name__ == "__main__":
+    # Test doctests
+    import doctest
+    doctest.testmod()
+
+    import python_ta
+    python_ta.check_all(config={
+        # the names (strs) of imported modules
+        'extra-imports': [],
+        'allowed-io': [],  # the names (strs) of functions that call print/open/input
+        'max-line-length': 100,
+
+        # Disable too-many-nested-blocks, too-many-arguments
+        'disable': ['E1136', 'R1702', 'R0913']
+    })

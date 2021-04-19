@@ -2,11 +2,28 @@
 reversi.py
 Contains the ReversiGame class, which represents a game state of a Reversi game.
 CSC111 Final Project by Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel Kim
+
+
+Copyright 2021 Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel Kim
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+associated documentation files (the "Software"), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge, publish, distribute,
+sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
 from __future__ import annotations
 import copy
-import time
 from typing import Optional, Set, Tuple
 from board import Board
 
@@ -61,13 +78,13 @@ class ReversiGame:
         else:
             self._board.create_board()
             self._board.set_piece(row=self._board.size // 2 - 1, column=self._board.size // 2 - 1,
-                                  type=1)
+                                  piece_type=1)
             self._board.set_piece(row=self._board.size // 2 - 1, column=self._board.size // 2,
-                                  type=-1)
+                                  piece_type=-1)
             self._board.set_piece(row=self._board.size // 2, column=self._board.size // 2 - 1,
-                                  type=-1)
+                                  piece_type=-1)
             self._board.set_piece(row=self._board.size // 2, column=self._board.size // 2,
-                                  type=1)
+                                  piece_type=1)
 
         self._current_player = current_player
         self._move_count = move_count
@@ -161,19 +178,22 @@ class ReversiGame:
         for pos in [(row, col) for row in range(0, self._board.size)
                     for col in range(0, self._board.size)]:
             piece = self._board.get_piece(row=pos[0], column=pos[1])
-            if piece == -current_player or piece == 0:
+            if piece in (-current_player, 0):
                 continue
 
             current_p = current_player
 
-            for dir in {(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)}:
-                self._find_moves_and_paths_in_direction(moves_and_paths, pos, current_p, dir)
+            for direction in {(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)}:
+                self._find_moves_and_paths_in_direction(moves_and_paths, pos, current_p, direction)
 
         return moves_and_paths
 
-    def _find_moves_and_paths_in_direction(self, moves_and_paths: Tuple[
-        Set[Tuple[int, int]], Set[Tuple[int, int], Tuple[int, int]]], pos: Tuple[int, int],
-                                           current_player: int, direction: Tuple[int, int]):
+    def _find_moves_and_paths_in_direction(self, moves_and_paths: Tuple[Set[Tuple[int, int]],
+                                                                        Set[Tuple[int, int],
+                                                                            Tuple[int, int]]],
+                                           pos: Tuple[int, int],
+                                           current_player: int,
+                                           direction: Tuple[int, int]) -> None:
         """Find a valid move moving in a given direction from a certain position, and store
            the path from the start square to the square on which the move is executed.
         """
@@ -189,8 +209,8 @@ class ReversiGame:
             # Break if there is another current_player piece in that direction or the first
             # space in that direction is empty
             if self._board.get_piece(row=row, column=col) == current_player or \
-                    (self._board.get_piece(row=row, column=col) == 0 and (row, col) == (
-                            pos[0] + direction[0], pos[1] + direction[1])):
+                    (self._board.get_piece(row=row, column=col) == 0
+                     and (row, col) == (pos[0] + direction[0], pos[1] + direction[1])):
                 break
             if self._board.get_piece(row=row, column=col) == other_player:
                 pass
@@ -208,7 +228,7 @@ class ReversiGame:
         """
 
         paths = self._calculate_moves_and_paths_for_board(self.get_current_player())[1]
-        filter_paths = {path for path in paths if path[1] == move}
+        filter_paths = {p for p in paths if p[1] == move}
         board_copy = copy.deepcopy(self._board.pieces)
         board_copy[move[0]][move[1]] = self.get_current_player()
         for path in filter_paths:
@@ -240,39 +260,18 @@ def get_direction(v1: Tuple[int, int], v2: Tuple[int, int]) -> list[int, int]:
     return direction
 
 
-def run_game(white: Player, black: Player,
-             visualize: bool = False, fps: int = 6) -> tuple[str, list[str]]:
-    """Run a Minichess game between the two given players.
-
-    Return the winner and list of moves made in the game.
-    """
-    game = ReversiGame()
-
-    move_sequence = []
-    previous_move = None
-    current_player = white
-    while game.get_winner() is None:
-
-        previous_move = current_player.make_move(game, previous_move)
-        game.make_move(previous_move)
-        move_sequence.append(previous_move)
-
-        if visualize:
-            display.update(game.get_fen(), game.get_winner())
-            time.sleep(1 / fps)
-
-        if current_player is white:
-            current_player = black
-        else:
-            current_player = white
-
-    if visualize:
-        # Give slightly more time to the victory visualization
-        time.sleep(4 / fps)
-
-    return game.get_winner(), move_sequence
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
+    # Test doctests
     import doctest
     doctest.testmod(verbose=True)
+
+    import python_ta
+    python_ta.check_all(config={
+        # the names (strs) of imported modules
+        'extra-imports': ['copy', 'time', 'board'],
+        'allowed-io': [],  # the names (strs) of functions that call print/open/input
+        'max-line-length': 100,
+
+        # Disable too-many-nested-blocks, too-many-arguments
+        'disable': ['E1136', 'R1702', 'R0913']
+    })

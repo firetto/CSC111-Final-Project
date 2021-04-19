@@ -2,16 +2,32 @@
 main.py
 Launch the program from here!
 CSC111 Final Project by Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel Kim
+
+
+Copyright 2021 Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel Kim
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+associated documentation files (the "Software"), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge, publish, distribute,
+sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
 import pygame
-from ui_handler import add_ui, update_games_stored_text, get_game_paused, increment_player_score
+from ui_handler import UIHandler
 from window import Window
 from reversi import ReversiGame
 from board_manager import BoardManager
-from ai_players import RandomPlayer, MinimaxPlayer, MinimaxABPlayer, \
-    basic_heuristic, POSITIONAL_HEURISTIC
-from stats import plot_game_statistics
+from ai_players import MinimaxABPlayer
 
 if __name__ == "__main__":
 
@@ -27,6 +43,8 @@ if __name__ == "__main__":
 
     # Setup the BoardManager instance
     board_manager = BoardManager(window)
+
+    ui_handler = UIHandler()
 
     # Minimax Player
 
@@ -44,7 +62,7 @@ if __name__ == "__main__":
     results = []
 
     # Add UI to the window
-    add_ui(window, game, results, colour_to_player)
+    ui_handler.add_ui(window, game, results, colour_to_player)
 
     # Window loop
     while window.is_running():
@@ -55,12 +73,12 @@ if __name__ == "__main__":
         winner = game.get_winner()
         if winner is not None:
             results.append(winner)
-            update_games_stored_text(len(results), window)
-            increment_player_score(winner, window)
+            ui_handler.update_games_stored_text(len(results), window)
+            ui_handler.increment_player_score(winner, window)
             game.start_game(human_player=game.get_human_player())
 
         # If the game is not paused, look for mouse clicks and process moves.
-        if not get_game_paused():
+        if not ui_handler.get_game_paused():
             if game.get_human_player() == game.get_current_player():
                 # Look at the mouse clicks and see if they are in the board.
 
@@ -83,7 +101,7 @@ if __name__ == "__main__":
         window.draw_background()
 
         # Draw the board.
-        board_manager.draw_board(game.get_board(), get_game_paused())
+        board_manager.draw_board(game.get_board(), ui_handler.get_game_paused())
 
         # Draw the buttons etc.
         window.draw_ui()

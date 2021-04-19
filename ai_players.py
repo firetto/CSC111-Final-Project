@@ -2,11 +2,30 @@
 ai_players.py:
 Contains the  pieces).
 CSC111 Final Project by Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel Kim
+
+Copyright 2021 Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel Kim
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+associated documentation files (the "Software"), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge, publish, distribute,
+sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from reversi import ReversiGame
-import random
-from game_tree import GameTree
+
 import time
+import random
+from reversi import ReversiGame
+from game_tree import GameTree
+
 
 POSITIONAL_HEURISTIC = [
     [100, -20, 10, 5, 5, 10, -20, 100],
@@ -32,8 +51,10 @@ def basic_heuristic(size: int) -> list[list[int]]:
 
 def heuristic(game: ReversiGame, heuristic_array: list[list[int]]) -> float:
     """
-    this is an example of a heuristic function. this function returns the difference between the number of
-    white and black pieces. if one side wins in a position, it gets assigned a value of 100000/-100000
+    this is an example of a heuristic function. this function returns
+    the difference between the number of
+    white and black pieces. if one side wins in a position, it gets
+    assigned a value of 100000/-100000
     """
 
     if game.get_winner() is None:
@@ -69,12 +90,12 @@ class Player:
 
     def make_move(self, game: ReversiGame, previous_move: tuple[int, int]):
         """
-        make_move is a function that takes a game position and the previous move in the game and returns
-        a valid move
+        make_move is a function that takes a game position and the previous
+        move in the game and returns a valid move
         """
         raise NotImplementedError
 
-    def set_heuristic(self, size: int):
+    def set_heuristic(self, size: int) -> None:
         """Set the heuristic array BASED on board size. 8x8 will choose the POSITIONAL_HEURISTIC,
         while any other size will choose the basic_heuristic. (get it? I said based)"""
 
@@ -164,7 +185,8 @@ class MinimaxABPlayer(Player):
     def make_move(self, game: ReversiGame, previous_move: tuple[int, int]):
         tree = self._minimax(previous_move, 0, game, float('-inf'), float('inf'))
         subtrees = tree.get_subtrees()
-        # if the tree is white's move, then it is currently black's turn, as the root holds the previous move
+        # if the tree is white's move, then it is currently black's turn,
+        # as the root holds the previous move
         if tree.is_white_move:
             best_tree = max(subtrees, key=lambda x: x.evaluation)
         else:
