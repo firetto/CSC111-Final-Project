@@ -212,7 +212,6 @@ class MinimaxABPlayer(Player):
         _minimax is a minimax function with alpha-beta pruning implemented that returns
         a full GameTree where each node stores the given evaluation
         """
-        # color represents if it is white's turn
         white_move = (game.get_current_player() == -1)
         ret = GameTree(move=root_move, is_white_move=white_move)
         # early return at max depth
