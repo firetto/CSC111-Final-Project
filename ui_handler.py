@@ -30,7 +30,7 @@ from stats import plot_game_statistics
 from ai_players import RandomPlayer, MinimaxABPlayer
 
 
-def increment_player_score(self, player: str, w: window.Window) -> None:
+def increment_player_score(player: str, w: window.Window) -> None:
     """Increments the player score of the corresponding player."""
 
     if player == "black":
@@ -46,14 +46,14 @@ def increment_player_score(self, player: str, w: window.Window) -> None:
             str(int(w.get_ui_element('text-score-white-amount').get_text()) + 1))
 
 
-def reset_player_scores(self, w: window.Window) -> None:
+def reset_player_scores(w: window.Window) -> None:
     """Reset the player score of the corresponding player."""
 
     w.get_ui_element('text-score-black-amount').set_text('0')
     w.get_ui_element('text-score-white-amount').set_text('0')
 
 
-def helper_dropdown_select_player(self, g: ReversiGame, text: str) -> None:
+def helper_dropdown_select_player(g: ReversiGame, text: str) -> None:
     """HELPER FUNCTION: Select the players given the dropdown option selected."""
 
     if text == "Human vs. AI":
@@ -64,7 +64,7 @@ def helper_dropdown_select_player(self, g: ReversiGame, text: str) -> None:
         g.start_game(human_player=0)
 
 
-def helper_dropdown_select_ai(self, black: int, colour_to_player: Dict, text: str) -> None:
+def helper_dropdown_select_ai(black: int, colour_to_player: Dict, text: str) -> None:
     """Set the AI given the text.
 
     Preconditions:
@@ -78,7 +78,7 @@ def helper_dropdown_select_ai(self, black: int, colour_to_player: Dict, text: st
         colour_to_player.update({black: RandomPlayer()})
 
 
-def helper_dropdown_select_board_size(self, g: ReversiGame,
+def helper_dropdown_select_board_size(g: ReversiGame,
                                       colour_to_player: Dict, text: str) -> None:
     """
     Set the board size given the text.
@@ -107,7 +107,7 @@ class UIHandler:
     """Contains methods for updating UI.
 
     Instance Attributes:
-     - board_size_current: Parameter for the board size stored by the selection
+     - board_size_current: Parameter for the board size stored by the selection.
      - game_paused: Whether or not the game is paused.
     """
 

@@ -51,12 +51,12 @@ class BoardManager:
                                                      pygame.Color(181, 136, 103))
     _BOARD_PIXEL_SIZE: int = 640
     _LINE_THICKNESS: int = 2
-    _BOARD_POSITION: int = (20, 20)
+    _BOARD_POSITION: Tuple[int, int] = (20, 20)
     _PIECE_COLORS: Tuple[pygame.Color, pygame.Color] = (pygame.Color(20, 20, 20),
                                                         pygame.Color(230, 230, 230))
     _VALID_MOVE_COLOR: pygame.Color = pygame.Color(215, 146, 53)
-    _PIECE_RADIUS_RATIO: int = 0.4
-    _VALID_MOVE_RADIUS_RATIO: int = 0.2
+    _PIECE_RADIUS_RATIO: float = 0.4
+    _VALID_MOVE_RADIUS_RATIO: float = 0.2
     _PAUSED_OVERLAY_ALPHA: int = 100
 
     def __init__(self, window: Window) -> None:
