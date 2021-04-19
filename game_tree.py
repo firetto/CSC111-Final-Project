@@ -35,14 +35,16 @@ class GameTree:
      - evaluation: a float representing the evaluation of the tree
 
      Private Instance Attributes:
-     - _subtrees: an array of GameTree that represents all of the following possible moves after the current move
+     - _subtrees: a list of GameTree that represents all of the following possible moves
+                  after the current move
     """
     move: tuple[int, int]
     is_white_move: bool
     _subtrees: list[GameTree]
     evaluation: float
 
-    def __init__(self, evaluation: float = 0.0, move: tuple = (-1, -1), is_white_move: bool = False):
+    def __init__(self, evaluation: float = 0.0, move: tuple = (-1, -1),
+                 is_white_move: bool = False) -> None:
         self.move = move
         self.is_white_move = is_white_move
         self._subtrees = []
@@ -55,6 +57,9 @@ class GameTree:
         return self._subtrees
 
     def add_subtree(self, subtree: GameTree) -> None:
+        """
+        add_subtree adds a subtree to the list
+        """
         self._subtrees.append(subtree)
 
     def find_subtree_by_move(self, move: tuple[int, int]) -> Optional[GameTree]:
@@ -89,3 +94,19 @@ class GameTree:
             for subtree in self._subtrees:
                 s += subtree._str_indented(depth + 1)
             return s
+
+
+if __name__ == "__main__":
+    import python_ta
+    python_ta.check_all(config={
+        'extra-imports': ['random', 'time', 'reversi', 'game_tree'],
+        'allowed-io': ['check_same', 'test_players'],
+        'max-line-length': 100,
+        'disable': ['E1136']
+    })
+
+    import python_ta.contracts
+    python_ta.contracts.check_all_contracts()
+
+    import doctest
+    doctest.testmod()

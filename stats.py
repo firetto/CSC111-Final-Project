@@ -105,8 +105,10 @@ def plot_game_statistics(game: reversi.ReversiGame, results: list[str], focused_
             title='Reversi Game Results | White: ' + other_str + ', Black: ' + focused_str,
             xaxis_title='Game')
 
-    # fig.show()
-    fig.write_image('stats.png')
+    fig.show()
+    # write_image() does not work with the provided python packages
+    # so it is commented out for submission
+    # fig.write_image('stats.png')
 
 
 def player_to_string(game: reversi.ReversiGame, player_colour: str, player: ai_players.Player) \

@@ -167,7 +167,7 @@ class ReversiGame:
 
     def _calculate_moves_and_paths_for_board(self,
                                              current_player: int) \
-            -> Tuple[Set[Tuple[int, int]], Set[Tuple[int, int], Tuple[int, int]]]:
+            -> Tuple[Set[Tuple[int, int]], Set[Tuple[Tuple[int, int], Tuple[int, int]]]]:
         """Return all possible moves and paths on a given board with a given active player.
            A path is a tuple of two integers representing the start square and end square
            of the path of the pieces which will be changed to the current player's colour when
@@ -188,12 +188,9 @@ class ReversiGame:
 
         return moves_and_paths
 
-    def _find_moves_and_paths_in_direction(self, moves_and_paths: Tuple[Set[Tuple[int, int]],
-                                                                        Set[Tuple[int, int],
-                                                                            Tuple[int, int]]],
-                                           pos: Tuple[int, int],
-                                           current_player: int,
-                                           direction: Tuple[int, int]) -> None:
+    def _find_moves_and_paths_in_direction(self, moves_and_paths: Tuple[
+        Set[Tuple[int, int]], Set[Tuple[Tuple[int, int], Tuple[int, int]]]], pos: Tuple[int, int],
+                                           current_player: int, direction: Tuple[int, int]) -> None:
         """Find a valid move moving in a given direction from a certain position, and store
            the path from the start square to the square on which the move is executed.
         """
@@ -263,9 +260,11 @@ def get_direction(v1: Tuple[int, int], v2: Tuple[int, int]) -> list[int, int]:
 if __name__ == "__main__":
     # Test doctests
     import doctest
+
     doctest.testmod(verbose=True)
 
     import python_ta
+
     python_ta.check_all(config={
         # the names (strs) of imported modules
         'extra-imports': ['copy', 'time', 'board'],

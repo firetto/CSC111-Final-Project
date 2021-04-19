@@ -1,6 +1,6 @@
 """
 ai_players.py:
-Contains the  pieces).
+Contains all ai players that can be played against in Reversi
 CSC111 Final Project by Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel Kim
 
 Copyright 2021 Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel Kim
@@ -27,6 +27,9 @@ from reversi import ReversiGame
 from game_tree import GameTree
 
 
+# POSITIONAL_HEURISTIC is a heuristic function that prioritizes
+# high-importance squares, such as the corners and edges
+# this heuristic generally outperforms an absolute difference heuristic
 POSITIONAL_HEURISTIC = [
     [100, -20, 10, 5, 5, 10, -20, 100],
     [-20, -50, -2, -2, -2, -2, -50, -20],
@@ -41,7 +44,8 @@ POSITIONAL_HEURISTIC = [
 
 def basic_heuristic(size: int) -> list[list[int]]:
     """
-    function that returns a <size> by <size> array of ones
+    function that returns a <size> by <size> array of ones to be used by
+    the heuristic function
     """
     ret = []
     for _ in range(size):
@@ -49,14 +53,11 @@ def basic_heuristic(size: int) -> list[list[int]]:
     return ret
 
 
-def heuristic(game: ReversiGame, heuristic_array: list[list[int]]) -> float:
+def heuristic(game: ReversiGame, heuristic_list: list[list[int]]) -> float:
     """
-    this is an example of a heuristic function. this function returns
-    the difference between the number of
-    white and black pieces. if one side wins in a position, it gets
-    assigned a value of 100000/-100000
+    heuristic takes a given heuristic_list and returns the game-state value
+    given by the list
     """
-
     if game.get_winner() is None:
         pieces = game.get_board().pieces
         black = 0
@@ -65,9 +66,9 @@ def heuristic(game: ReversiGame, heuristic_array: list[list[int]]) -> float:
         for i in range(length):
             for m in range(length):
                 if pieces[i][m] == 1:
-                    black += heuristic_array[i][m]
+                    black += heuristic_list[i][m]
                 elif pieces[i][m] == -1:
-                    white += heuristic_array[i][m]
+                    white += heuristic_list[i][m]
         return white - black
     elif game.get_winner() == 'white':
         return 100000
@@ -79,16 +80,17 @@ def heuristic(game: ReversiGame, heuristic_array: list[list[int]]) -> float:
 
 class Player:
     """
-    Player is an abstract class that represents a reversi player
+    Player is an abstract class that represents a reversi ai and is capable
+    of making moves given a board position
 
     Instance Attributes:
-        - heuristic_array: array that dictates how the board is evaluated, used in
+        - heuristic_array: list that dictates how the board is evaluated, used in
                            MinimaxPlayer and MinimaxABPlayer
     """
 
-    heuristic_array: list[list[int]]
+    heuristic_list: list[list[int]]
 
-    def make_move(self, game: ReversiGame, previous_move: tuple[int, int]):
+    def make_move(self, game: ReversiGame, previous_move: tuple[int, int]) -> tuple[int, int]:
         """
         make_move is a function that takes a game position and the previous
         move in the game and returns a valid move
@@ -96,20 +98,21 @@ class Player:
         raise NotImplementedError
 
     def set_heuristic(self, size: int) -> None:
-        """Set the heuristic array BASED on board size. 8x8 will choose the POSITIONAL_HEURISTIC,
-        while any other size will choose the basic_heuristic. (get it? I said based)"""
-
+        """
+        Set the heuristic array BASED on board size. 8x8 will choose the POSITIONAL_HEURISTIC,
+        while any other size will choose the basic_heuristic. (get it? I said based)
+        """
         if size == 8:
-            self.heuristic_array = POSITIONAL_HEURISTIC
+            self.heuristic_list = POSITIONAL_HEURISTIC
         else:
-            self.heuristic_array = basic_heuristic(size)
+            self.heuristic_list = basic_heuristic(size)
 
 
 class RandomPlayer(Player):
     """
     RandomPlayer is a player that plays random moves.
     """
-    def make_move(self, game: ReversiGame, previous_move: tuple[int, int]):
+    def make_move(self, game: ReversiGame, previous_move: tuple[int, int]) -> tuple[int, int]:
         """Make a random move."""
         return random.choice(list(game.get_valid_moves()))
 
@@ -123,11 +126,11 @@ class MinimaxPlayer(Player):
     """
     depth: int
 
-    def __init__(self, depth: int, board_size: int):
+    def __init__(self, depth: int, board_size: int) -> None:
         self.depth = depth
         self.set_heuristic(board_size)
 
-    def make_move(self, game: ReversiGame, previous_move: tuple[int, int]):
+    def make_move(self, game: ReversiGame, previous_move: tuple[int, int]) -> tuple[int, int]:
         tree = self._minimax(previous_move, game, 0)
         subtrees = tree.get_subtrees()
         # maximize if white's turn, else minimize
@@ -140,15 +143,18 @@ class MinimaxPlayer(Player):
     def _minimax(self, root_move: tuple[int, int], game: ReversiGame, depth: int) -> GameTree:
         """
         _minimax is a function that returns a tree where each node has a value determined by
-        minimax search
+        the minimax search algorithm
         """
         white_move = (game.get_current_player() == -1)
         ret = GameTree(move=root_move, is_white_move=white_move)
+        # early return if we have reached max depth
         if depth == self.depth:
-            ret.evaluation = heuristic(game, self.heuristic_array)
+            ret.evaluation = heuristic(game, self.heuristic_list)
             return ret
         possible_moves = list(game.get_valid_moves())
+        # game is over if there are no possible moves in a position
         if not possible_moves:
+            # if there are no moves, then the game is over so we check for the winner
             if game.get_winner() == 'white':
                 ret.evaluation = 10000
             elif game.get_winner() == 'black':
@@ -159,6 +165,7 @@ class MinimaxPlayer(Player):
         # shuffle for randomness
         random.shuffle(possible_moves)
         # best_value tracks the best possible move that the player can make
+        # this value is maximized by white and minimized by black
         best_value = float('-inf')
         if not white_move:
             best_value = float('inf')
@@ -176,17 +183,23 @@ class MinimaxPlayer(Player):
 
 
 class MinimaxABPlayer(Player):
+    """
+    MinimaxABPlayer is a player that uses the minimax algorithm to calculate the next move.
+    The MinimaxABPlayer also uses alpha-beta pruning to decrease calculation times
+
+    Instance Attributes:
+     - depth: the depth that the player will calculate to when making a decision
+    """
     depth: int
 
-    def __init__(self, depth: int, board_size: int):
+    def __init__(self, depth: int, board_size: int) -> None:
         self.depth = depth
         self.set_heuristic(board_size)
 
-    def make_move(self, game: ReversiGame, previous_move: tuple[int, int]):
+    def make_move(self, game: ReversiGame, previous_move: tuple[int, int]) -> tuple[int, int]:
         tree = self._minimax(previous_move, 0, game, float('-inf'), float('inf'))
         subtrees = tree.get_subtrees()
-        # if the tree is white's move, then it is currently black's turn,
-        # as the root holds the previous move
+        # maximize if white's turn, else minimize
         if tree.is_white_move:
             best_tree = max(subtrees, key=lambda x: x.evaluation)
         else:
@@ -196,13 +209,15 @@ class MinimaxABPlayer(Player):
     def _minimax(self, root_move: tuple[int, int], depth: int, game: ReversiGame,
                  alpha: float, beta: float) -> GameTree:
         """
-        _minimax is a minimax function with alpha-beta pruning implemented
+        _minimax is a minimax function with alpha-beta pruning implemented that returns
+        a full GameTree where each node stores the given evaluation
         """
         # color represents if it is white's turn
         white_move = (game.get_current_player() == -1)
         ret = GameTree(move=root_move, is_white_move=white_move)
+        # early return at max depth
         if depth == self.depth:
-            ret.evaluation = heuristic(game, self.heuristic_array)
+            ret.evaluation = heuristic(game, self.heuristic_list)
             return ret
         possible_moves = list(game.get_valid_moves())
         if not possible_moves:
@@ -271,7 +286,8 @@ def check_same(player1: Player, player2: Player) -> None:
     """
     check_same is a function that determines if two players return the same move throughout a game.
     this is particularly useful for comparison between MinimaxPlayer and MinimaxABPlayer.
-    It also gives the time that each player takes to find a move.
+    It also gives the time that each player takes to find a move. You must comment out the
+    random.shuffle() line of code in both players before testing
     """
     game = ReversiGame()
     prev_move = (-1, -1)
@@ -288,3 +304,19 @@ def check_same(player1: Player, player2: Player) -> None:
         assert move1 == move2
         game.try_make_move(move1)
         prev_move = move1
+
+
+if __name__ == "__main__":
+    import python_ta
+    python_ta.check_all(config={
+        'extra-imports': ['random', 'time', 'reversi', 'game_tree'],
+        'allowed-io': ['check_same', 'test_players'],
+        'max-line-length': 100,
+        'disable': ['E1136', 'R1702', 'R0913']
+    })
+
+    import python_ta.contracts
+    python_ta.contracts.check_all_contracts()
+
+    import doctest
+    doctest.testmod()

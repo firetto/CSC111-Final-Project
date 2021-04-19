@@ -89,8 +89,9 @@ if __name__ == "__main__":
                             if game.try_make_move(square):
                                 moves_made.append(square)
             elif game.get_winner() is None:
-                moves_made.append(game.try_make_move(colour_to_player[game.get_current_player()]
-                                                     .make_move(game, moves_made[-1])))
+                next_move = colour_to_player[game.get_current_player()].make_move(game, moves_made[-1])
+                game.try_make_move(next_move)
+                moves_made.append(next_move)
 
         # Update the window's clock
         window.update_clock()
