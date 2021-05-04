@@ -27,6 +27,9 @@ import copy
 from typing import Optional, Set, Tuple
 from board import Board
 
+_BLACK = 1
+_WHITE = -1
+
 
 class ReversiGame:
     """A class representing a state of a game of Reversi.
@@ -39,18 +42,13 @@ class ReversiGame:
     >>> game.get_valid_moves() == {(2,5), (4,5), (2,3)}
     True
 
-    # >>> # If you try to make an invalid move, a ValueError is raised.
-    # >>> game.make_move('a4d1')
-    # Traceback (most recent call last):
-    # ValueError: Move "a4d1" is not valid
-    # >>> # This move is okay.
+    Private Instance Attributes:
+    - _board: a Board instance representing the game board.
+    - _current_player: an int representing the current player (1 for black, -1 for white)
+    - _move_count: the number of moves that have been made in the current game
+    - _human_player: int representing which player the human is (1 for black, -1 for white
+                     and 0 if there is no human player in the game)
     """
-    # Private Instance Attributes:
-    #   - _board: a Board instance representing the game board.
-    #   - _current_player: an int representing the current player (1 for black, -1 for white)
-    #   - _move_count: the number of moves that have been made in the current game
-    #   - _human_player: int representing which player the human is (1 for black, -1 for white
-    #                    and 0 if there is no human player in the game)
 
     _board: Board
     _current_player: int
@@ -58,33 +56,43 @@ class ReversiGame:
     _human_player: int
 
     def __init__(self, board: list[list[int]] = None,
-                 current_player: int = 1, move_count: int = 0, human_player: int = 0) -> None:
+                 current_player: int = _BLACK, move_count: int = 0, human_player: int = 0) -> None:
         """Initializer for ReversiGame.
 
         Preconditions:
         - board is a square 2-d list
+        - current_player in [_BLACK, _WHITE]
+        - move_count >= 0
+        - human_player in [_BLACK, _WHITE, 0]
         """
 
         self._board = Board()
 
         self.start_game(board, current_player, move_count, human_player)
 
-    def start_game(self, board: list[list[int]] = None,
-                   current_player: int = 1, move_count: int = 0, human_player: int = 0) -> None:
-        """Reinitialize the board, set attributes."""
+    def start_game(self, board: list[list[int]] = None, current_player: int = _BLACK,
+                   move_count: int = 0, human_player: int = 0) -> None:
+        """Reinitialize the board, set attributes.
+
+        Preconditions:
+        - board is a square 2-d list
+        - current_player in [_BLACK, _WHITE]
+        - move_count >= 0
+        - human_player in [_BLACK, _WHITE, 0]
+        """
 
         if board is not None:
             self._board.set_board(board)
         else:
             self._board.create_board()
             self._board.set_piece(row=self._board.size // 2 - 1, column=self._board.size // 2 - 1,
-                                  piece_type=1)
+                                  piece_type=_BLACK)
             self._board.set_piece(row=self._board.size // 2 - 1, column=self._board.size // 2,
-                                  piece_type=-1)
+                                  piece_type=_WHITE)
             self._board.set_piece(row=self._board.size // 2, column=self._board.size // 2 - 1,
-                                  piece_type=-1)
+                                  piece_type=_WHITE)
             self._board.set_piece(row=self._board.size // 2, column=self._board.size // 2,
-                                  piece_type=1)
+                                  piece_type=_BLACK)
 
         self._current_player = current_player
         self._move_count = move_count
@@ -129,10 +137,8 @@ class ReversiGame:
             raise ValueError(f'Move "{move}" is not valid')
 
         self._board.set_board(self._board_after_move(move))
-
         self._current_player = -self._current_player
         self._move_count += 1
-
         self._recalculate_valid_moves()
 
     def copy_and_make_move(self, move: Tuple[int, int]) -> ReversiGame:
@@ -154,8 +160,8 @@ class ReversiGame:
         Return None if the game is not over.
         """
         if len(self._board.valid_moves) == 0:
-            num_black = sum([row.count(1) for row in self._board.pieces])
-            num_white = sum([row.count(-1) for row in self._board.pieces])
+            num_black = sum([row.count(_BLACK) for row in self._board.pieces])
+            num_white = sum([row.count(_WHITE) for row in self._board.pieces])
             if num_black > num_white:
                 return 'black'
             elif num_black < num_white:
@@ -165,13 +171,15 @@ class ReversiGame:
 
         return None
 
-    def _calculate_moves_and_paths_for_board(self,
-                                             current_player: int) \
+    def _calculate_moves_and_paths_for_board(self, current_player: int) \
             -> Tuple[Set[Tuple[int, int]], Set[Tuple[Tuple[int, int], Tuple[int, int]]]]:
         """Return all possible moves and paths on a given board with a given active player.
            A path is a tuple of two integers representing the start square and end square
            of the path of the pieces which will be changed to the current player's colour when
            the move is made.
+
+        Preconditions:
+        - current_player in [_BLACK, _WHITE]
         """
         moves_and_paths = (set(), set())
 
@@ -188,16 +196,22 @@ class ReversiGame:
 
         return moves_and_paths
 
-    def _find_moves_and_paths_in_direction(self, moves_and_paths: Tuple[
-        Set[Tuple[int, int]], Set[Tuple[Tuple[int, int], Tuple[int, int]]]], pos: Tuple[int, int],
+    def _find_moves_and_paths_in_direction(self, moves_and_paths: Tuple[Set[Tuple[int, int]],
+                                                                        Set[Tuple[
+                                                                            Tuple[int, int], Tuple[
+                                                                                int, int]]]],
+                                           pos: Tuple[int, int],
                                            current_player: int, direction: Tuple[int, int]) -> None:
         """Find a valid move moving in a given direction from a certain position, and store
            the path from the start square to the square on which the move is executed.
+
+        Preconditions:
+        - current_player in [_BLACK, _WHITE]
+        - direction in {(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)}
         """
         stop = False
         i = 1
         other_player = -current_player
-
         while not stop:
             row, col = pos[0] + direction[0] * i, pos[1] + direction[1] * i
 
@@ -222,6 +236,9 @@ class ReversiGame:
     def _board_after_move(self, move: Tuple[int, int]) -> list[list[int]]:
         """Return a copy of self._board.pieces representing the state of
         the board after making move.
+
+        Precondition:
+        x in list(range(self._board.size)) for x in move
         """
 
         paths = self._calculate_moves_and_paths_for_board(self.get_current_player())[1]
@@ -274,3 +291,6 @@ if __name__ == "__main__":
         # Disable too-many-nested-blocks, too-many-arguments
         'disable': ['E1136', 'R1702', 'R0913']
     })
+
+    import python_ta.contracts
+    python_ta.contracts.check_all_contracts()

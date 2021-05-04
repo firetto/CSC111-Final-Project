@@ -1,6 +1,6 @@
 """
 game_tree.py:
-Contains the game tree class
+Contains the game tree class, which is used by the AIs
 CSC111 Final Project by Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel Kim
 
 Copyright 2021 Anatoly Zavyalov, Baker Jackson, Elliot Schrider, Rachel Kim
